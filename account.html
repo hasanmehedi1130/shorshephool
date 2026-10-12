@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#174d35">
+
+  <title>আমার অ্যাকাউন্ট | সরষেফুল</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    .account-hero {
+      padding: 36px 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .account-hero h1 {
+      color: var(--green-dark);
+      font-family: "Noto Serif Bengali", serif;
+      font-size: clamp(32px, 5vw, 46px);
+    }
+
+    .account-page {
+      padding: 45px 0 80px;
+    }
+
+    .account-layout {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 25px;
+      align-items: start;
+    }
+
+    .account-sidebar {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .account-user {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+      background: #fafbf9;
+    }
+
+    .account-avatar {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 9px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+    }
+
+    .account-avatar svg {
+      width: 24px;
+    }
+
+    .account-user strong {
+      display: block;
+      color: var(--green-dark);
+    }
+
+    .account-user small {
+      color: var(--muted);
+    }
+
+    .account-menu button,
+    .account-menu a {
+      width: 100%;
+      min-height: 46px;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-align: left;
+      color: #5e6861;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      font-weight: 600;
+    }
+
+    .account-menu button:last-child,
+    .account-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .account-menu button.active {
+      background: var(--light-green);
+      color: var(--green);
+    }
+
+    .account-menu svg {
+      width: 17px;
+    }
+
+    .account-content-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .account-content-head {
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #fafbf9;
+    }
+
+    .account-content-head h2 {
+      color: var(--green-dark);
+      font-size: 20px;
+    }
+
+    .account-panel {
+      display: none;
+      padding: 20px;
+    }
+
+    .account-panel.active {
+      display: block;
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .dashboard-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .dashboard-card svg {
+      width: 22px;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+
+    .dashboard-card strong {
+      display: block;
+      color: var(--green-dark);
+      font-size: 24px;
+    }
+
+    .dashboard-card span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .account-links-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .account-link-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .account-link-card svg {
+      color: var(--green);
+    }
+
+    .account-link-card strong {
+      display: block;
+      color: var(--green-dark);
+    }
+
+    .account-link-card small {
+      color: var(--muted);
+    }
+
+    .profile-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .profile-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .profile-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .profile-input {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      outline: none;
+    }
+
+    textarea.profile-input {
+      min-height: 90px;
+      padding-top: 10px;
+    }
+
+    .profile-input:focus {
+      border-color: var(--green);
+    }
+
+    .save-profile {
+      margin-top: 16px;
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .recent-order {
+      padding: 13px 0;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 14px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .recent-order:last-child {
+      border-bottom: none;
+    }
+
+    .recent-order h3 {
+      color: var(--green-dark);
+      font-size: 13px;
+    }
+
+    .recent-order small {
+      color: var(--muted);
+    }
+
+    .recent-status {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--light-green);
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .recent-total {
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+
+    @media (max-width: 850px) {
+
+      .account-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .account-menu {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .account-menu button,
+      .account-menu a {
+        justify-content: center;
+        border-right: 1px solid var(--line);
+      }
+
+    }
+
+    @media (max-width: 620px) {
+
+      .dashboard-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .account-links-grid,
+      .profile-form {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-group.full {
+        grid-column: auto;
+      }
+
+      .account-menu {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .account-menu button,
+      .account-menu a {
+        font-size: 11px;
+      }
+
+      .recent-order {
+        grid-template-columns: 1fr auto;
+      }
+
+      .recent-status {
+        grid-row: 2;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>🚚 সারা বাংলাদেশে ডেলিভারি</span>
+      <span class="topbar-middle">৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি</span>
+      <a href="tel:+8801712345678">হেল্পলাইন: +880 1712-345678</a>
+    </div>
+  </div>
+
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <a href="index.html" class="brand">
+        <div class="brand-mark">স</div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার, পরিবারের জন্য</small>
+        </div>
+      </a>
+
+
+      <form class="search desktop-search" id="desktopSearchForm">
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        >
+
+        <button type="submit">খুঁজুন</button>
+
+      </form>
+
+
+      <div class="header-actions">
+
+        <a href="account.html" class="header-action desktop-action">
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+        <a href="wishlist.html" class="header-action desktop-action">
+          <i data-lucide="heart"></i>
+          <span>পছন্দ</span>
+          <b id="wishlistCount">0</b>
+        </a>
+
+        <button class="cart-header-button" id="cartButton">
+          <i data-lucide="shopping-bag"></i>
+          <span class="desktop-action">কার্ট</span>
+          <b id="cartCount">0</b>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="container mobile-search-row">
+
+      <form class="search" id="mobileSearchForm">
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        >
+
+        <button type="submit">খুঁজুন</button>
+
+      </form>
+
+    </div>
+
+  </header>
+
+
+  <div class="overlay" id="menuOverlay"></div>
+
+  <aside class="mobile-drawer" id="mobileDrawer">
+
+    <div class="drawer-header">
+
+      <a href="index.html" class="brand">
+        <div class="brand-mark">স</div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার</small>
+        </div>
+      </a>
+
+      <button class="round-button" id="closeMenuButton">
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+    <div class="drawer-links">
+      <a href="index.html"><i data-lucide="house"></i> হোম</a>
+      <a href="shop.html"><i data-lucide="shopping-basket"></i> সব পণ্য</a>
+      <a href="wishlist.html"><i data-lucide="heart"></i> পছন্দের তালিকা</a>
+      <a href="orders.html"><i data-lucide="package"></i> আমার অর্ডার</a>
+      <a href="order-tracking.html"><i data-lucide="truck"></i> অর্ডার ট্র্যাক</a>
+    </div>
+
+  </aside>
+
+
+  <main>
+
+    <section class="account-hero">
+      <div class="container">
+        <h1>আমার অ্যাকাউন্ট</h1>
+      </div>
+    </section>
+
+
+    <section class="account-page">
+
+      <div class="container">
+
+        <div class="account-layout">
+
+
+          <aside class="account-sidebar">
+
+            <div class="account-user">
+
+              <div class="account-avatar">
+                <i data-lucide="user"></i>
+              </div>
+
+              <strong id="sidebarUserName">
+                অতিথি গ্রাহক
+              </strong>
+
+              <small>
+                সরষেফুল Customer
+              </small>
+
+            </div>
+
+
+            <div class="account-menu">
+
+              <button
+                class="account-menu-button active"
+                data-panel="dashboardPanel"
+              >
+                <i data-lucide="layout-dashboard"></i>
+                Dashboard
+              </button>
+
+
+              <button
+                class="account-menu-button"
+                data-panel="profilePanel"
+              >
+                <i data-lucide="user-round"></i>
+                Profile
+              </button>
+
+
+              <a href="orders.html">
+                <i data-lucide="package"></i>
+                Orders
+              </a>
+
+
+              <a href="wishlist.html">
+                <i data-lucide="heart"></i>
+                Wishlist
+              </a>
+
+
+              <a href="order-tracking.html">
+                <i data-lucide="truck"></i>
+                Track Order
+              </a>
+
+            </div>
+
+          </aside>
+
+
+          <section class="account-content-card">
+
+            <div class="account-content-head">
+              <h2 id="accountSectionTitle">
+                Dashboard
+              </h2>
+            </div>
+
+
+            <!-- DASHBOARD -->
+
+            <div
+              class="account-panel active"
+              id="dashboardPanel"
+            >
+
+              <div class="dashboard-cards">
+
+                <div class="dashboard-card">
+                  <i data-lucide="package"></i>
+
+                  <strong id="totalOrderCount">
+                    0
+                  </strong>
+
+                  <span>
+                    মোট অর্ডার
+                  </span>
+                </div>
+
+
+                <div class="dashboard-card">
+                  <i data-lucide="heart"></i>
+
+                  <strong id="totalWishlistCount">
+                    0
+                  </strong>
+
+                  <span>
+                    পছন্দের পণ্য
+                  </span>
+                </div>
+
+
+                <div class="dashboard-card">
+                  <i data-lucide="shopping-bag"></i>
+
+                  <strong id="totalCartCount">
+                    0
+                  </strong>
+
+                  <span>
+                    কার্টে পণ্য
+                  </span>
+                </div>
+
+              </div>
+
+
+              <div class="account-links-grid">
+
+                <a href="orders.html" class="account-link-card">
+
+                  <i data-lucide="package"></i>
+
+                  <div>
+                    <strong>আমার অর্ডার</strong>
+                    <small>অর্ডারের history দেখুন</small>
+                  </div>
+
+                </a>
+
+
+                <a href="wishlist.html" class="account-link-card">
+
+                  <i data-lucide="heart"></i>
+
+                  <div>
+                    <strong>Wishlist</strong>
+                    <small>পছন্দের পণ্য দেখুন</small>
+                  </div>
+
+                </a>
+
+
+                <a href="order-tracking.html" class="account-link-card">
+
+                  <i data-lucide="truck"></i>
+
+                  <div>
+                    <strong>Order Tracking</strong>
+                    <small>অর্ডারের অবস্থা দেখুন</small>
+                  </div>
+
+                </a>
+
+
+                <a href="shop.html" class="account-link-card">
+
+                  <i data-lucide="shopping-basket"></i>
+
+                  <div>
+                    <strong>Shopping</strong>
+                    <small>আরও পণ্য দেখুন</small>
+                  </div>
+
+                </a>
+
+              </div>
+
+
+              <div style="margin-top:25px;">
+
+                <h3
+                  style="
+                    color:var(--green-dark);
+                    margin-bottom:10px;
+                  "
+                >
+                  সাম্প্রতিক অর্ডার
+                </h3>
+
+                <div id="recentOrders"></div>
+
+              </div>
+
+            </div>
+
+
+            <!-- PROFILE -->
+
+            <div
+              class="account-panel"
+              id="profilePanel"
+            >
+
+              <div class="profile-form">
+
+                <div class="profile-group">
+
+                  <label>
+                    পূর্ণ নাম
+                  </label>
+
+                  <input
+                    class="profile-input"
+                    id="profileName"
+                    type="text"
+                    placeholder="আপনার নাম"
+                  >
+
+                </div>
+
+
+                <div class="profile-group">
+
+                  <label>
+                    মোবাইল নম্বর
+                  </label>
+
+                  <input
+                    class="profile-input"
+                    id="profilePhone"
+                    type="tel"
+                    placeholder="01XXXXXXXXX"
+                  >
+
+                </div>
+
+
+                <div class="profile-group full">
+
+                  <label>
+                    ইমেইল
+                  </label>
+
+                  <input
+                    class="profile-input"
+                    id="profileEmail"
+                    type="email"
+                    placeholder="example@email.com"
+                  >
+
+                </div>
+
+
+                <div class="profile-group full">
+
+                  <label>
+                    ঠিকানা
+                  </label>
+
+                  <textarea
+                    class="profile-input"
+                    id="profileAddress"
+                    placeholder="আপনার ঠিকানা"
+                  ></textarea>
+
+                </div>
+
+              </div>
+
+
+              <button
+                class="save-profile"
+                id="saveProfileButton"
+              >
+                তথ্য সংরক্ষণ করুন
+              </button>
+
+            </div>
+
+          </section>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <div class="brand-mark">স</div>
+
+          <div class="brand-copy">
+            <strong>সরষেফুল</strong>
+            <small>প্রকৃতির খাবার</small>
+          </div>
+        </a>
+      </div>
+
+      <div class="footer-column">
+        <h3>কেনাকাটা</h3>
+        <a href="shop.html">সব পণ্য</a>
+        <a href="wishlist.html">Wishlist</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>অ্যাকাউন্ট</h3>
+        <a href="orders.html">আমার অর্ডার</a>
+        <a href="order-tracking.html">Track Order</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>যোগাযোগ</h3>
+        <p>+880 1712-345678</p>
+        <p>hello@soroshful.com</p>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <div class="overlay" id="cartOverlay"></div>
+
+  <aside class="cart-drawer" id="cartDrawer">
+
+    <div class="drawer-header">
+
+      <div>
+        <h2>আপনার কার্ট</h2>
+        <small id="cartItemCount">০টি পণ্য</small>
+      </div>
+
+      <button class="round-button" id="closeCartButton">
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-bottom">
+
+      <div>
+        <span>মোট</span>
+        <strong id="cartTotal">৳০</strong>
+      </div>
+
+      <a href="checkout.html" class="primary-button full-button">
+        Checkout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <nav class="mobile-bottom-nav">
+
+    <a href="index.html">
+      <i data-lucide="house"></i>
+      <span>হোম</span>
+    </a>
+
+    <a href="shop.html">
+      <i data-lucide="layout-grid"></i>
+      <span>পণ্য</span>
+    </a>
+
+    <a href="shop.html">
+      <i data-lucide="search"></i>
+      <span>খুঁজুন</span>
+    </a>
+
+    <a href="wishlist.html">
+      <i data-lucide="heart"></i>
+      <span>পছন্দ</span>
+    </a>
+
+    <button id="bottomCartButton">
+      <i data-lucide="shopping-bag"></i>
+      <span>কার্ট</span>
+      <b id="bottomCartCount">0</b>
+    </button>
+
+  </nav>
+
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+
+  <script>
+
+    
+
+    const accountOrders =
+      JSON.parse(
+        localStorage.getItem(
+          "soroshfulOrders"
+        )
+      ) || [];
+
+
+    const accountWishlist =
+      JSON.parse(
+        localStorage.getItem(
+          "soroshfulWishlist"
+        )
+      ) || [];
+
+
+    const accountCart =
+      JSON.parse(
+        localStorage.getItem(
+          "soroshfulCart"
+        )
+      ) || [];
+
+
+    const savedProfile =
+      JSON.parse(
+        localStorage.getItem(
+          "soroshfulProfile"
+        )
+      ) || {};
+
+
+    document
+      .getElementById(
+        "totalOrderCount"
+      )
+      .textContent =
+        accountOrders.length;
+
+
+    document
+      .getElementById(
+        "totalWishlistCount"
+      )
+      .textContent =
+        accountWishlist.length;
+
+
+    document
+      .getElementById(
+        "totalCartCount"
+      )
+      .textContent =
+        accountCart.reduce(
+          (total, item) =>
+            total +
+            Number(item.quantity || 1),
+          0
+        );
+
+
+    const lastCustomerOrder =
+      accountOrders[0];
+
+
+    const initialName =
+      savedProfile.name ||
+      lastCustomerOrder?.customer?.name ||
+      "";
+
+
+    const initialPhone =
+      savedProfile.phone ||
+      lastCustomerOrder?.customer?.phone ||
+      "";
+
+
+    const initialEmail =
+      savedProfile.email ||
+      lastCustomerOrder?.customer?.email ||
+      "";
+
+
+    const initialAddress =
+      savedProfile.address ||
+      lastCustomerOrder?.customer?.address ||
+      "";
+
+
+    document
+      .getElementById(
+        "profileName"
+      )
+      .value =
+        initialName;
+
+
+    document
+      .getElementById(
+        "profilePhone"
+      )
+      .value =
+        initialPhone;
+
+
+    document
+      .getElementById(
+        "profileEmail"
+      )
+      .value =
+        initialEmail;
+
+
+    document
+      .getElementById(
+        "profileAddress"
+      )
+      .value =
+        initialAddress;
+
+
+    document
+      .getElementById(
+        "sidebarUserName"
+      )
+      .textContent =
+        initialName ||
+        "অতিথি গ্রাহক";
+
+
+    const recentOrders =
+      document.getElementById(
+        "recentOrders"
+      );
+
+
+    if (
+      accountOrders.length === 0
+    ) {
+
+      recentOrders.innerHTML =
+        `
+          <p style="color:var(--muted);font-size:13px;">
+            এখনো কোনো অর্ডার করা হয়নি।
+          </p>
+        `;
+
+    } else {
+
+      recentOrders.innerHTML =
+        accountOrders
+          .slice(0, 3)
+          .map(order => {
+
+            return `
+
+              <a
+                href="order-tracking.html?order=${encodeURIComponent(order.orderId)}"
+                class="recent-order"
+              >
+
+                <div>
+
+                  <h3>
+                    ${order.orderId}
+                  </h3>
+
+                  <small>
+                    ${order.date}
+                  </small>
+
+                </div>
+
+
+                <span class="recent-status">
+                  ${order.status || "Order Placed"}
+                </span>
+
+
+                <strong class="recent-total">
+                  ৳${Number(order.total).toLocaleString("en-US")}
+                </strong>
+
+              </a>
+
+            `;
+
+          })
+          .join("");
+
+    }
+
+
+    const accountMenuButtons =
+      document.querySelectorAll(
+        ".account-menu-button"
+      );
+
+
+    const accountPanels =
+      document.querySelectorAll(
+        ".account-panel"
+      );
+
+
+    accountMenuButtons.forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            accountMenuButtons.forEach(
+              item =>
+                item.classList.remove(
+                  "active"
+                )
+            );
+
+
+            accountPanels.forEach(
+              panel =>
+                panel.classList.remove(
+                  "active"
+                )
+            );
+
+
+            this.classList.add(
+              "active"
+            );
+
+
+            document
+              .getElementById(
+                this.dataset.panel
+              )
+              .classList.add(
+                "active"
+              );
+
+
+            document
+              .getElementById(
+                "accountSectionTitle"
+              )
+              .textContent =
+                this.dataset.panel ===
+                "profilePanel"
+                  ? "Profile"
+                  : "Dashboard";
+
+          }
+        );
+
+      }
+    );
+
+
+    document
+      .getElementById(
+        "saveProfileButton"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          const profile = {
+
+            name:
+              document
+                .getElementById(
+                  "profileName"
+                )
+                .value
+                .trim(),
+
+            phone:
+              document
+                .getElementById(
+                  "profilePhone"
+                )
+                .value
+                .trim(),
+
+            email:
+              document
+                .getElementById(
+                  "profileEmail"
+                )
+                .value
+                .trim(),
+
+            address:
+              document
+                .getElementById(
+                  "profileAddress"
+                )
+                .value
+                .trim()
+
+          };
+
+
+          localStorage.setItem(
+            "soroshfulProfile",
+            JSON.stringify(profile)
+          );
+
+
+          document
+            .getElementById(
+              "sidebarUserName"
+            )
+            .textContent =
+              profile.name ||
+              "অতিথি গ্রাহক";
+
+
+          showToast(
+            "আপনার তথ্য সংরক্ষণ হয়েছে"
+          );
+
+        }
+      );
+
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>

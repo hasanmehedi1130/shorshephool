@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="সরষেফুল - খাঁটি, প্রাকৃতিক ও বিশ্বস্ত খাদ্যপণ্যের অনলাইন স্টোর"
+  />
+
+  <meta name="theme-color" content="#164d34" />
+
+  <title>সরষেফুল | খাঁটি খাবার, সহজ কেনাকাটা</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+
+      <span>
+        🚚 সারা বাংলাদেশে ডেলিভারি
+      </span>
+
+      <span class="topbar-middle">
+        ৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি
+      </span>
+
+      <a href="tel:+8801712345678">
+        হেল্পলাইন: +880 1712-345678
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+      <!-- MOBILE MENU -->
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+        aria-label="মেনু"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <!-- BRAND -->
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            সরষেফুল
+          </strong>
+
+          <small>
+            স্বাদে আহ্লাদে - তৃপ্তিতে
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <!-- DESKTOP SEARCH -->
+
+      <form
+        class="search desktop-search"
+        id="desktopSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="ঘি, মধু, চাল, মসলা খুঁজুন..."
+        />
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+
+      <!-- HEADER ACTIONS -->
+
+      <div class="header-actions">
+
+        <a
+          href="account.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+
+        <button
+          class="header-action desktop-action"
+          id="wishlistHeaderButton"
+        >
+
+          <i data-lucide="heart"></i>
+
+          <span>পছন্দ</span>
+
+          <b id="wishlistCount">
+            0
+          </b>
+
+        </button>
+
+
+        <button
+          class="cart-header-button"
+          id="cartButton"
+        >
+
+          <i data-lucide="shopping-bag"></i>
+
+          <span class="desktop-action">
+            কার্ট
+          </span>
+
+          <b id="cartCount">
+            0
+          </b>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- MOBILE SEARCH -->
+
+    <div class="container mobile-search-row">
+
+      <form
+        class="search"
+        id="mobileSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        />
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+    </div>
+
+
+    <!-- DESKTOP NAV -->
+
+    <nav class="desktop-nav">
+
+      <div class="container nav-inner">
+
+        <a
+          href="#categories"
+          class="category-nav-button"
+        >
+
+          <i data-lucide="layout-grid"></i>
+
+          সব ক্যাটাগরি
+
+        </a>
+
+
+        <div class="nav-links">
+
+          <a class="active" href="index.html">
+            হোম
+          </a>
+
+          <a href="shop.html">
+            সব পণ্য
+          </a>
+
+          <a href="#products">
+            জনপ্রিয়
+          </a>
+
+          <a href="offers.html">
+            অফার
+          </a>
+
+          <a href="about.html">
+            আমাদের গল্প
+          </a>
+
+          <a href="contact.html">
+            যোগাযোগ
+          </a>
+
+        </div>
+
+
+        <a
+          href="order-tracking.html"
+          class="track-order"
+        >
+
+          <i data-lucide="truck"></i>
+
+          অর্ডার ট্র্যাক
+
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =========================
+       MOBILE DRAWER
+  ========================== -->
+
+  <div
+    class="overlay"
+    id="menuOverlay"
+  ></div>
+
+
+  <aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            সরষেফুল
+          </strong>
+
+          <small>
+            প্রকৃতির খাবার
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <button
+        class="round-button"
+        id="closeMenuButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div class="drawer-links">
+
+      <a href="index.html">
+        <i data-lucide="house"></i>
+        হোম
+      </a>
+
+      <a href="shop.html">
+        <i data-lucide="shopping-basket"></i>
+        সব পণ্য
+      </a>
+
+      <a href="#categories">
+        <i data-lucide="layout-grid"></i>
+        ক্যাটাগরি
+      </a>
+
+      <a href="offers.html">
+        <i data-lucide="badge-percent"></i>
+        অফার
+      </a>
+
+      <a href="order-tracking.html">
+        <i data-lucide="truck"></i>
+        অর্ডার ট্র্যাক
+      </a>
+
+      <a href="about.html">
+        <i data-lucide="leaf"></i>
+        আমাদের গল্প
+      </a>
+
+      <a href="contact.html">
+        <i data-lucide="phone"></i>
+        যোগাযোগ
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="container hero-grid">
+
+        <div class="hero-content">
+
+          <span class="eyebrow">
+            খাঁটি • প্রাকৃতিক • বিশ্বস্ত
+          </span>
+
+
+          <h1>
+            প্রকৃতির বিশুদ্ধতা
+            <span>
+              আপনার প্রতিদিনের খাবারে
+            </span>
+          </h1>
+
+
+          <p>
+            নির্বাচিত কৃষক ও বিশ্বস্ত উৎপাদকদের কাছ থেকে সংগ্রহ করা
+            মানসম্মত খাদ্যপণ্য—সহজ অর্ডার, নিরাপদ প্যাকেজিং এবং
+            দ্রুত ডেলিভারি।
+          </p>
+
+
+          <div class="hero-buttons">
+
+            <a
+              href="#products"
+              class="primary-button"
+            >
+
+              কেনাকাটা করুন
+
+              <i data-lucide="arrow-right"></i>
+
+            </a>
+
+
+            <a
+              href="#categories"
+              class="outline-button"
+            >
+              ক্যাটাগরি দেখুন
+            </a>
+
+          </div>
+
+
+          <div class="hero-features">
+
+            <div>
+
+              <i data-lucide="badge-check"></i>
+
+              <span>
+                <b>মান যাচাইকৃত</b>
+                <small>বিশ্বস্ত উৎস</small>
+              </span>
+
+            </div>
+
+
+            <div>
+
+              <i data-lucide="package-check"></i>
+
+              <span>
+                <b>নিরাপদ প্যাকেজিং</b>
+                <small>যত্নে প্রস্তুত</small>
+              </span>
+
+            </div>
+
+
+            <div>
+
+              <i data-lucide="truck"></i>
+
+              <span>
+                <b>দ্রুত ডেলিভারি</b>
+                <small>সারা বাংলাদেশে</small>
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="hero-image">
+
+          <img
+            src="images/hero-organic.jpg"
+            alt="সরষেফুল অর্গানিক খাদ্য"
+          />
+
+          <div class="hero-image-badge">
+
+            <i data-lucide="leaf"></i>
+
+            <span>
+              <b>প্রকৃতি থেকে সংগ্রহ</b>
+              <small>আপনার পরিবারের জন্য</small>
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CATEGORY -->
+
+    <section
+      class="section"
+      id="categories"
+    >
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span>
+              সহজে খুঁজুন
+            </span>
+
+            <h2>
+              আমাদের ক্যাটাগরি
+            </h2>
+
+          </div>
+
+
+          <a
+            href="shop.html"
+            class="section-link"
+          >
+
+            সব দেখুন
+
+            <i data-lucide="arrow-right"></i>
+
+          </a>
+
+        </div>
+
+
+        <div class="category-grid">
+
+          <a
+            href="category.html?category=ghee"
+            class="category-card"
+          >
+
+            <img
+              src="images/category-ghee.jpg"
+              alt="ঘি ও তেল"
+            />
+
+            <div>
+              <h3>ঘি ও তেল</h3>
+              <p>বাছাই করা পণ্য</p>
+            </div>
+
+          </a>
+
+
+          <a
+            href="category.html?category=honey"
+            class="category-card"
+          >
+
+            <img
+              src="images/category-honey.jpg"
+              alt="মধু"
+            />
+
+            <div>
+              <h3>মধু</h3>
+              <p>প্রাকৃতিক সংগ্রহ</p>
+            </div>
+
+          </a>
+
+
+          <a
+            href="category.html?category=rice"
+            class="category-card"
+          >
+
+            <img
+              src="images/category-rice.jpg"
+              alt="চাল"
+            />
+
+            <div>
+              <h3>চাল ও শস্য</h3>
+              <p>দেশি ও সুগন্ধি</p>
+            </div>
+
+          </a>
+
+
+          <a
+            href="category.html?category=spices"
+            class="category-card"
+          >
+
+            <img
+              src="images/category-spices.jpg"
+              alt="মসলা"
+            />
+
+            <div>
+              <h3>মসলা</h3>
+              <p>বিশুদ্ধ ও সুগন্ধি</p>
+            </div>
+
+          </a>
+
+
+          <a
+            href="category.html?category=dal"
+            class="category-card"
+          >
+
+            <img
+              src="images/category-dal.jpg"
+              alt="ডাল"
+            />
+
+            <div>
+              <h3>ডাল ও বীজ</h3>
+              <p>প্রতিদিনের প্রয়োজন</p>
+            </div>
+
+          </a>
+
+
+          <a
+            href="category.html?category=nuts"
+            class="category-card"
+          >
+
+            <img
+              src="images/category-nuts.jpg"
+              alt="বাদাম"
+            />
+
+            <div>
+              <h3>বাদাম ও ড্রাই ফ্রুটস</h3>
+              <p>স্বাস্থ্যকর পছন্দ</p>
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+<section
+  class="products-section"
+  id="products"
+>
+
+  <div class="container">
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="section-label">
+          জনপ্রিয় পণ্য
+        </span>
+
+        <h2>
+          আপনার প্রতিদিনের প্রয়োজন
+        </h2>
+
+        <p>
+          সরষেফুলের নির্বাচিত জনপ্রিয় পণ্যগুলো দেখুন।
+        </p>
+
+      </div>
+
+
+      <a
+        href="shop.html"
+        class="section-link"
+      >
+        সব পণ্য দেখুন
+        <i data-lucide="arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <div
+      class="products-grid"
+      id="homepageProductsGrid"
+    ></div>
+
+
+    <div
+      id="homepageProductsEmpty"
+      style="
+        display:none;
+        padding:50px 20px;
+        text-align:center;
+        border:1px solid var(--line);
+        border-radius:14px;
+        color:var(--muted);
+        background:#fff;
+      "
+    >
+
+      <h3
+        style="
+          color:var(--green-dark);
+          margin-bottom:5px;
+        "
+      >
+        কোনো পণ্য পাওয়া যায়নি
+      </h3>
+
+      <p>
+        Admin Panel থেকে product add করুন।
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+    <!-- WHY -->
+
+    <section class="why-section">
+
+      <div class="container why-grid">
+
+        <div>
+
+          <span class="why-label">
+            কেন সরষেফুল
+          </span>
+
+          <h2>
+            ভালো খাবার,
+            <br />
+            সহজ কেনাকাটা
+          </h2>
+
+          <p>
+            আমরা অপ্রয়োজনীয় জটিলতা বাদ দিয়ে ভালো পণ্য,
+            পরিষ্কার তথ্য, সহজ অর্ডার এবং বিশ্বস্ত ডেলিভারির
+            ওপর গুরুত্ব দিই।
+          </p>
+
+        </div>
+
+
+        <div class="why-cards">
+
+          <div>
+
+            <i data-lucide="leaf"></i>
+
+            <span>
+              <b>বিশ্বস্ত উৎস</b>
+              <small>নির্বাচিত কৃষক ও উৎপাদক</small>
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <i data-lucide="shield-check"></i>
+
+            <span>
+              <b>মান যাচাই</b>
+              <small>প্যাকের আগে গুণমান পরীক্ষা</small>
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <i data-lucide="wallet"></i>
+
+            <span>
+              <b>স্বচ্ছ মূল্য</b>
+              <small>লুকানো চার্জ নেই</small>
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <i data-lucide="headphones"></i>
+
+            <span>
+              <b>সহজ সহায়তা</b>
+              <small>প্রয়োজনে দ্রুত যোগাযোগ</small>
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a
+          href="index.html"
+          class="brand"
+        >
+
+          <div class="brand-mark">
+            স
+          </div>
+
+          <div class="brand-copy">
+
+            <strong>
+              সরষেফুল
+            </strong>
+
+            <small>
+              প্রকৃতির খাবার
+            </small>
+
+          </div>
+
+        </a>
+
+
+        <p>
+          খাঁটি ও প্রাকৃতিক খাদ্য সহজে আপনার পরিবারের
+          কাছে পৌঁছে দেওয়ার চেষ্টা।
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>কেনাকাটা</h3>
+
+        <a href="shop.html">
+          সব পণ্য
+        </a>
+
+        <a href="#categories">
+          ক্যাটাগরি
+        </a>
+
+        <a href="offers.html">
+          অফার
+        </a>
+
+        <a href="order-tracking.html">
+          অর্ডার ট্র্যাক
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>সহায়তা</h3>
+
+        <a href="faq.html">
+          FAQ
+        </a>
+
+        <a href="shipping-policy.html">
+          ডেলিভারি পলিসি
+        </a>
+
+        <a href="refund-policy.html">
+          রিটার্ন ও রিফান্ড
+        </a>
+
+        <a href="contact.html">
+          যোগাযোগ
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>যোগাযোগ</h3>
+
+        <p>
+          +880 1712-345678
+        </p>
+
+        <p>
+          hello@soroshful.com
+        </p>
+
+        <p>
+          সকাল ৯টা – রাত ১০টা
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <div class="container">
+
+        © 2026 সরষেফুল। সর্বস্বত্ব সংরক্ষিত।
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       CART
+  ========================== -->
+
+  <div
+    class="overlay"
+    id="cartOverlay"
+  ></div>
+
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <div>
+
+        <h2>
+          আপনার কার্ট
+        </h2>
+
+        <small id="cartItemCount">
+          ০টি পণ্য
+        </small>
+
+      </div>
+
+
+      <button
+        class="round-button"
+        id="closeCartButton"
+      >
+
+        <i data-lucide="x"></i>
+
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-bottom">
+
+      <div>
+
+        <span>
+          মোট
+        </span>
+
+        <strong id="cartTotal">
+          ৳০
+        </strong>
+
+      </div>
+
+
+      <a
+        href="checkout.html"
+        class="primary-button full-button"
+      >
+        Checkout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MOBILE BOTTOM NAV
+  ========================== -->
+
+  <nav class="mobile-bottom-nav">
+
+    <a
+      class="active"
+      href="index.html"
+    >
+
+      <i data-lucide="house"></i>
+
+      <span>
+        হোম
+      </span>
+
+    </a>
+
+
+    <a href="#categories">
+
+      <i data-lucide="layout-grid"></i>
+
+      <span>
+        ক্যাটাগরি
+      </span>
+
+    </a>
+
+
+    <a href="shop.html">
+
+      <i data-lucide="search"></i>
+
+      <span>
+        খুঁজুন
+      </span>
+
+    </a>
+
+
+    <button>
+
+      <i data-lucide="heart"></i>
+
+      <span>
+        পছন্দ
+      </span>
+
+    </button>
+
+
+    <button id="bottomCartButton">
+
+      <i data-lucide="shopping-bag"></i>
+
+      <span>
+        কার্ট
+      </span>
+
+      <b id="bottomCartCount">
+        0
+      </b>
+
+    </button>
+
+  </nav>
+
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script src="script.js"></script>
+
+<script>
+
+const HOME_PRODUCTS_KEY =
+  "soroshfulProducts";
+
+
+/* =========================
+   GET PRODUCTS
+========================= */
+
+function getHomepageProducts() {
+
+  return JSON.parse(
+    localStorage.getItem(
+      HOME_PRODUCTS_KEY
+    )
+  ) || [];
+
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+function getHomepageWishlist() {
+
+  return JSON.parse(
+    localStorage.getItem(
+      "soroshfulWishlist"
+    )
+  ) || [];
+
+}
+
+
+/* =========================
+   RENDER HOMEPAGE PRODUCTS
+========================= */
+
+function renderHomepageProducts() {
+
+  const grid =
+    document.getElementById(
+      "homepageProductsGrid"
+    );
+
+
+  const empty =
+    document.getElementById(
+      "homepageProductsEmpty"
+    );
+
+
+  if (
+    !grid ||
+    !empty
+  ) {
+    return;
+  }
+
+
+  let products =
+    getHomepageProducts();
+
+
+  /*
+    Draft product homepage-এ দেখাবে না।
+    Active এবং out-of-stock product দেখাবে।
+  */
+
+  products =
+    products.filter(
+      product =>
+        product.status !==
+        "draft"
+    );
+
+
+  /*
+    Homepage-এ সর্বোচ্চ 6টি product
+  */
+
+  products =
+    products.slice(
+      0,
+      6
+    );
+
+
+  if (
+    products.length ===
+    0
+  ) {
+
+    grid.innerHTML =
+      "";
+
+
+    empty.style.display =
+      "block";
+
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  const wishlist =
+    getHomepageWishlist();
+
+
+  grid.innerHTML =
+    products
+      .map(
+        product => {
+
+          const price =
+            Number(
+              product.price || 0
+            );
+
+
+          const oldPrice =
+            Number(
+              product.oldPrice || 0
+            );
+
+
+          const stock =
+            Number(
+              product.stock || 0
+            );
+
+
+          const outOfStock =
+            product.status ===
+              "out-of-stock" ||
+            stock <= 0;
+
+
+          const wished =
+            wishlist.some(
+              id =>
+                Number(id) ===
+                Number(
+                  product.id
+                )
+            );
+
+
+          let discountBadge =
+            "";
+
+
+          if (
+            oldPrice >
+            price
+          ) {
+
+            const discount =
+              Math.round(
+                (
+                  (
+                    oldPrice -
+                    price
+                  ) /
+                  oldPrice
+                ) *
+                100
+              );
+
+
+            discountBadge = `
+              <span
+                style="
+                  position:absolute;
+                  left:10px;
+                  top:10px;
+                  z-index:2;
+                  padding:4px 7px;
+                  border-radius:999px;
+                  background:#fff0e8;
+                  color:#b55335;
+                  font-size:9px;
+                  font-weight:700;
+                "
+              >
+                ${discount}% OFF
+              </span>
+            `;
+
+          }
+
+
+          return `
+
+            <article
+              class="product-card homepage-product-card"
+              data-product-id="${product.id}"
+              style="cursor:pointer;"
+            >
+
+
+              <div
+                class="product-image"
+                style="
+                  position:relative;
+                  overflow:hidden;
+                "
+              >
+
+
+                <img
+                  src="${product.image || "images/hero-organic.jpg"}"
+                  alt="${product.name}"
+                  onerror="
+                    this.onerror=null;
+                    this.src='images/hero-organic.jpg';
+                  "
+                >
+
+
+                ${
+                  outOfStock
+                    ? `
+                      <span
+                        style="
+                          position:absolute;
+                          left:10px;
+                          top:10px;
+                          z-index:3;
+                          padding:4px 7px;
+                          border-radius:999px;
+                          background:#fff0ec;
+                          color:#c34d3a;
+                          font-size:9px;
+                          font-weight:700;
+                        "
+                      >
+                        Stock Out
+                      </span>
+                    `
+                    : discountBadge
+                }
+
+
+                <button
+                  type="button"
+                  onclick="toggleHomepageWishlist(event, ${product.id})"
+                  style="
+                    position:absolute;
+                    right:10px;
+                    top:10px;
+                    z-index:5;
+                    width:34px;
+                    height:34px;
+                    display:grid;
+                    place-items:center;
+                    border-radius:50%;
+                    background:${
+                      wished
+                        ? "var(--green)"
+                        : "#fff"
+                    };
+                    color:${
+                      wished
+                        ? "#fff"
+                        : "var(--green)"
+                    };
+                    box-shadow:0 5px 15px rgba(0,0,0,.08);
+                  "
+                  aria-label="Wishlist"
+                >
+                  <i data-lucide="heart"></i>
+                </button>
+
+              </div>
+
+
+              <div class="product-info">
+
+
+                <span class="product-category">
+
+                  ${
+                    product.category ||
+                    "Product"
+                  }
+
+                </span>
+
+
+                <h3>
+
+                  ${product.name}
+
+                </h3>
+
+
+                ${
+                  product.shortDescription
+                    ? `
+                      <p
+                        style="
+                          margin-top:4px;
+                          min-height:32px;
+                          color:var(--muted);
+                          font-size:10px;
+                          line-height:1.5;
+                        "
+                      >
+                        ${product.shortDescription}
+                      </p>
+                    `
+                    : ""
+                }
+
+
+                <div class="rating">
+
+                  <span>
+                    ★★★★★
+                  </span>
+
+                  <small>
+                    4.8
+                  </small>
+
+                </div>
+
+
+                <div class="product-footer">
+
+
+                  <div class="product-price">
+
+                    <strong>
+
+                      ৳${price.toLocaleString(
+                        "en-US"
+                      )}
+
+                    </strong>
+
+
+                    ${
+                      oldPrice >
+                      price
+                        ? `
+                          <del>
+
+                            ৳${oldPrice.toLocaleString(
+                              "en-US"
+                            )}
+
+                          </del>
+                        `
+                        : ""
+                    }
+
+                  </div>
+
+
+                  <button
+                    type="button"
+                    class="add-cart-button"
+                    onclick="addHomepageProductToCart(event, ${product.id})"
+                    ${
+                      outOfStock
+                        ? "disabled"
+                        : ""
+                    }
+                    style="${
+                      outOfStock
+                        ? "opacity:.45;cursor:not-allowed;"
+                        : ""
+                    }"
+                  >
+
+                    <i data-lucide="shopping-cart"></i>
+
+                  </button>
+
+                </div>
+
+
+                <div
+                  style="
+                    margin-top:6px;
+                    color:${
+                      outOfStock
+                        ? "var(--red)"
+                        : "#64806f"
+                    };
+                    font-size:9px;
+                  "
+                >
+
+                  ${
+                    outOfStock
+                      ? "বর্তমানে Stock Out"
+                      : `স্টকে আছে ${stock}টি`
+                  }
+
+                </div>
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+      )
+      .join("");
+
+
+  /* PRODUCT PAGE CLICK */
+
+  document
+    .querySelectorAll(
+      ".homepage-product-card"
+    )
+    .forEach(
+      card => {
+
+        card.addEventListener(
+          "click",
+          function(event) {
+
+            if (
+              event.target.closest(
+                "button"
+              )
+            ) {
+
+              return;
+
+            }
+
+
+            const productId =
+              this.dataset.productId;
+
+
+            window.location.href =
+              "product.html?id=" +
+              encodeURIComponent(
+                productId
+              );
+
+          }
+        );
+
+      }
+    );
+
+
+  lucide.createIcons();
+
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+window.addHomepageProductToCart =
+  function(
+    event,
+    productId
+  ) {
+
+    event.stopPropagation();
+
+
+    const product =
+      getHomepageProducts()
+        .find(
+          item =>
+            Number(item.id) ===
+            Number(
+              productId
+            )
+        );
+
+
+    if (!product) {
+      return;
+    }
+
+
+    const stock =
+      Number(
+        product.stock || 0
+      );
+
+
+    if (
+      product.status ===
+        "out-of-stock" ||
+      stock <= 0
+    ) {
+
+      showToast(
+        "এই পণ্যটি বর্তমানে Stock Out"
+      );
+
+      return;
+
+    }
+
+
+    const existing =
+      cart.find(
+        item =>
+          Number(item.id) ===
+            Number(
+              product.id
+            ) &&
+          !item.weight
+      );
+
+
+    if (existing) {
+
+      if (
+        Number(
+          existing.quantity
+        ) >=
+        stock
+      ) {
+
+        showToast(
+          "Available stock-এর বেশি যোগ করা যাবে না"
+        );
+
+        return;
+
+      }
+
+
+      existing.quantity +=
+        1;
+
+    } else {
+
+      cart.push({
+
+        id:
+          product.id,
+
+        name:
+          product.name,
+
+        price:
+          Number(
+            product.price
+          ),
+
+        quantity:
+          1
+
+      });
+
+    }
+
+
+    saveCart();
+
+    renderCart();
+
+
+    showToast(
+      "পণ্য কার্টে যোগ হয়েছে"
+    );
+
+  };
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+window.toggleHomepageWishlist =
+  function(
+    event,
+    productId
+  ) {
+
+    event.stopPropagation();
+
+
+    let wishlist =
+      getHomepageWishlist();
+
+
+    const exists =
+      wishlist.some(
+        id =>
+          Number(id) ===
+          Number(
+            productId
+          )
+      );
+
+
+    if (exists) {
+
+      wishlist =
+        wishlist.filter(
+          id =>
+            Number(id) !==
+            Number(
+              productId
+            )
+        );
+
+
+      showToast(
+        "Wishlist থেকে সরানো হয়েছে"
+      );
+
+    } else {
+
+      wishlist.push(
+        Number(
+          productId
+        )
+      );
+
+
+      showToast(
+        "Wishlist-এ যোগ হয়েছে"
+      );
+
+    }
+
+
+    localStorage.setItem(
+      "soroshfulWishlist",
+      JSON.stringify(
+        wishlist
+      )
+    );
+
+
+    if (
+      typeof updateWishlist ===
+      "function"
+    ) {
+
+      updateWishlist();
+
+    }
+
+
+    renderHomepageProducts();
+
+  };
+
+
+/* =========================
+   ADMIN UPDATE DETECTION
+========================= */
+
+window.addEventListener(
+  "storage",
+  function(event) {
+
+    if (
+      event.key ===
+      HOME_PRODUCTS_KEY
+    ) {
+
+      renderHomepageProducts();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   START
+========================= */
+
+renderHomepageProducts();
+
+lucide.createIcons();
+
+</script>
+
+</body>
+</html>

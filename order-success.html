@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <meta name="theme-color" content="#174d35" />
+
+  <title>অর্ডার সফল | সরষেফুল</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .success-page {
+      padding: 60px 0 80px;
+      background: #fffdf8;
+      min-height: 70vh;
+    }
+
+    .success-wrapper {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .success-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .success-top {
+      padding: 38px 28px 28px;
+      text-align: center;
+      background: linear-gradient(
+        180deg,
+        #f2f8f3 0%,
+        #ffffff 100%
+      );
+    }
+
+    .success-icon {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+    }
+
+    .success-icon svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .success-top h1 {
+      color: var(--green-dark);
+      font-family: "Noto Serif Bengali", serif;
+      font-size: clamp(30px, 5vw, 42px);
+      line-height: 1.2;
+    }
+
+    .success-top p {
+      max-width: 620px;
+      margin: 10px auto 0;
+      color: var(--muted);
+    }
+
+    .order-id-box {
+      max-width: 420px;
+      margin: 20px auto 0;
+      padding: 13px 16px;
+      border: 1px dashed #cad8cd;
+      border-radius: 10px;
+      background: #f8fbf8;
+    }
+
+    .order-id-box span,
+    .order-id-box strong {
+      display: block;
+    }
+
+    .order-id-box span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .order-id-box strong {
+      margin-top: 3px;
+      color: var(--green-dark);
+      font-size: 20px;
+      letter-spacing: .5px;
+    }
+
+    .success-body {
+      padding: 26px;
+    }
+
+    .success-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .info-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .info-card h3 {
+      color: var(--green-dark);
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .info-row {
+      min-height: 30px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: #5f6962;
+      font-size: 12px;
+    }
+
+    .info-row strong {
+      color: var(--green-dark);
+      text-align: right;
+    }
+
+    .order-items-card {
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .order-items-head {
+      padding: 13px 16px;
+      background: #fafbf9;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-items-head h3 {
+      color: var(--green-dark);
+      font-size: 15px;
+    }
+
+    .order-items-list {
+      padding: 6px 16px;
+    }
+
+    .order-item {
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item div:first-child {
+      min-width: 0;
+    }
+
+    .order-item h4 {
+      color: var(--green-dark);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .order-item small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .order-item strong {
+      white-space: nowrap;
+      color: var(--green-dark);
+      font-size: 13px;
+    }
+
+    .success-actions {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .success-empty {
+      padding: 60px 20px;
+      text-align: center;
+      display: none;
+    }
+
+    .success-empty.show {
+      display: block;
+    }
+
+    .success-empty h2 {
+      color: var(--green-dark);
+    }
+
+    .success-empty p {
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .success-empty a {
+      margin-top: 16px;
+    }
+
+    @media (max-width: 700px) {
+      .success-page {
+        padding: 34px 0 65px;
+      }
+
+      .success-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .success-body {
+        padding: 16px;
+      }
+
+      .success-top {
+        padding: 30px 16px 22px;
+      }
+
+      .success-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .success-actions a {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>🚚 সারা বাংলাদেশে ডেলিভারি</span>
+      <span class="topbar-middle">৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি</span>
+      <a href="tel:+8801712345678">
+        হেল্পলাইন: +880 1712-345678
+      </a>
+    </div>
+  </div>
+
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">স</div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার, পরিবারের জন্য</small>
+        </div>
+
+      </a>
+
+
+      <form
+        class="search desktop-search"
+        id="desktopSearchForm"
+      >
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="ঘি, মধু, চাল, মসলা খুঁজুন..."
+        />
+
+        <button type="submit">খুঁজুন</button>
+      </form>
+
+
+      <div class="header-actions">
+
+        <a
+          href="account.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+
+        <button class="header-action desktop-action">
+          <i data-lucide="heart"></i>
+          <span>পছন্দ</span>
+          <b id="wishlistCount">0</b>
+        </button>
+
+
+        <button
+          class="cart-header-button"
+          id="cartButton"
+        >
+          <i data-lucide="shopping-bag"></i>
+          <span class="desktop-action">কার্ট</span>
+          <b id="cartCount">0</b>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="container mobile-search-row">
+
+      <form
+        class="search"
+        id="mobileSearchForm"
+      >
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        />
+
+        <button type="submit">খুঁজুন</button>
+      </form>
+
+    </div>
+
+
+    <nav class="desktop-nav">
+
+      <div class="container nav-inner">
+
+        <a
+          href="index.html#categories"
+          class="category-nav-button"
+        >
+          <i data-lucide="layout-grid"></i>
+          সব ক্যাটাগরি
+        </a>
+
+
+        <div class="nav-links">
+          <a href="index.html">হোম</a>
+          <a href="shop.html">সব পণ্য</a>
+          <a href="index.html#products">জনপ্রিয়</a>
+          <a href="offers.html">অফার</a>
+          <a href="about.html">আমাদের গল্প</a>
+          <a href="contact.html">যোগাযোগ</a>
+        </div>
+
+
+        <a
+          href="order-tracking.html"
+          class="track-order"
+        >
+          <i data-lucide="truck"></i>
+          অর্ডার ট্র্যাক
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <div
+    class="overlay"
+    id="menuOverlay"
+  ></div>
+
+
+  <aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <a href="index.html" class="brand">
+        <div class="brand-mark">স</div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার</small>
+        </div>
+      </a>
+
+
+      <button
+        class="round-button"
+        id="closeMenuButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div class="drawer-links">
+      <a href="index.html"><i data-lucide="house"></i> হোম</a>
+      <a href="shop.html"><i data-lucide="shopping-basket"></i> সব পণ্য</a>
+      <a href="index.html#categories"><i data-lucide="layout-grid"></i> ক্যাটাগরি</a>
+      <a href="offers.html"><i data-lucide="badge-percent"></i> অফার</a>
+      <a href="order-tracking.html"><i data-lucide="truck"></i> অর্ডার ট্র্যাক</a>
+      <a href="about.html"><i data-lucide="leaf"></i> আমাদের গল্প</a>
+      <a href="contact.html"><i data-lucide="phone"></i> যোগাযোগ</a>
+    </div>
+
+  </aside>
+
+
+  <main class="success-page">
+
+    <div class="container success-wrapper">
+
+      <div
+        class="success-card"
+        id="successCard"
+      >
+
+        <div class="success-top">
+
+          <div class="success-icon">
+            <i data-lucide="check"></i>
+          </div>
+
+          <h1>
+            আপনার অর্ডার সফল হয়েছে
+          </h1>
+
+          <p>
+            ধন্যবাদ। আমরা আপনার অর্ডারটি পেয়েছি।
+            অর্ডার নিশ্চিত করার জন্য প্রয়োজন হলে আমাদের টিম যোগাযোগ করবে।
+          </p>
+
+          <div class="order-id-box">
+
+            <span>
+              আপনার Order ID
+            </span>
+
+            <strong id="successOrderId">
+              -
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="success-body">
+
+          <div class="success-grid">
+
+
+            <div class="info-card">
+
+              <h3>
+                অর্ডার তথ্য
+              </h3>
+
+              <div class="info-row">
+                <span>তারিখ</span>
+                <strong id="successOrderDate">-</strong>
+              </div>
+
+              <div class="info-row">
+                <span>পেমেন্ট</span>
+                <strong id="successPayment">-</strong>
+              </div>
+
+              <div class="info-row">
+                <span>ডেলিভারি</span>
+                <strong id="successDelivery">-</strong>
+              </div>
+
+              <div class="info-row">
+                <span>স্ট্যাটাস</span>
+                <strong>Order Placed</strong>
+              </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+              <h3>
+                ডেলিভারি তথ্য
+              </h3>
+
+              <div class="info-row">
+                <span>নাম</span>
+                <strong id="successCustomerName">-</strong>
+              </div>
+
+              <div class="info-row">
+                <span>মোবাইল</span>
+                <strong id="successCustomerPhone">-</strong>
+              </div>
+
+              <div class="info-row">
+                <span>জেলা</span>
+                <strong id="successCustomerDistrict">-</strong>
+              </div>
+
+              <div class="info-row">
+                <span>ঠিকানা</span>
+                <strong id="successCustomerAddress">-</strong>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="order-items-card">
+
+            <div class="order-items-head">
+              <h3>
+                অর্ডারের পণ্য
+              </h3>
+            </div>
+
+            <div
+              class="order-items-list"
+              id="successItems"
+            ></div>
+
+          </div>
+
+
+          <div
+            class="info-card"
+            style="margin-top:16px;"
+          >
+
+            <div class="info-row">
+              <span>Subtotal</span>
+              <strong id="successSubtotal">৳০</strong>
+            </div>
+
+            <div class="info-row">
+              <span>Delivery</span>
+              <strong id="successDeliveryCharge">৳০</strong>
+            </div>
+
+            <div
+              class="info-row"
+              style="
+                min-height:40px;
+                margin-top:5px;
+                padding-top:8px;
+                border-top:1px solid var(--line);
+              "
+            >
+              <span>
+                সর্বমোট
+              </span>
+
+              <strong
+                id="successTotal"
+                style="font-size:20px;"
+              >
+                ৳০
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div class="success-actions">
+
+            <a
+              href="shop.html"
+              class="outline-button"
+            >
+              আরও কেনাকাটা করুন
+            </a>
+
+            <a
+              href="order-tracking.html"
+              class="primary-button"
+              id="trackOrderButton"
+            >
+              অর্ডার ট্র্যাক করুন
+              <i data-lucide="arrow-right"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="success-empty"
+        id="successEmpty"
+      >
+
+        <h2>
+          কোনো সাম্প্রতিক অর্ডার পাওয়া যায়নি
+        </h2>
+
+        <p>
+          নতুন অর্ডার করলে এখানে অর্ডারের বিস্তারিত দেখা যাবে।
+        </p>
+
+        <a
+          href="shop.html"
+          class="primary-button"
+        >
+          পণ্য দেখুন
+        </a>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a href="index.html" class="brand">
+          <div class="brand-mark">স</div>
+
+          <div class="brand-copy">
+            <strong>সরষেফুল</strong>
+            <small>প্রকৃতির খাবার</small>
+          </div>
+        </a>
+
+        <p>
+          খাঁটি ও প্রাকৃতিক খাদ্য সহজে আপনার পরিবারের
+          কাছে পৌঁছে দেওয়ার চেষ্টা।
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+        <h3>কেনাকাটা</h3>
+        <a href="shop.html">সব পণ্য</a>
+        <a href="index.html#categories">ক্যাটাগরি</a>
+        <a href="offers.html">অফার</a>
+        <a href="order-tracking.html">অর্ডার ট্র্যাক</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>সহায়তা</h3>
+        <a href="faq.html">FAQ</a>
+        <a href="shipping-policy.html">ডেলিভারি পলিসি</a>
+        <a href="refund-policy.html">রিটার্ন ও রিফান্ড</a>
+        <a href="contact.html">যোগাযোগ</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>যোগাযোগ</h3>
+        <p>+880 1712-345678</p>
+        <p>hello@soroshful.com</p>
+        <p>সকাল ৯টা – রাত ১০টা</p>
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+      <div class="container">
+        © 2026 সরষেফুল। সর্বস্বত্ব সংরক্ষিত।
+      </div>
+    </div>
+
+  </footer>
+
+
+  <div
+    class="overlay"
+    id="cartOverlay"
+  ></div>
+
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <div>
+        <h2>আপনার কার্ট</h2>
+        <small id="cartItemCount">০টি পণ্য</small>
+      </div>
+
+      <button
+        class="round-button"
+        id="closeCartButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-bottom">
+
+      <div>
+        <span>মোট</span>
+        <strong id="cartTotal">৳০</strong>
+      </div>
+
+      <a
+        href="checkout.html"
+        class="primary-button full-button"
+      >
+        Checkout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <nav class="mobile-bottom-nav">
+
+    <a href="index.html">
+      <i data-lucide="house"></i>
+      <span>হোম</span>
+    </a>
+
+    <a href="index.html#categories">
+      <i data-lucide="layout-grid"></i>
+      <span>ক্যাটাগরি</span>
+    </a>
+
+    <a href="shop.html">
+      <i data-lucide="search"></i>
+      <span>খুঁজুন</span>
+    </a>
+
+    <button>
+      <i data-lucide="heart"></i>
+      <span>পছন্দ</span>
+    </button>
+
+    <button id="bottomCartButton">
+      <i data-lucide="shopping-bag"></i>
+      <span>কার্ট</span>
+      <b id="bottomCartCount">0</b>
+    </button>
+
+  </nav>
+
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script src="script.js"></script>
+
+
+  <script>
+
+    const lastOrder =
+      JSON.parse(
+        localStorage.getItem(
+          "soroshfulLastOrder"
+        )
+      );
+
+
+    const successCard =
+      document.getElementById(
+        "successCard"
+      );
+
+
+    const successEmpty =
+      document.getElementById(
+        "successEmpty"
+      );
+
+
+    if (!lastOrder) {
+
+      successCard.style.display =
+        "none";
+
+
+      successEmpty.classList.add(
+        "show"
+      );
+
+    } else {
+
+      document
+        .getElementById(
+          "successOrderId"
+        )
+        .textContent =
+          lastOrder.orderId;
+
+
+      document
+        .getElementById(
+          "successOrderDate"
+        )
+        .textContent =
+          lastOrder.date;
+
+
+      document
+        .getElementById(
+          "successCustomerName"
+        )
+        .textContent =
+          lastOrder.customer.name;
+
+
+      document
+        .getElementById(
+          "successCustomerPhone"
+        )
+        .textContent =
+          lastOrder.customer.phone;
+
+
+      document
+        .getElementById(
+          "successCustomerDistrict"
+        )
+        .textContent =
+          lastOrder.customer.district;
+
+
+      document
+        .getElementById(
+          "successCustomerAddress"
+        )
+        .textContent =
+          lastOrder.customer.address;
+
+
+      const paymentNames = {
+
+        cod:
+          "Cash on Delivery",
+
+        bkash:
+          "bKash",
+
+        nagad:
+          "Nagad"
+
+      };
+
+
+      const deliveryNames = {
+
+        standard:
+          "Standard Delivery",
+
+        express:
+          "Express Delivery"
+
+      };
+
+
+      document
+        .getElementById(
+          "successPayment"
+        )
+        .textContent =
+          paymentNames[
+            lastOrder.paymentMethod
+          ] ||
+          lastOrder.paymentMethod;
+
+
+      document
+        .getElementById(
+          "successDelivery"
+        )
+        .textContent =
+          deliveryNames[
+            lastOrder.deliveryMethod
+          ] ||
+          lastOrder.deliveryMethod;
+
+
+      document
+        .getElementById(
+          "successSubtotal"
+        )
+        .textContent =
+          "৳" +
+          Number(
+            lastOrder.subtotal
+          ).toLocaleString(
+            "en-US"
+          );
+
+
+      document
+        .getElementById(
+          "successDeliveryCharge"
+        )
+        .textContent =
+          Number(
+            lastOrder.deliveryCharge
+          ) === 0
+            ? "ফ্রি"
+            : "৳" +
+              Number(
+                lastOrder.deliveryCharge
+              ).toLocaleString(
+                "en-US"
+              );
+
+
+      document
+        .getElementById(
+          "successTotal"
+        )
+        .textContent =
+          "৳" +
+          Number(
+            lastOrder.total
+          ).toLocaleString(
+            "en-US"
+          );
+
+
+      document
+        .getElementById(
+          "successItems"
+        )
+        .innerHTML =
+          lastOrder.items
+            .map((item) => {
+
+              return `
+
+                <div class="order-item">
+
+                  <div>
+
+                    <h4>
+                      ${item.name}
+                    </h4>
+
+                    <small>
+                      ${item.quantity}
+                      ×
+                      ৳${item.price.toLocaleString("en-US")}
+                    </small>
+
+                  </div>
+
+
+                  <strong>
+
+                    ৳${(
+                      item.price *
+                      item.quantity
+                    ).toLocaleString(
+                      "en-US"
+                    )}
+
+                  </strong>
+
+                </div>
+
+              `;
+
+            })
+            .join("");
+
+
+      document
+        .getElementById(
+          "trackOrderButton"
+        )
+        .href =
+          "order-tracking.html?order=" +
+          encodeURIComponent(
+            lastOrder.orderId
+          );
+
+    }
+
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>

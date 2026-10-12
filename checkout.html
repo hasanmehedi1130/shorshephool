@@ -1,0 +1,2631 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="সরষেফুল - Checkout"
+  />
+
+  <meta name="theme-color" content="#174d35" />
+
+  <title>Checkout | সরষেফুল</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+
+    /* =========================
+       CHECKOUT PAGE
+    ========================= */
+
+    .checkout-hero {
+      padding: 34px 0;
+      background: #fff9ed;
+      border-bottom: 1px solid #eee7da;
+    }
+
+    .checkout-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+      color: #7b847e;
+      font-size: 12px;
+    }
+
+    .checkout-breadcrumb a:hover {
+      color: var(--green);
+    }
+
+    .checkout-hero h1 {
+      color: var(--green-dark);
+      font-family: "Noto Serif Bengali", serif;
+      font-size: clamp(32px, 5vw, 46px);
+      line-height: 1.2;
+    }
+
+    .checkout-section {
+      padding: 46px 0 80px;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, .75fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+
+    /* =========================
+       FORM CARD
+    ========================= */
+
+    .checkout-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .checkout-card + .checkout-card {
+      margin-top: 18px;
+    }
+
+    .checkout-card-head {
+      min-height: 58px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--line);
+      background: #fafbf9;
+    }
+
+    .checkout-card-head svg {
+      width: 20px;
+      color: var(--green);
+    }
+
+    .checkout-card-head h2 {
+      color: var(--green-dark);
+      font-size: 18px;
+    }
+
+    .checkout-card-body {
+      padding: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .form-group {
+      min-width: 0;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .form-group label span {
+      color: var(--red);
+    }
+
+    .form-control {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    textarea.form-control {
+      min-height: 95px;
+      padding-top: 10px;
+      resize: vertical;
+    }
+
+    .form-control:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(23, 77, 53, .06);
+    }
+
+    .field-note {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+
+    /* =========================
+       DELIVERY / PAYMENT OPTIONS
+    ========================= */
+
+    .option-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .checkout-option {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .checkout-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .checkout-option-content {
+      min-height: 64px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      transition: .2s;
+    }
+
+    .checkout-option input:checked + .checkout-option-content {
+      border-color: var(--green);
+      background: var(--light-green);
+      box-shadow: 0 0 0 2px rgba(23, 77, 53, .05);
+    }
+
+    .option-icon {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #f2f6f3;
+      color: var(--green);
+    }
+
+    .option-icon svg {
+      width: 18px;
+    }
+
+    .checkout-option-content > div:last-child {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .checkout-option-content b,
+    .checkout-option-content small {
+      display: block;
+    }
+
+    .checkout-option-content b {
+      color: var(--green-dark);
+      font-size: 13px;
+    }
+
+    .checkout-option-content small {
+      margin-top: 1px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .option-price {
+      margin-left: auto;
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+
+    /* =========================
+       PAYMENT EXTRA
+    ========================= */
+
+    .payment-extra {
+      display: none;
+      margin-top: 12px;
+      padding: 14px;
+      border: 1px solid #e8e5dc;
+      border-radius: 10px;
+      background: #fffaf0;
+    }
+
+    .payment-extra.show {
+      display: block;
+    }
+
+    .payment-extra p {
+      color: #5d665f;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .payment-number {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px dashed #d9d1bc;
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+
+    /* =========================
+       SUMMARY
+    ========================= */
+
+    .checkout-summary {
+      position: sticky;
+      top: 150px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .checkout-summary-head {
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #fafbf9;
+    }
+
+    .checkout-summary-head h2 {
+      color: var(--green-dark);
+      font-size: 20px;
+    }
+
+    .checkout-summary-items {
+      max-height: 360px;
+      overflow-y: auto;
+      padding: 8px 18px;
+    }
+
+    .checkout-summary-item {
+      padding: 11px 0;
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) auto;
+      gap: 9px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .checkout-summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .checkout-summary-image {
+      width: 52px;
+      height: 52px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #f1efe8;
+    }
+
+    .checkout-summary-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .checkout-summary-info {
+      min-width: 0;
+    }
+
+    .checkout-summary-info h3 {
+      color: var(--green-dark);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .checkout-summary-info small {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .checkout-summary-price {
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .checkout-summary-body {
+      padding: 16px 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .summary-line {
+      min-height: 31px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: #5e6861;
+      font-size: 12px;
+    }
+
+    .summary-line strong {
+      color: var(--green-dark);
+    }
+
+    .summary-divider {
+      height: 1px;
+      margin: 10px 0;
+      background: var(--line);
+    }
+
+    .summary-grand {
+      min-height: 42px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .summary-grand strong {
+      font-size: 22px;
+      color: var(--green-dark);
+    }
+
+
+    /* =========================
+       PLACE ORDER
+    ========================= */
+
+    .place-order-button {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 9px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .place-order-button:hover {
+      background: var(--green-dark);
+    }
+
+    .place-order-button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .secure-note {
+      margin-top: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      color: #89908b;
+      font-size: 10px;
+    }
+
+    .secure-note svg {
+      width: 13px;
+    }
+
+
+    /* =========================
+       EMPTY
+    ========================= */
+
+    .checkout-empty {
+      min-height: 450px;
+      display: none;
+      place-content: center;
+      justify-items: center;
+      text-align: center;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .checkout-empty.show {
+      display: grid;
+    }
+
+    .checkout-empty-icon {
+      width: 70px;
+      height: 70px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      border-radius: 50%;
+      background: var(--light-green);
+      color: var(--green);
+    }
+
+    .checkout-empty-icon svg {
+      width: 30px;
+    }
+
+    .checkout-empty h2 {
+      color: var(--green-dark);
+    }
+
+    .checkout-empty p {
+      max-width: 420px;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .checkout-empty a {
+      margin-top: 16px;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 950px) {
+
+      .checkout-layout {
+        grid-template-columns: minmax(0, 1fr) 310px;
+        gap: 20px;
+      }
+
+    }
+
+
+    @media (max-width: 820px) {
+
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-summary {
+        position: static;
+      }
+
+    }
+
+
+    @media (max-width: 620px) {
+
+      .checkout-hero {
+        padding: 27px 0;
+      }
+
+      .checkout-section {
+        padding: 34px 0 65px;
+      }
+
+      .checkout-card-head {
+        min-height: 54px;
+        padding: 0 14px;
+      }
+
+      .checkout-card-body {
+        padding: 14px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .checkout-summary-items {
+        max-height: none;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- TOP BAR -->
+
+  <div class="topbar">
+
+    <div class="container topbar-inner">
+
+      <span>
+        🚚 সারা বাংলাদেশে ডেলিভারি
+      </span>
+
+      <span class="topbar-middle">
+        ৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি
+      </span>
+
+      <a href="tel:+8801712345678">
+        হেল্পলাইন: +880 1712-345678
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+        aria-label="মেনু"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            সরষেফুল
+          </strong>
+
+          <small>
+            প্রকৃতির খাবার, পরিবারের জন্য
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <form
+        class="search desktop-search"
+        id="desktopSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="ঘি, মধু, চাল, মসলা খুঁজুন..."
+        />
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+
+      <div class="header-actions">
+
+        <a
+          href="account.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+
+        <button class="header-action desktop-action">
+
+          <i data-lucide="heart"></i>
+
+          <span>
+            পছন্দ
+          </span>
+
+          <b id="wishlistCount">
+            0
+          </b>
+
+        </button>
+
+
+        <button
+          class="cart-header-button"
+          id="cartButton"
+        >
+
+          <i data-lucide="shopping-bag"></i>
+
+          <span class="desktop-action">
+            কার্ট
+          </span>
+
+          <b id="cartCount">
+            0
+          </b>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="container mobile-search-row">
+
+      <form
+        class="search"
+        id="mobileSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        />
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+    </div>
+
+
+    <nav class="desktop-nav">
+
+      <div class="container nav-inner">
+
+        <a
+          href="index.html#categories"
+          class="category-nav-button"
+        >
+          <i data-lucide="layout-grid"></i>
+          সব ক্যাটাগরি
+        </a>
+
+
+        <div class="nav-links">
+
+          <a href="index.html">
+            হোম
+          </a>
+
+          <a href="shop.html">
+            সব পণ্য
+          </a>
+
+          <a href="index.html#products">
+            জনপ্রিয়
+          </a>
+
+          <a href="offers.html">
+            অফার
+          </a>
+
+          <a href="about.html">
+            আমাদের গল্প
+          </a>
+
+          <a href="contact.html">
+            যোগাযোগ
+          </a>
+
+        </div>
+
+
+        <a
+          href="order-tracking.html"
+          class="track-order"
+        >
+          <i data-lucide="truck"></i>
+          অর্ডার ট্র্যাক
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- MOBILE DRAWER -->
+
+  <div
+    class="overlay"
+    id="menuOverlay"
+  ></div>
+
+
+  <aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            সরষেফুল
+          </strong>
+
+          <small>
+            প্রকৃতির খাবার
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <button
+        class="round-button"
+        id="closeMenuButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div class="drawer-links">
+
+      <a href="index.html">
+        <i data-lucide="house"></i>
+        হোম
+      </a>
+
+      <a href="shop.html">
+        <i data-lucide="shopping-basket"></i>
+        সব পণ্য
+      </a>
+
+      <a href="index.html#categories">
+        <i data-lucide="layout-grid"></i>
+        ক্যাটাগরি
+      </a>
+
+      <a href="offers.html">
+        <i data-lucide="badge-percent"></i>
+        অফার
+      </a>
+
+      <a href="order-tracking.html">
+        <i data-lucide="truck"></i>
+        অর্ডার ট্র্যাক
+      </a>
+
+      <a href="about.html">
+        <i data-lucide="leaf"></i>
+        আমাদের গল্প
+      </a>
+
+      <a href="contact.html">
+        <i data-lucide="phone"></i>
+        যোগাযোগ
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- CHECKOUT HERO -->
+
+  <main>
+
+    <section class="checkout-hero">
+
+      <div class="container">
+
+        <div class="checkout-breadcrumb">
+
+          <a href="index.html">
+            হোম
+          </a>
+
+          <span>/</span>
+
+          <a href="cart.html">
+            কার্ট
+          </a>
+
+          <span>/</span>
+
+          <span>
+            Checkout
+          </span>
+
+        </div>
+
+
+        <h1>
+          Checkout
+        </h1>
+
+      </div>
+
+    </section>
+
+
+    <!-- CHECKOUT -->
+
+    <section class="checkout-section">
+
+      <div class="container">
+
+
+        <!-- EMPTY -->
+
+        <div
+          class="checkout-empty"
+          id="checkoutEmpty"
+        >
+
+          <div class="checkout-empty-icon">
+            <i data-lucide="shopping-bag"></i>
+          </div>
+
+          <h2>
+            Checkout করার মতো কোনো পণ্য নেই
+          </h2>
+
+          <p>
+            আগে আপনার পছন্দের পণ্য কার্টে যোগ করুন,
+            তারপর Checkout করুন।
+          </p>
+
+          <a
+            href="shop.html"
+            class="primary-button"
+          >
+            পণ্য দেখুন
+          </a>
+
+        </div>
+
+
+        <!-- MAIN -->
+
+        <div
+          class="checkout-layout"
+          id="checkoutLayout"
+        >
+
+
+          <!-- LEFT -->
+
+          <div>
+
+
+            <!-- CUSTOMER -->
+
+            <section class="checkout-card">
+
+              <div class="checkout-card-head">
+
+                <i data-lucide="user"></i>
+
+                <h2>
+                  গ্রাহকের তথ্য
+                </h2>
+
+              </div>
+
+
+              <div class="checkout-card-body">
+
+                <div class="form-grid">
+
+                  <div class="form-group">
+
+                    <label for="customerName">
+                      নাম
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      class="form-control"
+                      id="customerName"
+                      type="text"
+                      placeholder="আপনার পূর্ণ নাম"
+                    />
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label for="customerPhone">
+                      মোবাইল নম্বর
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      class="form-control"
+                      id="customerPhone"
+                      type="tel"
+                      placeholder="01XXXXXXXXX"
+                    />
+
+                  </div>
+
+
+                  <div class="form-group full">
+
+                    <label for="customerEmail">
+                      ইমেইল
+                    </label>
+
+                    <input
+                      class="form-control"
+                      id="customerEmail"
+                      type="email"
+                      placeholder="example@email.com"
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- ADDRESS -->
+
+            <section class="checkout-card">
+
+              <div class="checkout-card-head">
+
+                <i data-lucide="map-pin"></i>
+
+                <h2>
+                  ডেলিভারি ঠিকানা
+                </h2>
+
+              </div>
+
+
+              <div class="checkout-card-body">
+
+                <div class="form-grid">
+
+
+                  <div class="form-group full">
+
+                    <label for="customerAddress">
+                      সম্পূর্ণ ঠিকানা
+                      <span>*</span>
+                    </label>
+
+                    <textarea
+                      class="form-control"
+                      id="customerAddress"
+                      placeholder="বাড়ি/ফ্ল্যাট, রোড, এলাকা..."
+                    ></textarea>
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label for="district">
+                      জেলা
+                      <span>*</span>
+                    </label>
+
+                    <select
+                      class="form-control"
+                      id="district"
+                    >
+
+                      <option value="">
+                        জেলা নির্বাচন করুন
+                      </option>
+
+                      <option value="dhaka">
+                        ঢাকা
+                      </option>
+
+                      <option value="chattogram">
+                        চট্টগ্রাম
+                      </option>
+
+                      <option value="cumilla">
+                        কুমিল্লা
+                      </option>
+
+                      <option value="sylhet">
+                        সিলেট
+                      </option>
+
+                      <option value="rajshahi">
+                        রাজশাহী
+                      </option>
+
+                      <option value="khulna">
+                        খুলনা
+                      </option>
+
+                      <option value="other">
+                        অন্যান্য
+                      </option>
+
+                    </select>
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label for="area">
+                      এলাকা / থানা
+                      <span>*</span>
+                    </label>
+
+                    <input
+                      class="form-control"
+                      id="area"
+                      type="text"
+                      placeholder="যেমন: পাঁচলাইশ"
+                    />
+
+                  </div>
+
+
+                  <div class="form-group full">
+
+                    <label for="orderNote">
+                      অর্ডার নোট
+                    </label>
+
+                    <textarea
+                      class="form-control"
+                      id="orderNote"
+                      placeholder="বিশেষ কোনো নির্দেশনা থাকলে লিখুন..."
+                    ></textarea>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- DELIVERY -->
+
+            <section class="checkout-card">
+
+              <div class="checkout-card-head">
+
+                <i data-lucide="truck"></i>
+
+                <h2>
+                  ডেলিভারি পদ্ধতি
+                </h2>
+
+              </div>
+
+
+              <div class="checkout-card-body">
+
+                <div class="option-list">
+
+
+                  <label class="checkout-option">
+
+                    <input
+                      type="radio"
+                      name="delivery"
+                      value="standard"
+                      data-charge="80"
+                      checked
+                    />
+
+                    <div class="checkout-option-content">
+
+                      <div class="option-icon">
+                        <i data-lucide="package"></i>
+                      </div>
+
+
+                      <div>
+
+                        <b>
+                          Standard Delivery
+                        </b>
+
+                        <small>
+                          সাধারণ ডেলিভারি
+                        </small>
+
+                      </div>
+
+
+                      <span class="option-price">
+                        ৳৮০
+                      </span>
+
+                    </div>
+
+                  </label>
+
+
+                  <label class="checkout-option">
+
+                    <input
+                      type="radio"
+                      name="delivery"
+                      value="express"
+                      data-charge="150"
+                    />
+
+                    <div class="checkout-option-content">
+
+                      <div class="option-icon">
+                        <i data-lucide="zap"></i>
+                      </div>
+
+
+                      <div>
+
+                        <b>
+                          Express Delivery
+                        </b>
+
+                        <small>
+                          নির্বাচিত এলাকায় দ্রুত ডেলিভারি
+                        </small>
+
+                      </div>
+
+
+                      <span class="option-price">
+                        ৳১৫০
+                      </span>
+
+                    </div>
+
+                  </label>
+
+                </div>
+
+                <p class="field-note">
+                  ৳১৫০০ বা তার বেশি অর্ডারে Standard Delivery ফ্রি।
+                </p>
+
+              </div>
+
+            </section>
+
+
+            <!-- PAYMENT -->
+
+            <section class="checkout-card">
+
+              <div class="checkout-card-head">
+
+                <i data-lucide="wallet-cards"></i>
+
+                <h2>
+                  পেমেন্ট পদ্ধতি
+                </h2>
+
+              </div>
+
+
+              <div class="checkout-card-body">
+
+                <div class="option-list">
+
+
+                  <label class="checkout-option">
+
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="cod"
+                      checked
+                    />
+
+                    <div class="checkout-option-content">
+
+                      <div class="option-icon">
+                        <i data-lucide="banknote"></i>
+                      </div>
+
+
+                      <div>
+
+                        <b>
+                          Cash on Delivery
+                        </b>
+
+                        <small>
+                          পণ্য হাতে পেয়ে পেমেন্ট করুন
+                        </small>
+
+                      </div>
+
+                    </div>
+
+                  </label>
+
+
+                  <label class="checkout-option">
+
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="bkash"
+                    />
+
+                    <div class="checkout-option-content">
+
+                      <div class="option-icon">
+                        <i data-lucide="smartphone"></i>
+                      </div>
+
+
+                      <div>
+
+                        <b>
+                          bKash
+                        </b>
+
+                        <small>
+                          মোবাইল পেমেন্ট
+                        </small>
+
+                      </div>
+
+                    </div>
+
+                  </label>
+
+
+                  <label class="checkout-option">
+
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="nagad"
+                    />
+
+                    <div class="checkout-option-content">
+
+                      <div class="option-icon">
+                        <i data-lucide="smartphone"></i>
+                      </div>
+
+
+                      <div>
+
+                        <b>
+                          Nagad
+                        </b>
+
+                        <small>
+                          মোবাইল পেমেন্ট
+                        </small>
+
+                      </div>
+
+                    </div>
+
+                  </label>
+
+                </div>
+
+
+                <!-- BKASH -->
+
+                <div
+                  class="payment-extra"
+                  id="bkashExtra"
+                >
+
+                  <p>
+                    নিচের নম্বরে bKash Send Money করুন।
+                    পরে transaction ID লিখুন।
+                  </p>
+
+                  <div class="payment-number">
+                    01XXXXXXXXX
+                  </div>
+
+                  <div class="form-group" style="margin-top:12px;">
+
+                    <label for="bkashTrx">
+                      bKash Transaction ID
+                    </label>
+
+                    <input
+                      class="form-control"
+                      id="bkashTrx"
+                      type="text"
+                      placeholder="Transaction ID"
+                    />
+
+                  </div>
+
+                </div>
+
+
+                <!-- NAGAD -->
+
+                <div
+                  class="payment-extra"
+                  id="nagadExtra"
+                >
+
+                  <p>
+                    নিচের নম্বরে Nagad Send Money করুন।
+                    পরে transaction ID লিখুন।
+                  </p>
+
+                  <div class="payment-number">
+                    01XXXXXXXXX
+                  </div>
+
+                  <div class="form-group" style="margin-top:12px;">
+
+                    <label for="nagadTrx">
+                      Nagad Transaction ID
+                    </label>
+
+                    <input
+                      class="form-control"
+                      id="nagadTrx"
+                      type="text"
+                      placeholder="Transaction ID"
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+          </div>
+
+
+          <!-- RIGHT SUMMARY -->
+
+          <aside class="checkout-summary">
+
+            <div class="checkout-summary-head">
+
+              <h2>
+                আপনার অর্ডার
+              </h2>
+
+            </div>
+
+
+            <div
+              class="checkout-summary-items"
+              id="checkoutSummaryItems"
+            ></div>
+
+
+            <div class="checkout-summary-body">
+
+              <div class="summary-line">
+
+                <span>
+                  Subtotal
+                </span>
+
+                <strong id="checkoutSubtotal">
+                  ৳০
+                </strong>
+
+              </div>
+
+
+              <div class="summary-line">
+
+                <span>
+                  Delivery
+                </span>
+
+                <strong id="checkoutDelivery">
+                  ৳৮০
+                </strong>
+
+              </div>
+
+
+              <div class="summary-divider"></div>
+
+
+              <div class="summary-line summary-grand">
+
+                <span>
+                  সর্বমোট
+                </span>
+
+                <strong id="checkoutGrandTotal">
+                  ৳০
+                </strong>
+
+              </div>
+
+
+              <button
+                class="place-order-button"
+                id="placeOrderButton"
+              >
+
+                অর্ডার নিশ্চিত করুন
+
+                <i data-lucide="arrow-right"></i>
+
+              </button>
+
+
+              <div class="secure-note">
+
+                <i data-lucide="lock-keyhole"></i>
+
+                আপনার তথ্য নিরাপদভাবে প্রক্রিয়া করা হবে
+
+              </div>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a
+          href="index.html"
+          class="brand"
+        >
+
+          <div class="brand-mark">
+            স
+          </div>
+
+          <div class="brand-copy">
+
+            <strong>
+              সরষেফুল
+            </strong>
+
+            <small>
+              প্রকৃতির খাবার
+            </small>
+
+          </div>
+
+        </a>
+
+
+        <p>
+          খাঁটি ও প্রাকৃতিক খাদ্য সহজে আপনার পরিবারের
+          কাছে পৌঁছে দেওয়ার চেষ্টা।
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          কেনাকাটা
+        </h3>
+
+        <a href="shop.html">
+          সব পণ্য
+        </a>
+
+        <a href="index.html#categories">
+          ক্যাটাগরি
+        </a>
+
+        <a href="offers.html">
+          অফার
+        </a>
+
+        <a href="order-tracking.html">
+          অর্ডার ট্র্যাক
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          সহায়তা
+        </h3>
+
+        <a href="faq.html">
+          FAQ
+        </a>
+
+        <a href="shipping-policy.html">
+          ডেলিভারি পলিসি
+        </a>
+
+        <a href="refund-policy.html">
+          রিটার্ন ও রিফান্ড
+        </a>
+
+        <a href="contact.html">
+          যোগাযোগ
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          যোগাযোগ
+        </h3>
+
+        <p>
+          +880 1712-345678
+        </p>
+
+        <p>
+          hello@soroshful.com
+        </p>
+
+        <p>
+          সকাল ৯টা – রাত ১০টা
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <div class="container">
+        © 2026 সরষেফুল। সর্বস্বত্ব সংরক্ষিত।
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- CART DRAWER -->
+
+  <div
+    class="overlay"
+    id="cartOverlay"
+  ></div>
+
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <div>
+
+        <h2>
+          আপনার কার্ট
+        </h2>
+
+        <small id="cartItemCount">
+          ০টি পণ্য
+        </small>
+
+      </div>
+
+
+      <button
+        class="round-button"
+        id="closeCartButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-bottom">
+
+      <div>
+
+        <span>
+          মোট
+        </span>
+
+        <strong id="cartTotal">
+          ৳০
+        </strong>
+
+      </div>
+
+
+      <a
+        href="checkout.html"
+        class="primary-button full-button"
+      >
+        Checkout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MOBILE BOTTOM NAV -->
+
+  <nav class="mobile-bottom-nav">
+
+    <a href="index.html">
+
+      <i data-lucide="house"></i>
+
+      <span>
+        হোম
+      </span>
+
+    </a>
+
+
+    <a href="index.html#categories">
+
+      <i data-lucide="layout-grid"></i>
+
+      <span>
+        ক্যাটাগরি
+      </span>
+
+    </a>
+
+
+    <a href="shop.html">
+
+      <i data-lucide="search"></i>
+
+      <span>
+        খুঁজুন
+      </span>
+
+    </a>
+
+
+    <button>
+
+      <i data-lucide="heart"></i>
+
+      <span>
+        পছন্দ
+      </span>
+
+    </button>
+
+
+    <button id="bottomCartButton">
+
+      <i data-lucide="shopping-bag"></i>
+
+      <span>
+        কার্ট
+      </span>
+
+      <b id="bottomCartCount">
+        0
+      </b>
+
+    </button>
+
+  </nav>
+
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <!-- SHARED SCRIPT -->
+
+  <script src="script.js"></script>
+
+
+  <!-- CHECKOUT SCRIPT -->
+
+  <script>
+
+    const checkoutLayout =
+      document.getElementById(
+        "checkoutLayout"
+      );
+
+
+    const checkoutEmpty =
+      document.getElementById(
+        "checkoutEmpty"
+      );
+
+
+    const checkoutSummaryItems =
+      document.getElementById(
+        "checkoutSummaryItems"
+      );
+
+
+    const checkoutSubtotal =
+      document.getElementById(
+        "checkoutSubtotal"
+      );
+
+
+    const checkoutDelivery =
+      document.getElementById(
+        "checkoutDelivery"
+      );
+
+
+    const checkoutGrandTotal =
+      document.getElementById(
+        "checkoutGrandTotal"
+      );
+
+
+    const placeOrderButton =
+      document.getElementById(
+        "placeOrderButton"
+      );
+
+
+    let checkoutDeliveryCharge =
+      80;
+
+
+    /* =========================
+       IMAGE HELPER
+    ========================== */
+
+    function getCheckoutImage(item) {
+
+      const name =
+        item.name.toLowerCase();
+
+
+      if (name.includes("ঘি")) {
+        return "images/product-ghee.jpg";
+      }
+
+
+      if (name.includes("মধু")) {
+        return "images/product-honey.jpg";
+      }
+
+
+      if (name.includes("চাল")) {
+        return "images/product-rice.jpg";
+      }
+
+
+      if (
+        name.includes(
+          "সরিষার তেল"
+        )
+      ) {
+        return "images/product-mustard-oil.jpg";
+      }
+
+
+      if (name.includes("হলুদ")) {
+        return "images/product-turmeric.jpg";
+      }
+
+
+      if (name.includes("খেজুর")) {
+        return "images/product-dates.jpg";
+      }
+
+
+      if (name.includes("ডাল")) {
+        return "images/product-dal.jpg";
+      }
+
+
+      return "images/hero-organic.jpg";
+
+    }
+
+
+    /* =========================
+       RENDER SUMMARY
+    ========================== */
+
+    function renderCheckoutSummary() {
+
+      if (
+        cart.length === 0
+      ) {
+
+        checkoutLayout.style.display =
+          "none";
+
+
+        checkoutEmpty.classList.add(
+          "show"
+        );
+
+
+        return;
+
+      }
+
+
+      checkoutLayout.style.display =
+        "grid";
+
+
+      checkoutEmpty.classList.remove(
+        "show"
+      );
+
+
+      checkoutSummaryItems.innerHTML =
+        cart
+          .map((item) => {
+
+            const image =
+              getCheckoutImage(
+                item
+              );
+
+
+            const itemTotal =
+              item.price *
+              item.quantity;
+
+
+            return `
+
+              <div class="checkout-summary-item">
+
+                <div class="checkout-summary-image">
+
+                  <img
+                    src="${image}"
+                    alt="${item.name}"
+                  />
+
+                </div>
+
+
+                <div class="checkout-summary-info">
+
+                  <h3>
+                    ${item.name}
+                  </h3>
+
+                  <small>
+                    ${item.quantity} ×
+                    ৳${item.price.toLocaleString("en-US")}
+                  </small>
+
+                </div>
+
+
+                <div class="checkout-summary-price">
+
+                  ৳${itemTotal.toLocaleString("en-US")}
+
+                </div>
+
+              </div>
+
+            `;
+
+          })
+          .join("");
+
+
+      updateCheckoutTotal();
+
+    }
+
+
+    /* =========================
+       TOTAL
+    ========================== */
+
+  function updateCheckoutTotal() {
+
+  syncCartWithAdminProducts();
+
+
+  const subtotal =
+    cart.reduce(
+      (sum, item) =>
+        sum +
+        Number(item.price) *
+        Number(item.quantity),
+      0
+    );
+
+
+  const selectedDelivery =
+    document.querySelector(
+      'input[name="delivery"]:checked'
+    );
+
+
+  let selectedCharge =
+    selectedDelivery
+      ? Number(
+          selectedDelivery.dataset.charge
+        )
+      : 80;
+
+
+  if (
+    subtotal >= 1500 &&
+    selectedDelivery?.value ===
+      "standard"
+  ) {
+
+    selectedCharge = 0;
+
+  }
+
+
+  checkoutDeliveryCharge =
+    selectedCharge;
+
+
+  /* =========================
+     COUPON DISCOUNT
+  ========================== */
+
+  let discount = 0;
+
+
+  const savedCoupon =
+    JSON.parse(
+      localStorage.getItem(
+        "soroshfulCoupon"
+      )
+    );
+
+
+  if (
+    savedCoupon?.code ===
+      "SOROSHFUL10" &&
+    savedCoupon.active === true
+  ) {
+
+    discount =
+      Math.round(
+        subtotal * 0.10
+      );
+
+  }
+
+
+  /* Save discount for Place Order */
+
+  window.checkoutDiscount =
+    discount;
+
+
+  const total =
+    Math.max(
+      subtotal +
+      checkoutDeliveryCharge -
+      discount,
+      0
+    );
+
+
+  checkoutSubtotal.textContent =
+    "৳" +
+    subtotal.toLocaleString(
+      "en-US"
+    );
+
+
+  checkoutDelivery.textContent =
+    checkoutDeliveryCharge === 0
+      ? "ফ্রি"
+      : "৳" +
+        checkoutDeliveryCharge.toLocaleString(
+          "en-US"
+        );
+
+
+  checkoutGrandTotal.textContent =
+    "৳" +
+    total.toLocaleString(
+      "en-US"
+    );
+
+}
+
+
+    /* =========================
+       DELIVERY CHANGE
+    ========================== */
+
+    document
+      .querySelectorAll(
+        'input[name="delivery"]'
+      )
+      .forEach((radio) => {
+
+        radio.addEventListener(
+          "change",
+          updateCheckoutTotal
+        );
+
+      });
+
+
+    /* =========================
+       PAYMENT CHANGE
+    ========================== */
+
+    const bkashExtra =
+      document.getElementById(
+        "bkashExtra"
+      );
+
+
+    const nagadExtra =
+      document.getElementById(
+        "nagadExtra"
+      );
+
+
+    document
+      .querySelectorAll(
+        'input[name="payment"]'
+      )
+      .forEach((radio) => {
+
+        radio.addEventListener(
+          "change",
+          function () {
+
+            bkashExtra.classList.remove(
+              "show"
+            );
+
+
+            nagadExtra.classList.remove(
+              "show"
+            );
+
+
+            if (
+              this.value ===
+              "bkash"
+            ) {
+
+              bkashExtra.classList.add(
+                "show"
+              );
+
+            }
+
+
+            if (
+              this.value ===
+              "nagad"
+            ) {
+
+              nagadExtra.classList.add(
+                "show"
+              );
+
+            }
+
+          }
+        );
+
+      });
+
+
+    /* =========================
+       VALIDATION
+    ========================== */
+
+    function validateCheckout() {
+
+      const customerName =
+        document
+          .getElementById(
+            "customerName"
+          )
+          .value
+          .trim();
+
+
+      const customerPhone =
+        document
+          .getElementById(
+            "customerPhone"
+          )
+          .value
+          .trim();
+
+
+      const customerAddress =
+        document
+          .getElementById(
+            "customerAddress"
+          )
+          .value
+          .trim();
+
+
+      const district =
+        document
+          .getElementById(
+            "district"
+          )
+          .value;
+
+
+      const area =
+        document
+          .getElementById(
+            "area"
+          )
+          .value
+          .trim();
+
+
+      if (!customerName) {
+
+        showToast(
+          "আপনার নাম লিখুন"
+        );
+
+        return false;
+
+      }
+
+
+      if (!customerPhone) {
+
+        showToast(
+          "মোবাইল নম্বর লিখুন"
+        );
+
+        return false;
+
+      }
+
+
+      const phonePattern =
+        /^01[3-9][0-9]{8}$/;
+
+
+      if (
+        !phonePattern.test(
+          customerPhone
+        )
+      ) {
+
+        showToast(
+          "সঠিক বাংলাদেশি মোবাইল নম্বর লিখুন"
+        );
+
+        return false;
+
+      }
+
+
+      if (!customerAddress) {
+
+        showToast(
+          "ডেলিভারি ঠিকানা লিখুন"
+        );
+
+        return false;
+
+      }
+
+
+      if (!district) {
+
+        showToast(
+          "জেলা নির্বাচন করুন"
+        );
+
+        return false;
+
+      }
+
+
+      if (!area) {
+
+        showToast(
+          "এলাকা বা থানা লিখুন"
+        );
+
+        return false;
+
+      }
+
+
+      const payment =
+        document.querySelector(
+          'input[name="payment"]:checked'
+        );
+
+
+      if (
+        payment?.value ===
+        "bkash"
+      ) {
+
+        const trx =
+          document
+            .getElementById(
+              "bkashTrx"
+            )
+            .value
+            .trim();
+
+
+        if (!trx) {
+
+          showToast(
+            "bKash Transaction ID লিখুন"
+          );
+
+          return false;
+
+        }
+
+      }
+
+
+      if (
+        payment?.value ===
+        "nagad"
+      ) {
+
+        const trx =
+          document
+            .getElementById(
+              "nagadTrx"
+            )
+            .value
+            .trim();
+
+
+        if (!trx) {
+
+          showToast(
+            "Nagad Transaction ID লিখুন"
+          );
+
+          return false;
+
+        }
+
+      }
+
+
+      return true;
+
+    }
+
+
+    /* =========================
+       PLACE ORDER
+    ========================== */
+
+    placeOrderButton.addEventListener(
+      "click",
+      function () {
+
+        if (
+          cart.length === 0
+        ) {
+          return;
+        }
+
+
+        if (
+          !validateCheckout()
+        ) {
+          return;
+        }
+
+
+        const subtotal =
+          cart.reduce(
+            (sum, item) =>
+              sum +
+              item.price *
+              item.quantity,
+            0
+          );
+const savedCoupon =
+  JSON.parse(
+    localStorage.getItem(
+      "soroshfulCoupon"
+    )
+  );
+
+
+let discount = 0;
+
+
+if (
+  savedCoupon?.code ===
+    "SOROSHFUL10" &&
+  savedCoupon.active === true
+) {
+
+  discount =
+    Math.round(
+      subtotal * 0.10
+    );
+
+}
+
+        const payment =
+          document.querySelector(
+            'input[name="payment"]:checked'
+          );
+
+
+        const delivery =
+          document.querySelector(
+            'input[name="delivery"]:checked'
+          );
+
+
+        const orderId =
+          "SF" +
+          Date.now()
+            .toString()
+            .slice(-8);
+
+
+        const orderData = {
+
+          orderId:
+            orderId,
+
+          date:
+            new Date()
+              .toLocaleString(
+                "en-GB"
+              ),
+
+          customer: {
+
+            name:
+              document
+                .getElementById(
+                  "customerName"
+                )
+                .value
+                .trim(),
+
+            phone:
+              document
+                .getElementById(
+                  "customerPhone"
+                )
+                .value
+                .trim(),
+
+            email:
+              document
+                .getElementById(
+                  "customerEmail"
+                )
+                .value
+                .trim(),
+
+            address:
+              document
+                .getElementById(
+                  "customerAddress"
+                )
+                .value
+                .trim(),
+
+            district:
+              document
+                .getElementById(
+                  "district"
+                )
+                .value,
+
+            area:
+              document
+                .getElementById(
+                  "area"
+                )
+                .value
+                .trim()
+
+          },
+
+          items:
+            cart,
+
+          subtotal:
+            subtotal,
+            couponCode:
+  savedCoupon?.active
+    ? savedCoupon.code
+    : null,
+
+          deliveryCharge:
+  checkoutDeliveryCharge,
+
+discount:
+  discount,
+
+total:
+  subtotal +
+  checkoutDeliveryCharge -
+  discount,
+
+          deliveryMethod:
+            delivery?.value,
+
+          paymentMethod:
+            payment?.value,
+
+          note:
+            document
+              .getElementById(
+                "orderNote"
+              )
+              .value
+              .trim(),
+
+          status:
+            "Order Placed"
+
+        };
+
+
+        localStorage.setItem(
+          "soroshfulLastOrder",
+          JSON.stringify(
+            orderData
+          )
+        );
+
+
+        const previousOrders =
+          JSON.parse(
+            localStorage.getItem(
+              "soroshfulOrders"
+            )
+          ) || [];
+
+
+        previousOrders.unshift(
+          orderData
+        );
+
+
+        localStorage.setItem(
+          "soroshfulOrders",
+          JSON.stringify(
+            previousOrders
+          )
+        );
+
+
+        cart = [];
+
+
+        saveCart();
+
+        renderCart();
+
+
+        window.location.href =
+          "order-success.html";
+
+      }
+    );
+
+
+    /* =========================
+       INITIAL
+    ========================== */
+
+    renderCheckoutSummary();
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>

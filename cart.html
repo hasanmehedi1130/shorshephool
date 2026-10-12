@@ -1,0 +1,2704 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#174d35"
+  >
+
+  <title>আপনার কার্ট | সরষেফুল</title>
+
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+
+  <style>
+
+    /* =========================
+       CART HERO
+    ========================== */
+
+    .cart-page-hero {
+      padding: 36px 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+    }
+
+
+    .cart-page-hero h1 {
+      color: var(--green-dark);
+      font-family: "Noto Serif Bengali", serif;
+      font-size: clamp(32px, 5vw, 46px);
+    }
+
+
+    .cart-page-hero p {
+      margin-top: 5px;
+      color: var(--muted);
+    }
+
+
+    /* =========================
+       CART PAGE
+    ========================== */
+
+    .cart-page {
+      padding: 42px 0 80px;
+    }
+
+
+    .cart-page-layout {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(300px, .7fr);
+
+      gap: 25px;
+
+      align-items: start;
+    }
+
+
+    .cart-list-card,
+    .cart-summary-card {
+      overflow: hidden;
+
+      border: 1px solid var(--line);
+      border-radius: 14px;
+
+      background: #fff;
+    }
+
+
+    .cart-list-head,
+    .cart-summary-head {
+      padding: 15px 17px;
+
+      border-bottom: 1px solid var(--line);
+
+      background: #fafbf9;
+    }
+
+
+    .cart-list-head h2,
+    .cart-summary-head h2 {
+      color: var(--green-dark);
+      font-size: 17px;
+    }
+
+
+    /* =========================
+       CART ITEM
+    ========================== */
+
+    .cart-page-item {
+      padding: 16px;
+
+      display: grid;
+
+      grid-template-columns:
+        85px
+        minmax(0, 1fr)
+        auto;
+
+      gap: 15px;
+
+      align-items: center;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+
+    .cart-page-item:last-child {
+      border-bottom: none;
+    }
+
+
+    .cart-page-image {
+      width: 85px;
+      height: 85px;
+
+      overflow: hidden;
+
+      border: 1px solid var(--line);
+      border-radius: 10px;
+
+      background: #f5f5ef;
+
+      cursor: pointer;
+    }
+
+
+    .cart-page-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+
+    .cart-page-info {
+      min-width: 0;
+    }
+
+
+    .cart-page-category {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+
+    .cart-page-name {
+      margin-top: 2px;
+
+      color: var(--green-dark);
+
+      font-size: 14px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    .cart-page-weight {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+
+    .cart-page-price {
+      margin-top: 6px;
+
+      color: var(--green);
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+
+    .cart-stock-note {
+      margin-top: 4px;
+
+      color: #688071;
+
+      font-size: 9px;
+    }
+
+
+    .cart-stock-note.out {
+      color: var(--red);
+    }
+
+
+    .cart-page-actions {
+      display: grid;
+
+      justify-items: end;
+
+      gap: 9px;
+    }
+
+
+    /* =========================
+       QUANTITY
+    ========================== */
+
+    .cart-quantity {
+      height: 38px;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+
+    .cart-quantity button {
+      width: 34px;
+      height: 100%;
+
+      display: grid;
+      place-items: center;
+
+      background: #fff;
+      color: var(--green);
+    }
+
+
+    .cart-quantity button:hover {
+      background: var(--light-green);
+    }
+
+
+    .cart-quantity button:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+
+    .cart-quantity button svg {
+      width: 14px;
+    }
+
+
+    .cart-quantity span {
+      min-width: 34px;
+
+      text-align: center;
+
+      color: var(--green-dark);
+
+      font-weight: 700;
+    }
+
+
+    .cart-line-total {
+      color: var(--green-dark);
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+
+    .cart-remove-button {
+      display: flex;
+      align-items: center;
+
+      gap: 4px;
+
+      background: transparent;
+      color: var(--red);
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+
+    .cart-remove-button svg {
+      width: 13px;
+    }
+
+
+    .cart-list-bottom {
+      padding: 14px 16px;
+
+      display: flex;
+      justify-content: flex-end;
+
+      border-top: 1px solid var(--line);
+    }
+
+
+    .clear-cart-button {
+      min-height: 38px;
+
+      padding: 0 13px;
+
+      border-radius: 8px;
+
+      background: #fff1ee;
+      color: var(--red);
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       SUMMARY
+    ========================== */
+
+    .cart-summary-card {
+      position: sticky;
+      top: 100px;
+    }
+
+
+    .cart-summary-body {
+      padding: 17px;
+    }
+
+
+    .summary-row {
+      min-height: 37px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      color: #616b64;
+
+      font-size: 12px;
+    }
+
+
+    .summary-row strong {
+      color: var(--green-dark);
+    }
+
+
+    .discount-row strong {
+      color: var(--green);
+    }
+
+
+    .summary-total {
+      margin-top: 8px;
+      padding-top: 12px;
+
+      border-top: 1px solid var(--line);
+    }
+
+
+    .summary-total span {
+      color: var(--green-dark);
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+
+    .summary-total strong {
+      color: var(--green-dark);
+
+      font-size: 22px;
+    }
+
+
+    /* =========================
+       COUPON
+    ========================== */
+
+    .coupon-box {
+      margin: 15px 0;
+      padding: 13px;
+
+      border: 1px solid var(--line);
+      border-radius: 10px;
+
+      background: #f8faf8;
+    }
+
+
+    .coupon-box label {
+      display: block;
+
+      margin-bottom: 6px;
+
+      color: var(--green-dark);
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    .coupon-row {
+      display: grid;
+
+      grid-template-columns:
+        1fr
+        auto;
+
+      gap: 7px;
+    }
+
+
+    .coupon-row input {
+      width: 100%;
+      min-width: 0;
+      height: 39px;
+
+      padding: 0 9px;
+
+      border: 1px solid var(--line);
+      border-radius: 7px;
+
+      outline: none;
+    }
+
+
+    .coupon-row input:focus {
+      border-color: var(--green);
+    }
+
+
+    .coupon-row button {
+      padding: 0 12px;
+
+      border-radius: 7px;
+
+      background: var(--green);
+      color: #fff;
+
+      font-weight: 700;
+    }
+
+
+    .coupon-message {
+      min-height: 16px;
+
+      margin-top: 6px;
+
+      font-size: 9px;
+    }
+
+
+    .remove-coupon-button {
+      display: none;
+
+      margin-top: 4px;
+
+      background: transparent;
+      color: var(--red);
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       CHECKOUT BUTTON
+    ========================== */
+
+    .checkout-page-button {
+      width: 100%;
+      min-height: 47px;
+
+      margin-top: 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      border-radius: 9px;
+
+      background: var(--green);
+      color: #fff;
+
+      font-weight: 700;
+    }
+
+
+    .checkout-page-button:hover {
+      background: var(--green-dark);
+    }
+
+
+    .checkout-page-button.disabled {
+      opacity: .45;
+      pointer-events: none;
+    }
+
+
+    /* =========================
+       EMPTY CART
+    ========================== */
+
+    .cart-empty {
+      display: none;
+
+      min-height: 440px;
+
+      padding: 30px;
+
+      place-content: center;
+      justify-items: center;
+
+      text-align: center;
+
+      border: 1px solid var(--line);
+      border-radius: 14px;
+
+      background: #fff;
+    }
+
+
+    .cart-empty.show {
+      display: grid;
+    }
+
+
+    .cart-empty-icon {
+      width: 72px;
+      height: 72px;
+
+      margin-bottom: 13px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: var(--light-green);
+      color: var(--green);
+    }
+
+
+    .cart-empty-icon svg {
+      width: 30px;
+    }
+
+
+    .cart-empty h2 {
+      color: var(--green-dark);
+    }
+
+
+    .cart-empty p {
+      margin-top: 5px;
+      color: var(--muted);
+    }
+
+
+    .cart-empty a {
+      margin-top: 17px;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media(max-width: 850px) {
+
+      .cart-page-layout {
+        grid-template-columns: 1fr;
+      }
+
+
+      .cart-summary-card {
+        position: static;
+      }
+
+    }
+
+
+    @media(max-width: 600px) {
+
+      .cart-page {
+        padding: 28px 0 65px;
+      }
+
+
+      .cart-page-item {
+        grid-template-columns:
+          70px
+          minmax(0, 1fr);
+      }
+
+
+      .cart-page-image {
+        width: 70px;
+        height: 70px;
+      }
+
+
+      .cart-page-actions {
+        grid-column: 1 / -1;
+
+        width: 100%;
+
+        grid-template-columns:
+          auto
+          1fr
+          auto;
+
+        align-items: center;
+
+        justify-items: stretch;
+      }
+
+
+      .cart-line-total {
+        text-align: center;
+      }
+
+
+      .cart-remove-button {
+        justify-self: end;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
+  <div class="topbar">
+
+    <div class="container topbar-inner">
+
+      <span>
+        🚚 সারা বাংলাদেশে ডেলিভারি
+      </span>
+
+      <span class="topbar-middle">
+        ৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি
+      </span>
+
+      <a href="tel:+8801712345678">
+        হেল্পলাইন: +880 1712-345678
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            সরষেফুল
+          </strong>
+
+          <small>
+            প্রকৃতির খাবার, পরিবারের জন্য
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <form
+        class="search desktop-search"
+        id="desktopSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="ঘি, মধু, চাল, মসলা খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+
+      <div class="header-actions">
+
+
+        <a
+          href="account.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+
+        <a
+          href="wishlist.html"
+          class="header-action desktop-action"
+        >
+
+          <i data-lucide="heart"></i>
+
+          <span>
+            পছন্দ
+          </span>
+
+          <b id="wishlistCount">
+            0
+          </b>
+
+        </a>
+
+
+        <button
+          id="cartButton"
+          class="cart-header-button"
+        >
+
+          <i data-lucide="shopping-bag"></i>
+
+          <span class="desktop-action">
+            কার্ট
+          </span>
+
+          <b id="cartCount">
+            0
+          </b>
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+
+    <div class="container mobile-search-row">
+
+      <form
+        class="search"
+        id="mobileSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+    </div>
+
+
+    <nav class="desktop-nav">
+
+      <div class="container nav-inner">
+
+
+        <a
+          href="index.html#categories"
+          class="category-nav-button"
+        >
+
+          <i data-lucide="layout-grid"></i>
+
+          সব ক্যাটাগরি
+
+        </a>
+
+
+        <div class="nav-links">
+
+          <a href="index.html">
+            হোম
+          </a>
+
+          <a href="shop.html">
+            সব পণ্য
+          </a>
+
+          <a href="index.html#products">
+            জনপ্রিয়
+          </a>
+
+          <a href="offers.html">
+            অফার
+          </a>
+
+          <a href="about.html">
+            আমাদের গল্প
+          </a>
+
+          <a href="contact.html">
+            যোগাযোগ
+          </a>
+
+        </div>
+
+
+        <a
+          href="order-tracking.html"
+          class="track-order"
+        >
+
+          <i data-lucide="truck"></i>
+
+          অর্ডার ট্র্যাক
+
+        </a>
+
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =========================
+       MOBILE MENU
+  ========================== -->
+
+  <div
+    class="overlay"
+    id="menuOverlay"
+  ></div>
+
+
+  <aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+  >
+
+    <div class="drawer-header">
+
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            সরষেফুল
+          </strong>
+
+          <small>
+            প্রকৃতির খাবার
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <button
+        id="closeMenuButton"
+        class="round-button"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+
+    </div>
+
+
+    <div class="drawer-links">
+
+
+      <a href="index.html">
+
+        <i data-lucide="house"></i>
+
+        হোম
+
+      </a>
+
+
+      <a href="shop.html">
+
+        <i data-lucide="shopping-basket"></i>
+
+        সব পণ্য
+
+      </a>
+
+
+      <a href="wishlist.html">
+
+        <i data-lucide="heart"></i>
+
+        Wishlist
+
+      </a>
+
+
+      <a href="orders.html">
+
+        <i data-lucide="package"></i>
+
+        আমার অর্ডার
+
+      </a>
+
+
+      <a href="order-tracking.html">
+
+        <i data-lucide="truck"></i>
+
+        অর্ডার ট্র্যাক
+
+      </a>
+
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main>
+
+
+    <section class="cart-page-hero">
+
+      <div class="container">
+
+        <h1>
+          আপনার কার্ট
+        </h1>
+
+        <p>
+          Checkout করার আগে আপনার পণ্য ও পরিমাণ যাচাই করুন।
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="cart-page">
+
+      <div class="container">
+
+
+        <div
+          class="cart-page-layout"
+          id="cartPageLayout"
+        >
+
+
+          <!-- CART PRODUCTS -->
+
+          <section class="cart-list-card">
+
+
+            <div class="cart-list-head">
+
+              <h2>
+                কার্টের পণ্য
+              </h2>
+
+            </div>
+
+
+            <div id="fullCartItems"></div>
+
+
+            <div class="cart-list-bottom">
+
+              <button
+                id="clearFullCartButton"
+                class="clear-cart-button"
+                type="button"
+              >
+                কার্ট খালি করুন
+              </button>
+
+            </div>
+
+
+          </section>
+
+
+          <!-- ORDER SUMMARY -->
+
+          <aside class="cart-summary-card">
+
+
+            <div class="cart-summary-head">
+
+              <h2>
+                অর্ডার সারাংশ
+              </h2>
+
+            </div>
+
+
+            <div class="cart-summary-body">
+
+
+              <!-- SUBTOTAL -->
+
+              <div class="summary-row">
+
+                <span>
+                  Subtotal
+                </span>
+
+                <strong id="fullCartSubtotal">
+                  ৳0
+                </strong>
+
+              </div>
+
+
+              <!-- DELIVERY -->
+
+              <div class="summary-row">
+
+                <span>
+                  Delivery
+                </span>
+
+                <strong id="fullCartDelivery">
+                  ৳0
+                </strong>
+
+              </div>
+
+
+              <!-- COUPON -->
+
+              <div class="coupon-box">
+
+                <label for="couponInput">
+                  Coupon Code
+                </label>
+
+
+                <div class="coupon-row">
+
+                  <input
+                    id="couponInput"
+                    type="text"
+                    placeholder="Coupon code"
+                    autocomplete="off"
+                  >
+
+                  <button
+                    id="applyCouponButton"
+                    type="button"
+                  >
+                    Apply
+                  </button>
+
+                </div>
+
+
+                <div
+                  id="couponMessage"
+                  class="coupon-message"
+                ></div>
+
+
+                <button
+                  id="removeCouponButton"
+                  class="remove-coupon-button"
+                  type="button"
+                >
+                  Remove Coupon
+                </button>
+
+              </div>
+
+
+              <!-- DISCOUNT -->
+
+              <div
+                class="summary-row discount-row"
+                id="discountRow"
+                style="display:none;"
+              >
+
+                <span>
+                  Discount
+                </span>
+
+                <strong id="fullCartDiscount">
+                  -৳0
+                </strong>
+
+              </div>
+
+
+              <!-- TOTAL -->
+
+              <div class="summary-row summary-total">
+
+                <span>
+                  সর্বমোট
+                </span>
+
+                <strong id="fullCartTotal">
+                  ৳0
+                </strong>
+
+              </div>
+
+
+              <!-- CHECKOUT -->
+
+              <a
+                href="checkout.html"
+                id="checkoutPageButton"
+                class="checkout-page-button"
+              >
+
+                Checkout
+
+                <i data-lucide="arrow-right"></i>
+
+              </a>
+
+
+            </div>
+
+
+          </aside>
+
+
+        </div>
+
+
+        <!-- EMPTY CART -->
+
+        <div
+          id="cartEmpty"
+          class="cart-empty"
+        >
+
+          <div class="cart-empty-icon">
+
+            <i data-lucide="shopping-basket"></i>
+
+          </div>
+
+
+          <h2>
+            আপনার কার্ট খালি
+          </h2>
+
+
+          <p>
+            পছন্দের পণ্য কার্টে যোগ করে কেনাকাটা শুরু করুন।
+          </p>
+
+
+          <a
+            href="shop.html"
+            class="primary-button"
+          >
+            পণ্য দেখুন
+          </a>
+
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+
+      <div class="footer-brand">
+
+        <a
+          href="index.html"
+          class="brand"
+        >
+
+          <div class="brand-mark">
+            স
+          </div>
+
+          <div class="brand-copy">
+
+            <strong>
+              সরষেফুল
+            </strong>
+
+            <small>
+              প্রকৃতির খাবার
+            </small>
+
+          </div>
+
+        </a>
+
+
+        <p>
+          খাঁটি ও প্রাকৃতিক খাদ্য সহজে আপনার পরিবারের কাছে
+          পৌঁছে দেওয়ার চেষ্টা।
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          কেনাকাটা
+        </h3>
+
+        <a href="shop.html">
+          সব পণ্য
+        </a>
+
+        <a href="wishlist.html">
+          Wishlist
+        </a>
+
+        <a href="orders.html">
+          আমার অর্ডার
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          সহায়তা
+        </h3>
+
+        <a href="order-tracking.html">
+          অর্ডার ট্র্যাক
+        </a>
+
+        <a href="contact.html">
+          যোগাযোগ
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          যোগাযোগ
+        </h3>
+
+        <p>
+          +880 1712-345678
+        </p>
+
+        <p>
+          hello@soroshful.com
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       CART DRAWER
+  ========================== -->
+
+  <div
+    class="overlay"
+    id="cartOverlay"
+  ></div>
+
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+  >
+
+    <div class="drawer-header">
+
+
+      <div>
+
+        <h2>
+          আপনার কার্ট
+        </h2>
+
+        <small id="cartItemCount">
+          ০টি পণ্য
+        </small>
+
+      </div>
+
+
+      <button
+        id="closeCartButton"
+        class="round-button"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+
+    </div>
+
+
+    <div
+      id="cartItems"
+      class="cart-items"
+    ></div>
+
+
+    <div class="cart-bottom">
+
+
+      <div>
+
+        <span>
+          মোট
+        </span>
+
+        <strong id="cartTotal">
+          ৳০
+        </strong>
+
+      </div>
+
+
+      <a
+        href="checkout.html"
+        class="primary-button full-button"
+      >
+        Checkout
+      </a>
+
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MOBILE BOTTOM NAV
+  ========================== -->
+
+  <nav class="mobile-bottom-nav">
+
+
+    <a href="index.html">
+
+      <i data-lucide="house"></i>
+
+      <span>
+        হোম
+      </span>
+
+    </a>
+
+
+    <a href="shop.html">
+
+      <i data-lucide="layout-grid"></i>
+
+      <span>
+        পণ্য
+      </span>
+
+    </a>
+
+
+    <a href="shop.html">
+
+      <i data-lucide="search"></i>
+
+      <span>
+        খুঁজুন
+      </span>
+
+    </a>
+
+
+    <a href="wishlist.html">
+
+      <i data-lucide="heart"></i>
+
+      <span>
+        পছন্দ
+      </span>
+
+    </a>
+
+
+    <button id="bottomCartButton">
+
+      <i data-lucide="shopping-bag"></i>
+
+      <span>
+        কার্ট
+      </span>
+
+      <b id="bottomCartCount">
+        0
+      </b>
+
+    </button>
+
+
+  </nav>
+
+
+  <div
+    id="toast"
+    class="toast"
+  ></div>
+
+
+  <!-- =========================
+       GLOBAL SCRIPT
+  ========================== -->
+
+  <script src="script.js"></script>
+
+
+  <!-- =========================
+       CART PAGE SCRIPT
+  ========================== -->
+
+  <script>
+
+    const CART_PRODUCTS_KEY =
+      "soroshfulProducts";
+
+
+    const CART_COUPON_KEY =
+      "soroshfulCoupon";
+
+
+    /* =========================
+       PRODUCT DATABASE
+    ========================== */
+
+    function getCartProducts() {
+
+      return JSON.parse(
+        localStorage.getItem(
+          CART_PRODUCTS_KEY
+        )
+      ) || [];
+
+    }
+
+
+    function getCartProductById(id) {
+
+      return getCartProducts()
+        .find(
+          product =>
+            Number(product.id) ===
+            Number(id)
+        );
+
+    }
+
+
+    /* =========================
+       SYNC CART WITH ADMIN
+    ========================== */
+
+    function syncCartWithProducts() {
+
+      const products =
+        getCartProducts();
+
+
+      let changed =
+        false;
+
+
+      for (
+        let index =
+          cart.length - 1;
+
+        index >= 0;
+
+        index--
+      ) {
+
+        const cartItem =
+          cart[index];
+
+
+        const product =
+          products.find(
+            item =>
+              Number(item.id) ===
+              Number(cartItem.id)
+          );
+
+
+        /* PRODUCT DELETED */
+
+        if (!product) {
+
+          cart.splice(
+            index,
+            1
+          );
+
+
+          changed =
+            true;
+
+
+          continue;
+
+        }
+
+
+        /* DRAFT PRODUCT */
+
+        if (
+          product.status ===
+          "draft"
+        ) {
+
+          cart.splice(
+            index,
+            1
+          );
+
+
+          changed =
+            true;
+
+
+          continue;
+
+        }
+
+
+        /*
+          পুরোনো weighted product থাকলে
+          তার variant name/price force করে
+          overwrite করবো না।
+        */
+
+        if (!cartItem.weight) {
+
+
+          /* LATEST NAME */
+
+          if (
+            cartItem.name !==
+            product.name
+          ) {
+
+            cartItem.name =
+              product.name;
+
+
+            changed =
+              true;
+
+          }
+
+
+          /* LATEST PRICE */
+
+          const latestPrice =
+            Number(
+              product.price || 0
+            );
+
+
+          if (
+            Number(
+              cartItem.price
+            ) !==
+            latestPrice
+          ) {
+
+            cartItem.price =
+              latestPrice;
+
+
+            changed =
+              true;
+
+          }
+
+        }
+
+
+        /* LATEST STOCK */
+
+        const latestStock =
+          Number(
+            product.stock || 0
+          );
+
+
+        if (
+          product.status ===
+            "out-of-stock" ||
+          latestStock <= 0
+        ) {
+
+          cart.splice(
+            index,
+            1
+          );
+
+
+          changed =
+            true;
+
+
+          continue;
+
+        }
+
+
+        if (
+          Number(
+            cartItem.quantity
+          ) >
+          latestStock
+        ) {
+
+          cartItem.quantity =
+            latestStock;
+
+
+          changed =
+            true;
+
+        }
+
+      }
+
+
+      if (changed) {
+
+        saveCart();
+
+        renderCart();
+
+      }
+
+    }
+
+
+    /* =========================
+       CART ITEM KEY
+    ========================== */
+
+    function getCartItemKey(
+      item
+    ) {
+
+      return (
+        String(item.id) +
+        "__" +
+        String(
+          item.weight || ""
+        )
+      );
+
+    }
+
+
+    /* =========================
+       RENDER FULL CART
+    ========================== */
+
+    function renderFullCart() {
+
+      syncCartWithProducts();
+
+
+      const container =
+        document.getElementById(
+          "fullCartItems"
+        );
+
+
+      const layout =
+        document.getElementById(
+          "cartPageLayout"
+        );
+
+
+      const empty =
+        document.getElementById(
+          "cartEmpty"
+        );
+
+
+      if (
+        cart.length === 0
+      ) {
+
+        container.innerHTML =
+          "";
+
+
+        layout.style.display =
+          "none";
+
+
+        empty.classList.add(
+          "show"
+        );
+
+
+        updateFullCartSummary();
+
+
+        lucide.createIcons();
+
+
+        return;
+
+      }
+
+
+      layout.style.display =
+        "grid";
+
+
+      empty.classList.remove(
+        "show"
+      );
+
+
+      container.innerHTML =
+        cart
+          .map(
+            (
+              item,
+              index
+            ) => {
+
+              const product =
+                getCartProductById(
+                  item.id
+                );
+
+
+              const stock =
+                Number(
+                  product?.stock || 0
+                );
+
+
+              const image =
+                product?.image ||
+                "images/hero-organic.jpg";
+
+
+              const category =
+                product?.category ||
+                "Product";
+
+
+              const weightHTML =
+                item.weight
+                  ? `
+                    <div class="cart-page-weight">
+                      ${item.weight}
+                    </div>
+                  `
+                  : "";
+
+
+              return `
+
+                <article class="cart-page-item">
+
+
+                  <div
+                    class="cart-page-image"
+                    onclick="openCartProduct(${item.id})"
+                  >
+
+                    <img
+                      src="${image}"
+                      alt="${item.name}"
+                      onerror="
+                        this.onerror=null;
+                        this.src='images/hero-organic.jpg';
+                      "
+                    >
+
+                  </div>
+
+
+                  <div class="cart-page-info">
+
+
+                    <span class="cart-page-category">
+
+                      ${category}
+
+                    </span>
+
+
+                    <div
+                      class="cart-page-name"
+                      onclick="openCartProduct(${item.id})"
+                    >
+
+                      ${item.name}
+
+                    </div>
+
+
+                    ${weightHTML}
+
+
+                    <div class="cart-page-price">
+
+                      ৳${Number(
+                        item.price || 0
+                      ).toLocaleString(
+                        "en-US"
+                      )}
+                      / পিস
+
+                    </div>
+
+
+                    <div class="cart-stock-note">
+
+                      Available Stock:
+                      ${stock}
+
+                    </div>
+
+
+                  </div>
+
+
+                  <div class="cart-page-actions">
+
+
+                    <div class="cart-quantity">
+
+
+                      <button
+                        type="button"
+                        onclick="decreaseFullCart(${index})"
+                      >
+
+                        <i data-lucide="minus"></i>
+
+                      </button>
+
+
+                      <span>
+
+                        ${item.quantity}
+
+                      </span>
+
+
+                      <button
+                        type="button"
+                        onclick="increaseFullCart(${index})"
+                        ${
+                          Number(
+                            item.quantity
+                          ) >=
+                          stock
+                            ? "disabled"
+                            : ""
+                        }
+                      >
+
+                        <i data-lucide="plus"></i>
+
+                      </button>
+
+
+                    </div>
+
+
+                    <div class="cart-line-total">
+
+                      ৳${(
+                        Number(
+                          item.price || 0
+                        ) *
+                        Number(
+                          item.quantity || 0
+                        )
+                      ).toLocaleString(
+                        "en-US"
+                      )}
+
+                    </div>
+
+
+                    <button
+                      type="button"
+                      class="cart-remove-button"
+                      onclick="removeFullCartItem(${index})"
+                    >
+
+                      <i data-lucide="trash-2"></i>
+
+                      Remove
+
+                    </button>
+
+
+                  </div>
+
+
+                </article>
+
+              `;
+
+            }
+          )
+          .join("");
+
+
+      updateFullCartSummary();
+
+
+      lucide.createIcons();
+
+    }
+
+
+    /* =========================
+       OPEN PRODUCT
+    ========================== */
+
+    window.openCartProduct =
+      function(id) {
+
+        window.location.href =
+          "product.html?id=" +
+          encodeURIComponent(
+            id
+          );
+
+      };
+
+
+    /* =========================
+       QUANTITY PLUS
+    ========================== */
+
+    window.increaseFullCart =
+      function(index) {
+
+        const cartItem =
+          cart[index];
+
+
+        if (!cartItem) {
+          return;
+        }
+
+
+        const product =
+          getCartProductById(
+            cartItem.id
+          );
+
+
+        if (!product) {
+
+          showToast(
+            "Product পাওয়া যায়নি"
+          );
+
+          return;
+
+        }
+
+
+        const stock =
+          Number(
+            product.stock || 0
+          );
+
+
+        if (
+          Number(
+            cartItem.quantity
+          ) >=
+          stock
+        ) {
+
+          showToast(
+            "Available stock-এর বেশি নেওয়া যাবে না"
+          );
+
+          return;
+
+        }
+
+
+        cartItem.quantity =
+          Number(
+            cartItem.quantity
+          ) + 1;
+
+
+        saveCart();
+
+        renderCart();
+
+        renderFullCart();
+
+      };
+
+
+    /* =========================
+       QUANTITY MINUS
+    ========================== */
+
+    window.decreaseFullCart =
+      function(index) {
+
+        const cartItem =
+          cart[index];
+
+
+        if (!cartItem) {
+          return;
+        }
+
+
+        if (
+          Number(
+            cartItem.quantity
+          ) > 1
+        ) {
+
+          cartItem.quantity =
+            Number(
+              cartItem.quantity
+            ) - 1;
+
+        } else {
+
+          cart.splice(
+            index,
+            1
+          );
+
+        }
+
+
+        saveCart();
+
+        renderCart();
+
+        renderFullCart();
+
+      };
+
+
+    /* =========================
+       REMOVE ITEM
+    ========================== */
+
+    window.removeFullCartItem =
+      function(index) {
+
+        if (
+          !cart[index]
+        ) {
+          return;
+        }
+
+
+        cart.splice(
+          index,
+          1
+        );
+
+
+        saveCart();
+
+        renderCart();
+
+        renderFullCart();
+
+
+        showToast(
+          "পণ্য কার্ট থেকে সরানো হয়েছে"
+        );
+
+      };
+
+
+    /* =========================
+       CLEAR CART
+    ========================== */
+
+    document
+      .getElementById(
+        "clearFullCartButton"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          cart =
+            [];
+
+
+          saveCart();
+
+          renderCart();
+
+          renderFullCart();
+
+
+          showToast(
+            "কার্ট খালি করা হয়েছে"
+          );
+
+        }
+      );
+
+
+    /* =========================
+       GET COUPON
+    ========================== */
+
+    function getSavedCoupon() {
+
+      return JSON.parse(
+        localStorage.getItem(
+          CART_COUPON_KEY
+        )
+      );
+
+    }
+
+
+    /* =========================
+       DISCOUNT
+    ========================== */
+
+    function getCouponDiscount(
+      subtotal
+    ) {
+
+      const coupon =
+        getSavedCoupon();
+
+
+      if (
+        coupon?.code ===
+          "SOROSHFUL10" &&
+        coupon?.active ===
+          true
+      ) {
+
+        return Math.round(
+          subtotal * 0.10
+        );
+
+      }
+
+
+      return 0;
+
+    }
+
+
+    /* =========================
+       SUMMARY
+    ========================== */
+
+    function updateFullCartSummary() {
+
+      const subtotal =
+        cart.reduce(
+          (
+            total,
+            item
+          ) => {
+
+            return (
+              total +
+              Number(
+                item.price || 0
+              ) *
+              Number(
+                item.quantity || 0
+              )
+            );
+
+          },
+          0
+        );
+
+
+      const delivery =
+        subtotal === 0
+          ? 0
+          : subtotal >= 1500
+            ? 0
+            : 80;
+
+
+      const discount =
+        getCouponDiscount(
+          subtotal
+        );
+
+
+      const grandTotal =
+        Math.max(
+          subtotal +
+          delivery -
+          discount,
+          0
+        );
+
+
+      /* SUBTOTAL */
+
+      document
+        .getElementById(
+          "fullCartSubtotal"
+        )
+        .textContent =
+          "৳" +
+          subtotal.toLocaleString(
+            "en-US"
+          );
+
+
+      /* DELIVERY */
+
+      document
+        .getElementById(
+          "fullCartDelivery"
+        )
+        .textContent =
+          subtotal > 0 &&
+          delivery === 0
+            ? "ফ্রি"
+            : "৳" +
+              delivery.toLocaleString(
+                "en-US"
+              );
+
+
+      /* DISCOUNT */
+
+      const discountRow =
+        document.getElementById(
+          "discountRow"
+        );
+
+
+      const discountAmount =
+        document.getElementById(
+          "fullCartDiscount"
+        );
+
+
+      if (
+        discount > 0
+      ) {
+
+        discountRow.style.display =
+          "flex";
+
+
+        discountAmount.textContent =
+          "-৳" +
+          discount.toLocaleString(
+            "en-US"
+          );
+
+      } else {
+
+        discountRow.style.display =
+          "none";
+
+      }
+
+
+      /* TOTAL */
+
+      document
+        .getElementById(
+          "fullCartTotal"
+        )
+        .textContent =
+          "৳" +
+          grandTotal.toLocaleString(
+            "en-US"
+          );
+
+
+      /* CHECKOUT BUTTON */
+
+      document
+        .getElementById(
+          "checkoutPageButton"
+        )
+        .classList.toggle(
+          "disabled",
+          cart.length === 0
+        );
+
+
+      updateCouponDisplay();
+
+    }
+
+
+    /* =========================
+       APPLY COUPON
+    ========================== */
+
+    document
+      .getElementById(
+        "applyCouponButton"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          const input =
+            document.getElementById(
+              "couponInput"
+            );
+
+
+          const message =
+            document.getElementById(
+              "couponMessage"
+            );
+
+
+          const code =
+            input.value
+              .trim()
+              .toUpperCase();
+
+
+          if (
+            code ===
+            "SOROSHFUL10"
+          ) {
+
+            localStorage.setItem(
+              CART_COUPON_KEY,
+              JSON.stringify({
+
+                code:
+                  "SOROSHFUL10",
+
+                active:
+                  true
+
+              })
+            );
+
+
+            message.style.color =
+              "var(--green)";
+
+
+            message.textContent =
+              "Coupon applied: 10% discount";
+
+
+            updateFullCartSummary();
+
+
+            showToast(
+              "10% discount applied"
+            );
+
+
+            return;
+
+          }
+
+
+          localStorage.removeItem(
+            CART_COUPON_KEY
+          );
+
+
+          message.style.color =
+            "var(--red)";
+
+
+          message.textContent =
+            "Coupon code সঠিক নয়।";
+
+
+          updateFullCartSummary();
+
+        }
+      );
+
+
+    /* =========================
+       REMOVE COUPON
+    ========================== */
+
+    document
+      .getElementById(
+        "removeCouponButton"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          localStorage.removeItem(
+            CART_COUPON_KEY
+          );
+
+
+          document
+            .getElementById(
+              "couponInput"
+            )
+            .value =
+              "";
+
+
+          document
+            .getElementById(
+              "couponMessage"
+            )
+            .textContent =
+              "";
+
+
+          updateFullCartSummary();
+
+
+          showToast(
+            "Coupon removed"
+          );
+
+        }
+      );
+
+
+    /* =========================
+       COUPON DISPLAY
+    ========================== */
+
+    function updateCouponDisplay() {
+
+      const coupon =
+        getSavedCoupon();
+
+
+      const input =
+        document.getElementById(
+          "couponInput"
+        );
+
+
+      const message =
+        document.getElementById(
+          "couponMessage"
+        );
+
+
+      const removeButton =
+        document.getElementById(
+          "removeCouponButton"
+        );
+
+
+      if (
+        coupon?.code ===
+          "SOROSHFUL10" &&
+        coupon?.active ===
+          true
+      ) {
+
+        input.value =
+          coupon.code;
+
+
+        message.style.color =
+          "var(--green)";
+
+
+        message.textContent =
+          "Coupon applied: 10% discount";
+
+
+        removeButton.style.display =
+          "inline-block";
+
+      } else {
+
+        removeButton.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    /* =========================
+       ENTER KEY COUPON
+    ========================== */
+
+    document
+      .getElementById(
+        "couponInput"
+      )
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (
+            event.key ===
+            "Enter"
+          ) {
+
+            event.preventDefault();
+
+
+            document
+              .getElementById(
+                "applyCouponButton"
+              )
+              .click();
+
+          }
+
+        }
+      );
+
+
+    /* =========================
+       ADMIN UPDATE LISTENER
+    ========================== */
+
+    window.addEventListener(
+      "storage",
+      function(event) {
+
+        if (
+          event.key ===
+          CART_PRODUCTS_KEY
+        ) {
+
+          renderFullCart();
+
+        }
+
+
+        if (
+          event.key ===
+          CART_COUPON_KEY
+        ) {
+
+          updateFullCartSummary();
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       START
+    ========================== */
+
+    syncCartWithProducts();
+
+    renderFullCart();
+
+    updateCouponDisplay();
+
+    lucide.createIcons();
+
+  </script>
+
+
+</body>
+
+</html>

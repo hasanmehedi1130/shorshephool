@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#174d35">
+
+  <title>সব পণ্য | সরষেফুল</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .shop-hero {
+      padding: 38px 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .shop-hero h1 {
+      color: var(--green-dark);
+      font-family: "Noto Serif Bengali", serif;
+      font-size: clamp(32px, 5vw, 48px);
+    }
+
+    .shop-hero p {
+      margin-top: 5px;
+      color: var(--muted);
+    }
+
+    .shop-page {
+      padding: 38px 0 80px;
+    }
+
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .filter-sidebar {
+      position: sticky;
+      top: 95px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .filter-head {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fafbf9;
+    }
+
+    .filter-head h3 {
+      color: var(--green-dark);
+      font-size: 15px;
+    }
+
+    .filter-section {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .filter-section:last-child {
+      border-bottom: 0;
+    }
+
+    .filter-section h4 {
+      margin-bottom: 10px;
+      color: var(--green-dark);
+      font-size: 12px;
+    }
+
+    .category-list {
+      display: grid;
+      gap: 6px;
+    }
+
+    .category-filter {
+      width: 100%;
+      min-height: 35px;
+      padding: 0 10px;
+      text-align: left;
+      border-radius: 7px;
+      background: transparent;
+      color: #5e6961;
+      font-size: 11px;
+    }
+
+    .category-filter:hover,
+    .category-filter.active {
+      background: var(--light-green);
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    .price-grid input {
+      width: 100%;
+      height: 38px;
+      padding: 0 8px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      outline: none;
+    }
+
+    .price-grid input:focus {
+      border-color: var(--green);
+    }
+
+    .clear-filter-button {
+      width: 100%;
+      min-height: 38px;
+      border-radius: 8px;
+      background: #f4f6f4;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .shop-main {
+      min-width: 0;
+    }
+
+    .shop-toolbar {
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .shop-result-count {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .shop-result-count strong {
+      color: var(--green-dark);
+    }
+
+    .shop-sort {
+      height: 40px;
+      padding: 0 30px 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    .mobile-filter-button {
+      display: none;
+      min-height: 40px;
+      padding: 0 13px;
+      align-items: center;
+      gap: 6px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .mobile-filter-button svg {
+      width: 16px;
+    }
+
+    .shop-products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .dynamic-product-card {
+      cursor: pointer;
+    }
+
+    .dynamic-product-card .product-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dynamic-product-card .product-image img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .wishlist-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--green);
+      box-shadow: 0 5px 16px rgba(0,0,0,.08);
+    }
+
+    .wishlist-button.active {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .wishlist-button svg,
+    .add-cart-button svg {
+      width: 16px;
+    }
+
+    .product-status-note {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: #fff4e5;
+      color: #9d6416;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .product-short-desc {
+      margin-top: 4px;
+      min-height: 34px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .product-stock {
+      margin-top: 4px;
+      color: #64806f;
+      font-size: 9px;
+    }
+
+    .product-stock.out {
+      color: var(--red);
+    }
+
+    .add-cart-button:disabled {
+      cursor: not-allowed;
+      opacity: .45;
+    }
+
+    .no-products {
+      display: none;
+      padding: 60px 20px;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--muted);
+    }
+
+    .no-products.show {
+      display: block;
+    }
+
+    .no-products h3 {
+      color: var(--green-dark);
+      margin-bottom: 5px;
+    }
+
+    .mobile-filter-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1990;
+      background: rgba(0,0,0,.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: .2s;
+    }
+
+    .mobile-filter-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-filter-drawer {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 2000;
+      width: min(88vw, 330px);
+      padding: 16px;
+      overflow-y: auto;
+      background: #fff;
+      transform: translateX(-103%);
+      transition: .25s;
+    }
+
+    .mobile-filter-drawer.show {
+      transform: translateX(0);
+    }
+
+    .mobile-filter-head {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-filter-head h3 {
+      color: var(--green-dark);
+    }
+
+    @media (max-width: 1050px) {
+      .shop-layout {
+        grid-template-columns: 200px minmax(0, 1fr);
+      }
+
+      .shop-products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 820px) {
+      .shop-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-sidebar {
+        display: none;
+      }
+
+      .mobile-filter-button {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shop-page {
+        padding: 28px 0 65px;
+      }
+
+      .shop-toolbar {
+        align-items: stretch;
+        flex-wrap: wrap;
+      }
+
+      .shop-sort {
+        flex: 1;
+      }
+
+      .shop-products-grid {
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .shop-products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>🚚 সারা বাংলাদেশে ডেলিভারি</span>
+      <span class="topbar-middle">৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি</span>
+      <a href="tel:+8801712345678">
+        হেল্পলাইন: +880 1712-345678
+      </a>
+    </div>
+  </div>
+
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">স</div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার, পরিবারের জন্য</small>
+        </div>
+
+      </a>
+
+
+      <form
+        class="search desktop-search"
+        id="desktopSearchForm"
+      >
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="ঘি, মধু, চাল, মসলা খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+      </form>
+
+
+      <div class="header-actions">
+
+        <a
+          href="account.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+
+        <a
+          href="wishlist.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="heart"></i>
+          <span>পছন্দ</span>
+          <b id="wishlistCount">0</b>
+        </a>
+
+
+        <button
+          class="cart-header-button"
+          id="cartButton"
+        >
+          <i data-lucide="shopping-bag"></i>
+          <span class="desktop-action">কার্ট</span>
+          <b id="cartCount">0</b>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="container mobile-search-row">
+
+      <form
+        class="search"
+        id="mobileSearchForm"
+      >
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+      </form>
+
+    </div>
+
+
+    <nav class="desktop-nav">
+
+      <div class="container nav-inner">
+
+        <a
+          href="index.html#categories"
+          class="category-nav-button"
+        >
+          <i data-lucide="layout-grid"></i>
+          সব ক্যাটাগরি
+        </a>
+
+
+        <div class="nav-links">
+          <a href="index.html">হোম</a>
+          <a href="shop.html" class="active">সব পণ্য</a>
+          <a href="index.html#products">জনপ্রিয়</a>
+          <a href="offers.html">অফার</a>
+          <a href="about.html">আমাদের গল্প</a>
+          <a href="contact.html">যোগাযোগ</a>
+        </div>
+
+
+        <a
+          href="order-tracking.html"
+          class="track-order"
+        >
+          <i data-lucide="truck"></i>
+          অর্ডার ট্র্যাক
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <div class="overlay" id="menuOverlay"></div>
+
+
+  <aside class="mobile-drawer" id="mobileDrawer">
+
+    <div class="drawer-header">
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">স</div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার</small>
+        </div>
+
+      </a>
+
+
+      <button
+        class="round-button"
+        id="closeMenuButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div class="drawer-links">
+
+      <a href="index.html">
+        <i data-lucide="house"></i>
+        হোম
+      </a>
+
+      <a href="shop.html">
+        <i data-lucide="shopping-basket"></i>
+        সব পণ্য
+      </a>
+
+      <a href="wishlist.html">
+        <i data-lucide="heart"></i>
+        Wishlist
+      </a>
+
+      <a href="orders.html">
+        <i data-lucide="package"></i>
+        আমার অর্ডার
+      </a>
+
+      <a href="order-tracking.html">
+        <i data-lucide="truck"></i>
+        অর্ডার ট্র্যাক
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <main>
+
+    <section class="shop-hero">
+
+      <div class="container">
+
+        <h1>
+          সব পণ্য
+        </h1>
+
+        <p>
+          সরষেফুলের সব খাঁটি ও প্রাকৃতিক পণ্য এক জায়গায়।
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="shop-page">
+
+      <div class="container shop-layout">
+
+
+        <!-- DESKTOP FILTER -->
+
+        <aside class="filter-sidebar">
+
+          <div class="filter-head">
+            <h3>ফিল্টার</h3>
+          </div>
+
+
+          <div class="filter-section">
+
+            <h4>ক্যাটাগরি</h4>
+
+            <div
+              class="category-list"
+              id="desktopCategoryList"
+            ></div>
+
+          </div>
+
+
+          <div class="filter-section">
+
+            <h4>মূল্য</h4>
+
+            <div class="price-grid">
+
+              <input
+                id="desktopMinPrice"
+                type="number"
+                placeholder="Min"
+              >
+
+              <input
+                id="desktopMaxPrice"
+                type="number"
+                placeholder="Max"
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="filter-section">
+
+            <button
+              class="clear-filter-button"
+              id="desktopClearFilters"
+            >
+              Filter Reset
+            </button>
+
+          </div>
+
+        </aside>
+
+
+        <!-- PRODUCTS -->
+
+        <div class="shop-main">
+
+
+          <div class="shop-toolbar">
+
+            <div class="shop-result-count">
+
+              পাওয়া গেছে:
+              <strong id="shopResultCount">0</strong>
+              টি পণ্য
+
+            </div>
+
+
+            <button
+              class="mobile-filter-button"
+              id="openMobileFilter"
+            >
+              <i data-lucide="sliders-horizontal"></i>
+              Filter
+            </button>
+
+
+            <select
+              id="shopSort"
+              class="shop-sort"
+            >
+              <option value="default">
+                Default
+              </option>
+
+              <option value="low">
+                Price: Low to High
+              </option>
+
+              <option value="high">
+                Price: High to Low
+              </option>
+
+              <option value="name">
+                Name
+              </option>
+            </select>
+
+          </div>
+
+
+          <div
+            class="shop-products-grid"
+            id="shopProductsGrid"
+          ></div>
+
+
+          <div
+            class="no-products"
+            id="noProducts"
+          >
+            <h3>কোনো পণ্য পাওয়া যায়নি</h3>
+            <p>
+              Filter বা search পরিবর্তন করে আবার চেষ্টা করুন।
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- MOBILE FILTER -->
+
+  <div
+    class="mobile-filter-overlay"
+    id="mobileFilterOverlay"
+  ></div>
+
+
+  <aside
+    class="mobile-filter-drawer"
+    id="mobileFilterDrawer"
+  >
+
+    <div class="mobile-filter-head">
+
+      <h3>Filter Products</h3>
+
+      <button
+        class="round-button"
+        id="closeMobileFilter"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div class="filter-section">
+
+      <h4>ক্যাটাগরি</h4>
+
+      <div
+        class="category-list"
+        id="mobileCategoryList"
+      ></div>
+
+    </div>
+
+
+    <div class="filter-section">
+
+      <h4>মূল্য</h4>
+
+      <div class="price-grid">
+
+        <input
+          id="mobileMinPrice"
+          type="number"
+          placeholder="Min"
+        >
+
+        <input
+          id="mobileMaxPrice"
+          type="number"
+          placeholder="Max"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="filter-section">
+
+      <button
+        class="clear-filter-button"
+        id="mobileClearFilters"
+      >
+        Filter Reset
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a href="index.html" class="brand">
+
+          <div class="brand-mark">স</div>
+
+          <div class="brand-copy">
+            <strong>সরষেফুল</strong>
+            <small>প্রকৃতির খাবার</small>
+          </div>
+
+        </a>
+
+
+        <p>
+          খাঁটি ও প্রাকৃতিক খাদ্য সহজে আপনার পরিবারের কাছে
+          পৌঁছে দেওয়ার চেষ্টা।
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+        <h3>কেনাকাটা</h3>
+        <a href="shop.html">সব পণ্য</a>
+        <a href="wishlist.html">Wishlist</a>
+        <a href="orders.html">আমার অর্ডার</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>সহায়তা</h3>
+        <a href="order-tracking.html">অর্ডার ট্র্যাক</a>
+        <a href="contact.html">যোগাযোগ</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>যোগাযোগ</h3>
+        <p>+880 1712-345678</p>
+        <p>hello@soroshful.com</p>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- CART -->
+
+  <div
+    class="overlay"
+    id="cartOverlay"
+  ></div>
+
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <div>
+        <h2>আপনার কার্ট</h2>
+        <small id="cartItemCount">০টি পণ্য</small>
+      </div>
+
+      <button
+        class="round-button"
+        id="closeCartButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-bottom">
+
+      <div>
+        <span>মোট</span>
+        <strong id="cartTotal">৳০</strong>
+      </div>
+
+      <a
+        href="checkout.html"
+        class="primary-button full-button"
+      >
+        Checkout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <nav class="mobile-bottom-nav">
+
+    <a href="index.html">
+      <i data-lucide="house"></i>
+      <span>হোম</span>
+    </a>
+
+    <a href="shop.html" class="active">
+      <i data-lucide="layout-grid"></i>
+      <span>পণ্য</span>
+    </a>
+
+    <a href="shop.html">
+      <i data-lucide="search"></i>
+      <span>খুঁজুন</span>
+    </a>
+
+    <a href="wishlist.html">
+      <i data-lucide="heart"></i>
+      <span>পছন্দ</span>
+    </a>
+
+    <button id="bottomCartButton">
+      <i data-lucide="shopping-bag"></i>
+      <span>কার্ট</span>
+      <b id="bottomCartCount">0</b>
+    </button>
+
+  </nav>
+
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script src="script.js"></script>
+
+
+  <script>
+
+    const PRODUCTS_KEY =
+      "soroshfulProducts";
+
+
+    const fallbackProducts = [
+
+      {
+        id: 1,
+        name: "দেশি গাওয়া ঘি",
+        category: "ঘি ও তেল",
+        price: 850,
+        oldPrice: 950,
+        stock: 40,
+        status: "active",
+        image: "images/product-ghee.jpg",
+        shortDescription:
+          "যত্নে প্রস্তুত দেশি গাওয়া ঘি।"
+      },
+
+      {
+        id: 2,
+        name: "খাঁটি সরিষা ফুলের মধু",
+        category: "মধু",
+        price: 650,
+        oldPrice: 800,
+        stock: 55,
+        status: "active",
+        image: "images/product-honey.jpg",
+        shortDescription:
+          "প্রাকৃতিক সরিষা ফুলের মধু।"
+      },
+
+      {
+        id: 3,
+        name: "চিনিগুঁড়া সুগন্ধি চাল",
+        category: "চাল ও শস্য",
+        price: 450,
+        oldPrice: 550,
+        stock: 80,
+        status: "active",
+        image: "images/product-rice.jpg",
+        shortDescription:
+          "সুগন্ধি চিনিগুঁড়া চাল।"
+      },
+
+      {
+        id: 4,
+        name: "ঘানি ভাঙা সরিষার তেল",
+        category: "ঘি ও তেল",
+        price: 380,
+        oldPrice: 450,
+        stock: 65,
+        status: "active",
+        image: "images/product-mustard-oil.jpg",
+        shortDescription:
+          "ঘানি ভাঙা সরিষার তেল।"
+      },
+
+      {
+        id: 5,
+        name: "দেশি হলুদের গুঁড়া",
+        category: "মসলা",
+        price: 220,
+        oldPrice: 290,
+        stock: 45,
+        status: "active",
+        image: "images/product-turmeric.jpg",
+        shortDescription:
+          "নির্বাচিত হলুদ থেকে প্রস্তুত।"
+      },
+
+      {
+        id: 6,
+        name: "প্রিমিয়াম খেজুর",
+        category: "ড্রাই ফ্রুটস",
+        price: 480,
+        oldPrice: 600,
+        stock: 30,
+        status: "active",
+        image: "images/product-dates.jpg",
+        shortDescription:
+          "নির্বাচিত প্রিমিয়াম খেজুর।"
+      }
+
+    ];
+
+
+    function getShopProducts() {
+
+      let products =
+        JSON.parse(
+          localStorage.getItem(
+            PRODUCTS_KEY
+          )
+        );
+
+
+      if (
+        !Array.isArray(products) ||
+        products.length === 0
+      ) {
+
+        products =
+          fallbackProducts;
+
+
+        localStorage.setItem(
+          PRODUCTS_KEY,
+          JSON.stringify(products)
+        );
+
+      }
+
+
+      return products;
+
+    }
+
+
+    let allShopProducts =
+      getShopProducts();
+
+
+    let activeCategory =
+      "all";
+
+
+    let currentSearch =
+      "";
+
+
+    const shopProductsGrid =
+      document.getElementById(
+        "shopProductsGrid"
+      );
+
+
+    const noProducts =
+      document.getElementById(
+        "noProducts"
+      );
+
+
+    const shopResultCount =
+      document.getElementById(
+        "shopResultCount"
+      );
+
+
+    const shopSort =
+      document.getElementById(
+        "shopSort"
+      );
+
+
+    function getWishlistIds() {
+
+      return JSON.parse(
+        localStorage.getItem(
+          "soroshfulWishlist"
+        )
+      ) || [];
+
+    }
+
+
+    function renderCategoryFilters() {
+
+      const categories =
+        [
+          ...new Set(
+            allShopProducts
+              .filter(
+                product =>
+                  product.status !==
+                  "draft"
+              )
+              .map(
+                product =>
+                  product.category
+              )
+              .filter(Boolean)
+          )
+        ];
+
+
+      const html = [
+
+        `
+          <button
+            class="category-filter ${
+              activeCategory ===
+              "all"
+                ? "active"
+                : ""
+            }"
+            data-category="all"
+          >
+            সব পণ্য
+          </button>
+        `,
+
+        ...categories.map(
+          category => `
+
+            <button
+              class="category-filter ${
+                activeCategory ===
+                category
+                  ? "active"
+                  : ""
+              }"
+              data-category="${category}"
+            >
+              ${category}
+            </button>
+
+          `
+        )
+
+      ].join("");
+
+
+      document
+        .getElementById(
+          "desktopCategoryList"
+        )
+        .innerHTML =
+          html;
+
+
+      document
+        .getElementById(
+          "mobileCategoryList"
+        )
+        .innerHTML =
+          html;
+
+
+      document
+        .querySelectorAll(
+          ".category-filter"
+        )
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                activeCategory =
+                  this.dataset.category;
+
+
+                renderCategoryFilters();
+
+                renderShopProducts();
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+
+    function getMinPrice() {
+
+      return Number(
+        document
+          .getElementById(
+            "desktopMinPrice"
+          )
+          .value ||
+        document
+          .getElementById(
+            "mobileMinPrice"
+          )
+          .value ||
+        0
+      );
+
+    }
+
+
+    function getMaxPrice() {
+
+      const value =
+        document
+          .getElementById(
+            "desktopMaxPrice"
+          )
+          .value ||
+        document
+          .getElementById(
+            "mobileMaxPrice"
+          )
+          .value;
+
+
+      return value
+        ? Number(value)
+        : Infinity;
+
+    }
+
+
+    function renderShopProducts() {
+
+      allShopProducts =
+        getShopProducts();
+
+
+      let products =
+        allShopProducts.filter(
+          product =>
+            product.status !==
+            "draft"
+        );
+
+
+      const minPrice =
+        getMinPrice();
+
+
+      const maxPrice =
+        getMaxPrice();
+
+
+      products =
+        products.filter(
+          product => {
+
+            const categoryMatch =
+              activeCategory ===
+              "all" ||
+              product.category ===
+              activeCategory;
+
+
+            const price =
+              Number(
+                product.price || 0
+              );
+
+
+            const priceMatch =
+              price >= minPrice &&
+              price <= maxPrice;
+
+
+            const searchText =
+              `${product.name || ""}
+               ${product.category || ""}
+               ${product.shortDescription || ""}`
+                .toLowerCase();
+
+
+            const searchMatch =
+              !currentSearch ||
+              searchText.includes(
+                currentSearch
+              );
+
+
+            return (
+              categoryMatch &&
+              priceMatch &&
+              searchMatch
+            );
+
+          }
+        );
+
+
+      switch (
+        shopSort.value
+      ) {
+
+        case "low":
+
+          products.sort(
+            (a, b) =>
+              Number(a.price) -
+              Number(b.price)
+          );
+
+          break;
+
+
+        case "high":
+
+          products.sort(
+            (a, b) =>
+              Number(b.price) -
+              Number(a.price)
+          );
+
+          break;
+
+
+        case "name":
+
+          products.sort(
+            (a, b) =>
+              String(a.name)
+                .localeCompare(
+                  String(b.name),
+                  "bn"
+                )
+          );
+
+          break;
+
+      }
+
+
+      shopResultCount.textContent =
+        products.length;
+
+
+      if (
+        products.length === 0
+      ) {
+
+        shopProductsGrid.innerHTML =
+          "";
+
+        noProducts.classList.add(
+          "show"
+        );
+
+        return;
+
+      }
+
+
+      noProducts.classList.remove(
+        "show"
+      );
+
+
+      const wishlistIds =
+        getWishlistIds();
+
+
+      shopProductsGrid.innerHTML =
+        products
+          .map(
+            product => {
+
+              const stock =
+                Number(
+                  product.stock || 0
+                );
+
+
+              const outOfStock =
+                product.status ===
+                  "out-of-stock" ||
+                stock <= 0;
+
+
+              const wished =
+                wishlistIds.some(
+                  id =>
+                    Number(id) ===
+                    Number(product.id)
+                );
+
+
+              return `
+
+                <article
+                  class="product-card dynamic-product-card"
+                  data-product-id="${product.id}"
+                >
+
+                  <div class="product-image">
+
+                    <img
+                      src="${product.image || "images/hero-organic.jpg"}"
+                      alt="${product.name}"
+                      onerror="
+                        this.onerror=null;
+                        this.src='images/hero-organic.jpg';
+                      "
+                    >
+
+
+                    ${
+                      outOfStock
+                        ? `
+                          <span class="product-status-note">
+                            Stock Out
+                          </span>
+                        `
+                        : ""
+                    }
+
+
+                    <button
+                      class="wishlist-button ${wished ? "active" : ""}"
+                      onclick="toggleDynamicWishlist(event, ${product.id})"
+                      title="Wishlist"
+                    >
+                      <i data-lucide="heart"></i>
+                    </button>
+
+                  </div>
+
+
+                  <div class="product-info">
+
+                    <span class="product-category">
+                      ${product.category || "Product"}
+                    </span>
+
+
+                    <h3>
+                      ${product.name}
+                    </h3>
+
+
+                    <p class="product-short-desc">
+                      ${product.shortDescription || ""}
+                    </p>
+
+
+                    <div class="rating">
+                      <span>★★★★★</span>
+                      <small>4.8</small>
+                    </div>
+
+
+                    <div
+                      class="product-stock ${
+                        outOfStock
+                          ? "out"
+                          : ""
+                      }"
+                    >
+                      ${
+                        outOfStock
+                          ? "বর্তমানে Stock Out"
+                          : `স্টকে আছে: ${stock}টি`
+                      }
+                    </div>
+
+
+                    <div class="product-footer">
+
+                      <div class="product-price">
+
+                        <strong>
+                          ৳${Number(product.price || 0).toLocaleString("en-US")}
+                        </strong>
+
+
+                        ${
+                          product.oldPrice
+                            ? `
+                              <del>
+                                ৳${Number(product.oldPrice).toLocaleString("en-US")}
+                              </del>
+                            `
+                            : ""
+                        }
+
+                      </div>
+
+
+                      <button
+                        class="add-cart-button"
+                        onclick="addDynamicProductToCart(event, ${product.id})"
+                        ${
+                          outOfStock
+                            ? "disabled"
+                            : ""
+                        }
+                        title="Add to Cart"
+                      >
+                        <i data-lucide="shopping-cart"></i>
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                </article>
+
+              `;
+
+            }
+          )
+          .join("");
+
+
+      document
+        .querySelectorAll(
+          ".dynamic-product-card"
+        )
+        .forEach(
+          card => {
+
+            card.addEventListener(
+              "click",
+              function(event) {
+
+                if (
+                  event.target.closest(
+                    "button"
+                  )
+                ) {
+                  return;
+                }
+
+
+                const id =
+                  this.dataset.productId;
+
+
+                window.location.href =
+                  "product.html?id=" +
+                  encodeURIComponent(id);
+
+              }
+            );
+
+          }
+        );
+
+
+      lucide.createIcons();
+
+    }
+
+
+    window.addDynamicProductToCart =
+      function(
+        event,
+        productId
+      ) {
+
+        event.stopPropagation();
+
+
+        const product =
+          getShopProducts()
+            .find(
+              item =>
+                Number(item.id) ===
+                Number(productId)
+            );
+
+
+        if (!product) {
+          return;
+        }
+
+
+        const stock =
+          Number(
+            product.stock || 0
+          );
+
+
+        if (
+          product.status ===
+            "out-of-stock" ||
+          stock <= 0
+        ) {
+
+          showToast(
+            "এই পণ্যটি বর্তমানে Stock Out"
+          );
+
+          return;
+
+        }
+
+
+        const existing =
+          cart.find(
+            item =>
+              Number(item.id) ===
+                Number(product.id) &&
+              !item.weight
+          );
+
+
+        if (existing) {
+
+          if (
+            existing.quantity >=
+            stock
+          ) {
+
+            showToast(
+              "Stock-এর চেয়ে বেশি যোগ করা যাবে না"
+            );
+
+            return;
+
+          }
+
+
+          existing.quantity += 1;
+
+        } else {
+
+          cart.push({
+
+            id:
+              product.id,
+
+            name:
+              product.name,
+
+            price:
+              Number(
+                product.price
+              ),
+
+            quantity:
+              1
+
+          });
+
+        }
+
+
+        saveCart();
+
+        renderCart();
+
+
+        showToast(
+          "পণ্য কার্টে যোগ হয়েছে"
+        );
+
+      };
+
+
+    window.toggleDynamicWishlist =
+      function(
+        event,
+        productId
+      ) {
+
+        event.stopPropagation();
+
+
+        let storedWishlist =
+          getWishlistIds();
+
+
+        const exists =
+          storedWishlist.some(
+            id =>
+              Number(id) ===
+              Number(productId)
+          );
+
+
+        if (exists) {
+
+          storedWishlist =
+            storedWishlist.filter(
+              id =>
+                Number(id) !==
+                Number(productId)
+            );
+
+
+          showToast(
+            "Wishlist থেকে সরানো হয়েছে"
+          );
+
+        } else {
+
+          storedWishlist.push(
+            Number(productId)
+          );
+
+
+          showToast(
+            "Wishlist-এ যোগ হয়েছে"
+          );
+
+        }
+
+
+        localStorage.setItem(
+          "soroshfulWishlist",
+          JSON.stringify(
+            storedWishlist
+          )
+        );
+
+
+        if (
+          typeof updateWishlist ===
+          "function"
+        ) {
+
+          updateWishlist();
+
+        }
+
+
+        renderShopProducts();
+
+      };
+
+
+    function clearShopFilters() {
+
+      activeCategory =
+        "all";
+
+
+      currentSearch =
+        "";
+
+
+      [
+        "desktopMinPrice",
+        "desktopMaxPrice",
+        "mobileMinPrice",
+        "mobileMaxPrice"
+      ]
+      .forEach(
+        id => {
+
+          document
+            .getElementById(
+              id
+            )
+            .value =
+              "";
+
+        }
+      );
+
+
+      shopSort.value =
+        "default";
+
+
+      renderCategoryFilters();
+
+      renderShopProducts();
+
+    }
+
+
+    [
+      "desktopMinPrice",
+      "desktopMaxPrice",
+      "mobileMinPrice",
+      "mobileMaxPrice"
+    ]
+    .forEach(
+      id => {
+
+        document
+          .getElementById(
+            id
+          )
+          .addEventListener(
+            "input",
+            renderShopProducts
+          );
+
+      }
+    );
+
+
+    document
+      .getElementById(
+        "desktopClearFilters"
+      )
+      .addEventListener(
+        "click",
+        clearShopFilters
+      );
+
+
+    document
+      .getElementById(
+        "mobileClearFilters"
+      )
+      .addEventListener(
+        "click",
+        clearShopFilters
+      );
+
+
+    shopSort.addEventListener(
+      "change",
+      renderShopProducts
+    );
+
+
+    const urlParams =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    currentSearch =
+      (
+        urlParams.get(
+          "search"
+        ) || ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if (currentSearch) {
+
+      const desktopSearchInput =
+        document.getElementById(
+          "desktopSearchInput"
+        );
+
+
+      const mobileSearchInput =
+        document.getElementById(
+          "mobileSearchInput"
+        );
+
+
+      if (desktopSearchInput) {
+        desktopSearchInput.value =
+          urlParams.get("search");
+      }
+
+
+      if (mobileSearchInput) {
+        mobileSearchInput.value =
+          urlParams.get("search");
+      }
+
+    }
+
+
+    const mobileFilterDrawer =
+      document.getElementById(
+        "mobileFilterDrawer"
+      );
+
+
+    const mobileFilterOverlay =
+      document.getElementById(
+        "mobileFilterOverlay"
+      );
+
+
+    function openFilterDrawer() {
+
+      mobileFilterDrawer.classList.add(
+        "show"
+      );
+
+      mobileFilterOverlay.classList.add(
+        "show"
+      );
+
+    }
+
+
+    function closeFilterDrawer() {
+
+      mobileFilterDrawer.classList.remove(
+        "show"
+      );
+
+      mobileFilterOverlay.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    document
+      .getElementById(
+        "openMobileFilter"
+      )
+      .addEventListener(
+        "click",
+        openFilterDrawer
+      );
+
+
+    document
+      .getElementById(
+        "closeMobileFilter"
+      )
+      .addEventListener(
+        "click",
+        closeFilterDrawer
+      );
+
+
+    mobileFilterOverlay.addEventListener(
+      "click",
+      closeFilterDrawer
+    );
+
+
+    window.addEventListener(
+      "storage",
+      function(event) {
+
+        if (
+          event.key ===
+          PRODUCTS_KEY
+        ) {
+
+          allShopProducts =
+            getShopProducts();
+
+
+          renderCategoryFilters();
+
+          renderShopProducts();
+
+        }
+
+      }
+    );
+
+
+    renderCategoryFilters();
+
+    renderShopProducts();
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>

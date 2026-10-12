@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#174d35">
+
+  <title>পছন্দের তালিকা | সরষেফুল</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .page-hero {
+      padding: 36px 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .page-hero h1 {
+      color: var(--green-dark);
+      font-family: "Noto Serif Bengali", serif;
+      font-size: clamp(32px, 5vw, 46px);
+    }
+
+    .page-hero p {
+      margin-top: 5px;
+      color: var(--muted);
+    }
+
+    .wishlist-page {
+      padding: 45px 0 80px;
+    }
+
+    .wishlist-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .wishlist-top strong {
+      color: var(--green-dark);
+    }
+
+    .clear-wishlist {
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 700;
+      background: transparent;
+    }
+
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .wishlist-card {
+      cursor: pointer;
+    }
+
+    .wishlist-card .product-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wishlist-card .product-image img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .wishlist-remove {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 3;
+
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+      background: #fff;
+      color: var(--red);
+
+      box-shadow: 0 5px 18px rgba(0,0,0,.08);
+    }
+
+    .wishlist-remove svg {
+      width: 16px;
+    }
+
+    .wishlist-short-desc {
+      min-height: 32px;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .wishlist-stock {
+      margin-top: 4px;
+      color: #64806f;
+      font-size: 9px;
+    }
+
+    .wishlist-stock.out {
+      color: var(--red);
+    }
+
+    .wishlist-empty {
+      min-height: 430px;
+
+      display: none;
+      place-content: center;
+      justify-items: center;
+
+      text-align: center;
+
+      border: 1px solid var(--line);
+      border-radius: 16px;
+
+      background: #fff;
+
+      padding: 30px;
+    }
+
+    .wishlist-empty.show {
+      display: grid;
+    }
+
+    .wishlist-empty-icon {
+      width: 70px;
+      height: 70px;
+
+      margin-bottom: 14px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: var(--light-green);
+      color: var(--green);
+    }
+
+    .wishlist-empty-icon svg {
+      width: 30px;
+    }
+
+    .wishlist-empty h2 {
+      color: var(--green-dark);
+    }
+
+    .wishlist-empty p {
+      margin-top: 5px;
+      max-width: 430px;
+      color: var(--muted);
+    }
+
+    .wishlist-empty a {
+      margin-top: 18px;
+    }
+
+    @media (max-width: 1050px) {
+      .wishlist-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 780px) {
+      .wishlist-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 390px) {
+      .wishlist-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+
+      <span>
+        🚚 সারা বাংলাদেশে ডেলিভারি
+      </span>
+
+      <span class="topbar-middle">
+        ৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি
+      </span>
+
+      <a href="tel:+8801712345678">
+        হেল্পলাইন: +880 1712-345678
+      </a>
+
+    </div>
+  </div>
+
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার, পরিবারের জন্য</small>
+        </div>
+
+      </a>
+
+
+      <form
+        class="search desktop-search"
+        id="desktopSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="ঘি, মধু, চাল, মসলা খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+
+      <div class="header-actions">
+
+        <a
+          href="account.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+
+        <a
+          href="wishlist.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="heart"></i>
+          <span>পছন্দ</span>
+          <b id="wishlistCount">0</b>
+        </a>
+
+
+        <button
+          class="cart-header-button"
+          id="cartButton"
+        >
+
+          <i data-lucide="shopping-bag"></i>
+
+          <span class="desktop-action">
+            কার্ট
+          </span>
+
+          <b id="cartCount">
+            0
+          </b>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="container mobile-search-row">
+
+      <form
+        class="search"
+        id="mobileSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+    </div>
+
+  </header>
+
+
+  <div
+    class="overlay"
+    id="menuOverlay"
+  ></div>
+
+
+  <aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার</small>
+        </div>
+
+      </a>
+
+
+      <button
+        class="round-button"
+        id="closeMenuButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div class="drawer-links">
+
+      <a href="index.html">
+        <i data-lucide="house"></i>
+        হোম
+      </a>
+
+      <a href="shop.html">
+        <i data-lucide="shopping-basket"></i>
+        সব পণ্য
+      </a>
+
+      <a href="wishlist.html">
+        <i data-lucide="heart"></i>
+        পছন্দের তালিকা
+      </a>
+
+      <a href="orders.html">
+        <i data-lucide="package"></i>
+        আমার অর্ডার
+      </a>
+
+      <a href="order-tracking.html">
+        <i data-lucide="truck"></i>
+        অর্ডার ট্র্যাক
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <main>
+
+    <section class="page-hero">
+
+      <div class="container">
+
+        <h1>
+          পছন্দের তালিকা
+        </h1>
+
+        <p>
+          আপনার সংরক্ষিত পণ্যগুলো এখানে থাকবে।
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="wishlist-page">
+
+      <div class="container">
+
+
+        <div
+          class="wishlist-top"
+          id="wishlistTop"
+        >
+
+          <strong id="wishlistPageCount">
+            ০টি পণ্য
+          </strong>
+
+
+          <button
+            class="clear-wishlist"
+            id="clearWishlistButton"
+          >
+            সব মুছুন
+          </button>
+
+        </div>
+
+
+        <div
+          class="wishlist-grid"
+          id="wishlistGrid"
+        ></div>
+
+
+        <div
+          class="wishlist-empty"
+          id="wishlistEmpty"
+        >
+
+          <div class="wishlist-empty-icon">
+            <i data-lucide="heart"></i>
+          </div>
+
+
+          <h2>
+            আপনার পছন্দের তালিকা খালি
+          </h2>
+
+
+          <p>
+            পছন্দের কোনো পণ্যে Heart icon চাপলে
+            সেটি এখানে সংরক্ষিত থাকবে।
+          </p>
+
+
+          <a
+            href="shop.html"
+            class="primary-button"
+          >
+            পণ্য দেখুন
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a
+          href="index.html"
+          class="brand"
+        >
+
+          <div class="brand-mark">
+            স
+          </div>
+
+          <div class="brand-copy">
+            <strong>সরষেফুল</strong>
+            <small>প্রকৃতির খাবার</small>
+          </div>
+
+        </a>
+
+
+        <p>
+          খাঁটি ও প্রাকৃতিক খাদ্য সহজে
+          আপনার পরিবারের কাছে পৌঁছে দেওয়ার চেষ্টা।
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          কেনাকাটা
+        </h3>
+
+        <a href="shop.html">
+          সব পণ্য
+        </a>
+
+        <a href="wishlist.html">
+          পছন্দের তালিকা
+        </a>
+
+        <a href="orders.html">
+          আমার অর্ডার
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          সহায়তা
+        </h3>
+
+        <a href="order-tracking.html">
+          অর্ডার ট্র্যাক
+        </a>
+
+        <a href="contact.html">
+          যোগাযোগ
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          যোগাযোগ
+        </h3>
+
+        <p>
+          +880 1712-345678
+        </p>
+
+        <p>
+          hello@soroshful.com
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <div
+    class="overlay"
+    id="cartOverlay"
+  ></div>
+
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <div>
+
+        <h2>
+          আপনার কার্ট
+        </h2>
+
+        <small id="cartItemCount">
+          ০টি পণ্য
+        </small>
+
+      </div>
+
+
+      <button
+        class="round-button"
+        id="closeCartButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-bottom">
+
+      <div>
+
+        <span>
+          মোট
+        </span>
+
+        <strong id="cartTotal">
+          ৳০
+        </strong>
+
+      </div>
+
+
+      <a
+        href="checkout.html"
+        class="primary-button full-button"
+      >
+        Checkout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <nav class="mobile-bottom-nav">
+
+    <a href="index.html">
+
+      <i data-lucide="house"></i>
+
+      <span>
+        হোম
+      </span>
+
+    </a>
+
+
+    <a href="shop.html">
+
+      <i data-lucide="layout-grid"></i>
+
+      <span>
+        পণ্য
+      </span>
+
+    </a>
+
+
+    <a href="shop.html">
+
+      <i data-lucide="search"></i>
+
+      <span>
+        খুঁজুন
+      </span>
+
+    </a>
+
+
+    <a
+      href="wishlist.html"
+      class="active"
+    >
+
+      <i data-lucide="heart"></i>
+
+      <span>
+        পছন্দ
+      </span>
+
+    </a>
+
+
+    <button id="bottomCartButton">
+
+      <i data-lucide="shopping-bag"></i>
+
+      <span>
+        কার্ট
+      </span>
+
+      <b id="bottomCartCount">
+        0
+      </b>
+
+    </button>
+
+  </nav>
+
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script src="script.js"></script>
+
+
+  <script>
+
+    const WISHLIST_PRODUCTS_KEY =
+      "soroshfulProducts";
+
+
+    /* =========================
+       GET PRODUCTS
+    ========================= */
+
+    function getWishlistProducts() {
+
+      return JSON.parse(
+        localStorage.getItem(
+          WISHLIST_PRODUCTS_KEY
+        )
+      ) || [];
+
+    }
+
+
+    function getStoredWishlist() {
+
+      return JSON.parse(
+        localStorage.getItem(
+          "soroshfulWishlist"
+        )
+      ) || [];
+
+    }
+
+
+    /* =========================
+       RENDER
+    ========================= */
+
+    function renderWishlistPage() {
+
+      const wishlistIds =
+        getStoredWishlist();
+
+
+      const allProducts =
+        getWishlistProducts();
+
+
+      const wishlistProducts =
+        wishlistIds
+          .map(
+            id =>
+              allProducts.find(
+                product =>
+                  Number(product.id) ===
+                  Number(id)
+              )
+          )
+          .filter(
+            product =>
+              product &&
+              product.status !==
+              "draft"
+          );
+
+
+      const grid =
+        document.getElementById(
+          "wishlistGrid"
+        );
+
+
+      const empty =
+        document.getElementById(
+          "wishlistEmpty"
+        );
+
+
+      const top =
+        document.getElementById(
+          "wishlistTop"
+        );
+
+
+      document
+        .getElementById(
+          "wishlistPageCount"
+        )
+        .textContent =
+          wishlistProducts.length +
+          "টি পণ্য";
+
+
+      if (
+        wishlistProducts.length ===
+        0
+      ) {
+
+        grid.innerHTML =
+          "";
+
+
+        empty.classList.add(
+          "show"
+        );
+
+
+        top.style.display =
+          "none";
+
+
+        lucide.createIcons();
+
+        return;
+
+      }
+
+
+      empty.classList.remove(
+        "show"
+      );
+
+
+      top.style.display =
+        "flex";
+
+
+      grid.innerHTML =
+        wishlistProducts
+          .map(
+            product => {
+
+              const price =
+                Number(
+                  product.price || 0
+                );
+
+
+              const oldPrice =
+                Number(
+                  product.oldPrice || 0
+                );
+
+
+              const stock =
+                Number(
+                  product.stock || 0
+                );
+
+
+              const outOfStock =
+                product.status ===
+                  "out-of-stock" ||
+                stock <= 0;
+
+
+              return `
+
+                <article
+                  class="product-card wishlist-card"
+                  data-product-id="${product.id}"
+                >
+
+
+                  <div class="product-image">
+
+
+                    <button
+                      type="button"
+                      class="wishlist-remove"
+                      onclick="removeWishlistItem(event, ${product.id})"
+                    >
+                      <i data-lucide="x"></i>
+                    </button>
+
+
+                    <img
+                      src="${product.image || "images/hero-organic.jpg"}"
+                      alt="${product.name}"
+                      onerror="
+                        this.onerror=null;
+                        this.src='images/hero-organic.jpg';
+                      "
+                    >
+
+                  </div>
+
+
+                  <div class="product-info">
+
+
+                    <span class="product-category">
+
+                      ${
+                        product.category ||
+                        "Product"
+                      }
+
+                    </span>
+
+
+                    <h3>
+                      ${product.name}
+                    </h3>
+
+
+                    <p class="wishlist-short-desc">
+
+                      ${
+                        product.shortDescription ||
+                        ""
+                      }
+
+                    </p>
+
+
+                    <div class="rating">
+
+                      <span>
+                        ★★★★★
+                      </span>
+
+                      <small>
+                        4.8
+                      </small>
+
+                    </div>
+
+
+                    <div
+                      class="wishlist-stock ${
+                        outOfStock
+                          ? "out"
+                          : ""
+                      }"
+                    >
+
+                      ${
+                        outOfStock
+                          ? "বর্তমানে Stock Out"
+                          : `স্টকে আছে ${stock}টি`
+                      }
+
+                    </div>
+
+
+                    <div class="product-footer">
+
+
+                      <div class="product-price">
+
+                        <strong>
+
+                          ৳${price.toLocaleString(
+                            "en-US"
+                          )}
+
+                        </strong>
+
+
+                        ${
+                          oldPrice >
+                          price
+                            ? `
+                              <del>
+
+                                ৳${oldPrice.toLocaleString(
+                                  "en-US"
+                                )}
+
+                              </del>
+                            `
+                            : ""
+                        }
+
+                      </div>
+
+
+                      <button
+                        type="button"
+                        class="add-cart-button"
+                        onclick="addWishlistProductToCart(event, ${product.id})"
+                        ${
+                          outOfStock
+                            ? "disabled"
+                            : ""
+                        }
+                        style="${
+                          outOfStock
+                            ? "opacity:.45;cursor:not-allowed;"
+                            : ""
+                        }"
+                      >
+
+                        <i data-lucide="shopping-cart"></i>
+
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                </article>
+
+              `;
+
+            }
+          )
+          .join("");
+
+
+      document
+        .querySelectorAll(
+          ".wishlist-card"
+        )
+        .forEach(
+          card => {
+
+            card.addEventListener(
+              "click",
+              function(event) {
+
+                if (
+                  event.target.closest(
+                    "button"
+                  )
+                ) {
+
+                  return;
+
+                }
+
+
+                window.location.href =
+                  "product.html?id=" +
+                  encodeURIComponent(
+                    this.dataset.productId
+                  );
+
+              }
+            );
+
+          }
+        );
+
+
+      lucide.createIcons();
+
+    }
+
+
+    /* =========================
+       REMOVE
+    ========================= */
+
+    window.removeWishlistItem =
+      function(
+        event,
+        productId
+      ) {
+
+        event.stopPropagation();
+
+
+        let wishlist =
+          getStoredWishlist();
+
+
+        wishlist =
+          wishlist.filter(
+            id =>
+              Number(id) !==
+              Number(productId)
+          );
+
+
+        localStorage.setItem(
+          "soroshfulWishlist",
+          JSON.stringify(
+            wishlist
+          )
+        );
+
+
+        if (
+          typeof updateWishlist ===
+          "function"
+        ) {
+
+          updateWishlist();
+
+        }
+
+
+        renderWishlistPage();
+
+
+        showToast(
+          "Wishlist থেকে সরানো হয়েছে"
+        );
+
+      };
+
+
+    /* =========================
+       ADD TO CART
+    ========================= */
+
+    window.addWishlistProductToCart =
+      function(
+        event,
+        productId
+      ) {
+
+        event.stopPropagation();
+
+
+        const product =
+          getWishlistProducts()
+            .find(
+              item =>
+                Number(item.id) ===
+                Number(productId)
+            );
+
+
+        if (!product) {
+          return;
+        }
+
+
+        const stock =
+          Number(
+            product.stock || 0
+          );
+
+
+        if (
+          product.status ===
+            "out-of-stock" ||
+          stock <= 0
+        ) {
+
+          showToast(
+            "এই পণ্যটি বর্তমানে Stock Out"
+          );
+
+          return;
+
+        }
+
+
+        const existing =
+          cart.find(
+            item =>
+              Number(item.id) ===
+                Number(product.id) &&
+              !item.weight
+          );
+
+
+        if (existing) {
+
+          if (
+            Number(
+              existing.quantity
+            ) >=
+            stock
+          ) {
+
+            showToast(
+              "Available stock-এর বেশি যোগ করা যাবে না"
+            );
+
+            return;
+
+          }
+
+
+          existing.quantity +=
+            1;
+
+        } else {
+
+          cart.push({
+
+            id:
+              product.id,
+
+            name:
+              product.name,
+
+            price:
+              Number(
+                product.price
+              ),
+
+            quantity:
+              1
+
+          });
+
+        }
+
+
+        saveCart();
+
+        renderCart();
+
+
+        showToast(
+          "পণ্য কার্টে যোগ হয়েছে"
+        );
+
+      };
+
+
+    /* =========================
+       CLEAR WISHLIST
+    ========================= */
+
+    document
+      .getElementById(
+        "clearWishlistButton"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          localStorage.setItem(
+            "soroshfulWishlist",
+            JSON.stringify([])
+          );
+
+
+          if (
+            typeof updateWishlist ===
+            "function"
+          ) {
+
+            updateWishlist();
+
+          }
+
+
+          renderWishlistPage();
+
+
+          showToast(
+            "Wishlist খালি করা হয়েছে"
+          );
+
+        }
+      );
+
+
+    /* =========================
+       ADMIN UPDATE
+    ========================= */
+
+    window.addEventListener(
+      "storage",
+      function(event) {
+
+        if (
+          event.key ===
+          WISHLIST_PRODUCTS_KEY
+        ) {
+
+          renderWishlistPage();
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       START
+    ========================= */
+
+    renderWishlistPage();
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>

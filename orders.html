@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#174d35">
+
+  <title>আমার অর্ডার | সরষেফুল</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    .orders-hero {
+      padding: 36px 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .orders-hero h1 {
+      color: var(--green-dark);
+      font-family: "Noto Serif Bengali", serif;
+      font-size: clamp(32px, 5vw, 46px);
+    }
+
+    .orders-hero p {
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .orders-section {
+      padding: 45px 0 80px;
+    }
+
+    .orders-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .orders-toolbar {
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .orders-toolbar strong {
+      color: var(--green-dark);
+    }
+
+    .orders-filter {
+      height: 40px;
+      padding: 0 30px 0 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      outline: none;
+    }
+
+    .orders-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .order-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .order-card-head {
+      padding: 14px 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      background: #fafbf9;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-card-head h2 {
+      color: var(--green-dark);
+      font-size: 16px;
+    }
+
+    .order-card-head small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    .order-status {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--light-green);
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .order-card-body {
+      padding: 16px 17px;
+    }
+
+    .order-overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .order-overview-item span,
+    .order-overview-item strong {
+      display: block;
+    }
+
+    .order-overview-item span {
+      color: var(--muted);
+      font-size: 9px;
+      margin-bottom: 2px;
+    }
+
+    .order-overview-item strong {
+      color: var(--green-dark);
+      font-size: 12px;
+    }
+
+    .order-products {
+      margin-top: 15px;
+      padding-top: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    .order-product {
+      min-height: 35px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      color: #59645c;
+      font-size: 11px;
+    }
+
+    .order-product strong {
+      color: var(--green-dark);
+      white-space: nowrap;
+    }
+
+    .order-card-actions {
+      padding: 13px 17px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      border-top: 1px solid var(--line);
+    }
+
+    .order-action-secondary {
+      min-height: 38px;
+      padding: 0 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .order-action-primary {
+      min-height: 38px;
+      padding: 0 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .orders-empty {
+      min-height: 430px;
+      display: none;
+      place-content: center;
+      justify-items: center;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .orders-empty.show {
+      display: grid;
+    }
+
+    .orders-empty-icon {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 13px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--light-green);
+      color: var(--green);
+    }
+
+    .orders-empty-icon svg {
+      width: 30px;
+    }
+
+    .orders-empty h2 {
+      color: var(--green-dark);
+    }
+
+    .orders-empty p {
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .orders-empty a {
+      margin-top: 17px;
+    }
+
+    @media (max-width: 750px) {
+
+      .order-overview {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 520px) {
+
+      .orders-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .orders-filter {
+        width: 100%;
+      }
+
+      .order-card-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .order-overview {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .order-card-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .order-action-primary,
+      .order-action-secondary {
+        justify-content: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="topbar">
+
+    <div class="container topbar-inner">
+
+      <span>
+        🚚 সারা বাংলাদেশে ডেলিভারি
+      </span>
+
+      <span class="topbar-middle">
+        ৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি
+      </span>
+
+      <a href="tel:+8801712345678">
+        হেল্পলাইন: +880 1712-345678
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার, পরিবারের জন্য</small>
+        </div>
+
+      </a>
+
+
+      <form
+        class="search desktop-search"
+        id="desktopSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+
+      <div class="header-actions">
+
+        <a
+          href="account.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+
+        <a
+          href="wishlist.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="heart"></i>
+          <span>পছন্দ</span>
+          <b id="wishlistCount">0</b>
+        </a>
+
+
+        <button
+          class="cart-header-button"
+          id="cartButton"
+        >
+          <i data-lucide="shopping-bag"></i>
+          <span class="desktop-action">কার্ট</span>
+          <b id="cartCount">0</b>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="container mobile-search-row">
+
+      <form
+        class="search"
+        id="mobileSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+    </div>
+
+  </header>
+
+
+  <div class="overlay" id="menuOverlay"></div>
+
+
+  <aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">স</div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার</small>
+        </div>
+
+      </a>
+
+      <button
+        class="round-button"
+        id="closeMenuButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div class="drawer-links">
+
+      <a href="index.html">
+        <i data-lucide="house"></i>
+        হোম
+      </a>
+
+      <a href="shop.html">
+        <i data-lucide="shopping-basket"></i>
+        সব পণ্য
+      </a>
+
+      <a href="wishlist.html">
+        <i data-lucide="heart"></i>
+        Wishlist
+      </a>
+
+      <a href="account.html">
+        <i data-lucide="user"></i>
+        Account
+      </a>
+
+      <a href="orders.html">
+        <i data-lucide="package"></i>
+        আমার অর্ডার
+      </a>
+
+      <a href="order-tracking.html">
+        <i data-lucide="truck"></i>
+        Track Order
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <main>
+
+    <section class="orders-hero">
+
+      <div class="container">
+
+        <h1>
+          আমার অর্ডার
+        </h1>
+
+        <p>
+          আপনার করা সব অর্ডারের history এবং বর্তমান status দেখুন।
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="orders-section">
+
+      <div class="container orders-wrapper">
+
+        <div
+          class="orders-toolbar"
+          id="ordersToolbar"
+        >
+
+          <strong id="ordersCount">
+            ০টি অর্ডার
+          </strong>
+
+
+          <select
+            class="orders-filter"
+            id="ordersFilter"
+          >
+
+            <option value="all">
+              সব অর্ডার
+            </option>
+
+            <option value="Order Placed">
+              Order Placed
+            </option>
+
+            <option value="Confirmed">
+              Confirmed
+            </option>
+
+            <option value="Processing">
+              Processing
+            </option>
+
+            <option value="Shipped">
+              Shipped
+            </option>
+
+            <option value="Delivered">
+              Delivered
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div
+          class="orders-list"
+          id="ordersList"
+        ></div>
+
+
+        <div
+          class="orders-empty"
+          id="ordersEmpty"
+        >
+
+          <div class="orders-empty-icon">
+            <i data-lucide="package-open"></i>
+          </div>
+
+          <h2>
+            এখনো কোনো অর্ডার নেই
+          </h2>
+
+          <p>
+            আপনার প্রথম অর্ডার করতে পণ্য দেখুন।
+          </p>
+
+          <a
+            href="shop.html"
+            class="primary-button"
+          >
+            কেনাকাটা শুরু করুন
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a
+          href="index.html"
+          class="brand"
+        >
+          <div class="brand-mark">স</div>
+
+          <div class="brand-copy">
+            <strong>সরষেফুল</strong>
+            <small>প্রকৃতির খাবার</small>
+          </div>
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+        <h3>কেনাকাটা</h3>
+        <a href="shop.html">সব পণ্য</a>
+        <a href="wishlist.html">Wishlist</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>অ্যাকাউন্ট</h3>
+        <a href="account.html">আমার অ্যাকাউন্ট</a>
+        <a href="orders.html">আমার অর্ডার</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>সহায়তা</h3>
+        <a href="order-tracking.html">অর্ডার ট্র্যাক</a>
+        <a href="contact.html">যোগাযোগ</a>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <div
+    class="overlay"
+    id="cartOverlay"
+  ></div>
+
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <div>
+        <h2>আপনার কার্ট</h2>
+        <small id="cartItemCount">০টি পণ্য</small>
+      </div>
+
+      <button
+        class="round-button"
+        id="closeCartButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-bottom">
+
+      <div>
+        <span>মোট</span>
+        <strong id="cartTotal">৳০</strong>
+      </div>
+
+      <a
+        href="checkout.html"
+        class="primary-button full-button"
+      >
+        Checkout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <nav class="mobile-bottom-nav">
+
+    <a href="index.html">
+      <i data-lucide="house"></i>
+      <span>হোম</span>
+    </a>
+
+    <a href="shop.html">
+      <i data-lucide="layout-grid"></i>
+      <span>পণ্য</span>
+    </a>
+
+    <a href="shop.html">
+      <i data-lucide="search"></i>
+      <span>খুঁজুন</span>
+    </a>
+
+    <a href="wishlist.html">
+      <i data-lucide="heart"></i>
+      <span>পছন্দ</span>
+    </a>
+
+    <button id="bottomCartButton">
+      <i data-lucide="shopping-bag"></i>
+      <span>কার্ট</span>
+      <b id="bottomCartCount">0</b>
+    </button>
+
+  </nav>
+
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script src="script.js"></script>
+
+
+  <script>
+
+    const ordersList =
+      document.getElementById(
+        "ordersList"
+      );
+
+
+    const ordersEmpty =
+      document.getElementById(
+        "ordersEmpty"
+      );
+
+
+    const ordersCount =
+      document.getElementById(
+        "ordersCount"
+      );
+
+
+    const ordersFilter =
+      document.getElementById(
+        "ordersFilter"
+      );
+
+
+    const ordersToolbar =
+      document.getElementById(
+        "ordersToolbar"
+      );
+
+
+    function getSavedOrders() {
+
+      return JSON.parse(
+        localStorage.getItem(
+          "soroshfulOrders"
+        )
+      ) || [];
+
+    }
+
+
+    function paymentName(method) {
+
+      const names = {
+        cod: "Cash on Delivery",
+        bkash: "bKash",
+        nagad: "Nagad"
+      };
+
+
+      return names[method] ||
+        method ||
+        "-";
+
+    }
+
+
+    function deliveryName(method) {
+
+      const names = {
+        standard: "Standard Delivery",
+        express: "Express Delivery"
+      };
+
+
+      return names[method] ||
+        method ||
+        "-";
+
+    }
+
+
+    function renderOrders() {
+
+      const allOrders =
+        getSavedOrders();
+
+
+      const filterValue =
+        ordersFilter.value;
+
+
+      const visibleOrders =
+        filterValue === "all"
+          ? allOrders
+          : allOrders.filter(
+              order =>
+                (order.status || "Order Placed") ===
+                filterValue
+            );
+
+
+      ordersCount.textContent =
+        visibleOrders.length +
+        "টি অর্ডার";
+
+
+      if (
+        allOrders.length === 0
+      ) {
+
+        ordersToolbar.style.display =
+          "none";
+
+
+        ordersList.innerHTML =
+          "";
+
+
+        ordersEmpty.classList.add(
+          "show"
+        );
+
+
+        return;
+
+      }
+
+
+      ordersToolbar.style.display =
+        "flex";
+
+
+      ordersEmpty.classList.remove(
+        "show"
+      );
+
+
+      if (
+        visibleOrders.length === 0
+      ) {
+
+        ordersList.innerHTML =
+          `
+            <div
+              style="
+                padding:45px 20px;
+                text-align:center;
+                border:1px solid var(--line);
+                border-radius:14px;
+                color:var(--muted);
+              "
+            >
+              এই status-এর কোনো অর্ডার নেই।
+            </div>
+          `;
+
+        return;
+
+      }
+
+
+      ordersList.innerHTML =
+        visibleOrders
+          .map(order => {
+
+            const products =
+              order.items
+                .map(item => {
+
+                  return `
+
+                    <div class="order-product">
+
+                      <span>
+                        ${item.name}
+                        × ${item.quantity}
+                      </span>
+
+
+                      <strong>
+
+                        ৳${(
+                          item.price *
+                          item.quantity
+                        ).toLocaleString(
+                          "en-US"
+                        )}
+
+                      </strong>
+
+                    </div>
+
+                  `;
+
+                })
+                .join("");
+
+
+            return `
+
+              <article class="order-card">
+
+                <div class="order-card-head">
+
+                  <div>
+
+                    <h2>
+                      ${order.orderId}
+                    </h2>
+
+                    <small>
+                      ${order.date}
+                    </small>
+
+                  </div>
+
+
+                  <span class="order-status">
+                    ${order.status || "Order Placed"}
+                  </span>
+
+                </div>
+
+
+                <div class="order-card-body">
+
+                  <div class="order-overview">
+
+                    <div class="order-overview-item">
+
+                      <span>
+                        পেমেন্ট
+                      </span>
+
+                      <strong>
+                        ${paymentName(order.paymentMethod)}
+                      </strong>
+
+                    </div>
+
+
+                    <div class="order-overview-item">
+
+                      <span>
+                        ডেলিভারি
+                      </span>
+
+                      <strong>
+                        ${deliveryName(order.deliveryMethod)}
+                      </strong>
+
+                    </div>
+
+
+                    <div class="order-overview-item">
+
+                      <span>
+                        পণ্য
+                      </span>
+
+                      <strong>
+                        ${order.items.length}টি
+                      </strong>
+
+                    </div>
+
+
+                    <div class="order-overview-item">
+
+                      <span>
+                        সর্বমোট
+                      </span>
+
+                      <strong>
+                        ৳${Number(order.total).toLocaleString("en-US")}
+                      </strong>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="order-products">
+                    ${products}
+                  </div>
+
+                </div>
+
+
+                <div class="order-card-actions">
+
+                  <a
+                    href="order-tracking.html?order=${encodeURIComponent(order.orderId)}"
+                    class="order-action-secondary"
+                  >
+                    <i data-lucide="truck"></i>
+                    Track
+                  </a>
+
+
+                  <button
+                    class="order-action-primary"
+                    onclick="reorderItems('${order.orderId}')"
+                  >
+                    <i data-lucide="rotate-ccw"></i>
+                    আবার কিনুন
+                  </button>
+
+                </div>
+
+              </article>
+
+            `;
+
+          })
+          .join("");
+
+
+      lucide.createIcons();
+
+    }
+
+
+    window.reorderItems =
+      function(orderId) {
+
+        const allOrders =
+          getSavedOrders();
+
+
+        const selectedOrder =
+          allOrders.find(
+            order =>
+              order.orderId ===
+              orderId
+          );
+
+
+        if (!selectedOrder) {
+          return;
+        }
+
+
+        selectedOrder.items.forEach(
+          orderItem => {
+
+            const existing =
+              cart.find(
+                cartItem => {
+
+                  return (
+                    Number(cartItem.id) ===
+                    Number(orderItem.id) &&
+                    (cartItem.weight || "") ===
+                    (orderItem.weight || "")
+                  );
+
+                }
+              );
+
+
+            if (existing) {
+
+              existing.quantity +=
+                Number(
+                  orderItem.quantity
+                );
+
+            } else {
+
+              cart.push({
+                ...orderItem
+              });
+
+            }
+
+          }
+        );
+
+
+        saveCart();
+
+        renderCart();
+
+
+        showToast(
+          "অর্ডারের পণ্যগুলো আবার কার্টে যোগ হয়েছে"
+        );
+
+      };
+
+
+    ordersFilter.addEventListener(
+      "change",
+      renderOrders
+    );
+
+
+    renderOrders();
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>

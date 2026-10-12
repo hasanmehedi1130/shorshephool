@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | সরষেফুল</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Hind Siliguri", sans-serif;
+            background: #f5f3ed;
+            color: #1d2721;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+            cursor: pointer;
+        }
+
+        .login-page {
+            min-height: 100vh;
+            padding: 25px;
+            display: grid;
+            place-items: center;
+        }
+
+        .login-card {
+            width: min(100%, 420px);
+            background: white;
+            border: 1px solid #e4e5e1;
+            border-radius: 18px;
+            padding: 34px;
+            box-shadow: 0 20px 60px rgba(23, 77, 53, .08);
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .brand-mark {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 10px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: #174d35;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .brand h1 {
+            color: #0e3524;
+            font-size: 25px;
+        }
+
+        .brand p {
+            color: #7a827c;
+            font-size: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #0e3524;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-wrap > svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            width: 17px;
+            transform: translateY(-50%);
+            color: #8a928c;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 46px;
+            padding: 0 42px 0 40px;
+            border: 1px solid #dde1dd;
+            border-radius: 9px;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #174d35;
+            box-shadow: 0 0 0 3px rgba(23, 77, 53, .06);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 7px;
+            top: 50%;
+            width: 34px;
+            height: 34px;
+            transform: translateY(-50%);
+            display: grid;
+            place-items: center;
+            background: transparent;
+            color: #747d76;
+        }
+
+        .password-toggle svg {
+            width: 16px;
+        }
+
+        .login-button {
+            width: 100%;
+            min-height: 48px;
+            margin-top: 5px;
+            border-radius: 9px;
+            background: #174d35;
+            color: white;
+            font-weight: 700;
+        }
+
+        .login-button:hover {
+            background: #0e3524;
+        }
+
+        .message {
+            display: none;
+            margin-bottom: 14px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: #a23c2e;
+            background: #fff0ec;
+            font-size: 12px;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .demo {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 9px;
+            background: #f5f8f6;
+            color: #626c64;
+            font-size: 11px;
+        }
+
+        .demo strong {
+            color: #174d35;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 18px;
+            text-align: center;
+            color: #174d35;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        @media(max-width: 480px) {
+            .login-page {
+                padding: 14px;
+            }
+
+            .login-card {
+                padding: 25px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="login-page">
+
+    <section class="login-card">
+
+        <div class="brand">
+            <div class="brand-mark">স</div>
+            <h1>সরষেফুল Admin</h1>
+            <p>Management & Operations Panel</p>
+        </div>
+
+        <div id="loginMessage" class="message"></div>
+
+        <form id="adminLoginForm">
+
+            <div class="form-group">
+                <label>Admin / Moderator ID</label>
+
+                <div class="input-wrap">
+                    <i data-lucide="user"></i>
+
+                    <input
+                        id="adminId"
+                        class="form-input"
+                        type="text"
+                        placeholder="আপনার ID"
+                        autocomplete="username"
+                    >
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label>Password</label>
+
+                <div class="input-wrap">
+
+                    <i data-lucide="lock-keyhole"></i>
+
+                    <input
+                        id="adminPassword"
+                        class="form-input"
+                        type="password"
+                        placeholder="Password"
+                        autocomplete="current-password"
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="password-toggle"
+                    >
+                        <i data-lucide="eye"></i>
+                    </button>
+
+                </div>
+            </div>
+
+
+            <button class="login-button" type="submit">
+                Login to Admin Panel
+            </button>
+
+        </form>
+
+
+        <div class="demo">
+            Demo Admin:<br>
+            ID: <strong>admin</strong><br>
+            Password: <strong>Admin@123</strong>
+        </div>
+
+        <a href="index.html" class="back-link">
+            ← Website-এ ফিরে যান
+        </a>
+
+    </section>
+
+</main>
+
+
+<script>
+
+const USERS_KEY = "soroshfulAdminUsers";
+const SESSION_KEY = "soroshfulAdminSession";
+
+
+function seedDefaultAdmin() {
+
+    let users =
+        JSON.parse(
+            localStorage.getItem(
+                USERS_KEY
+            )
+        ) || [];
+
+
+    const adminExists =
+        users.some(
+            user =>
+                user.id === "admin"
+        );
+
+
+    if (!adminExists) {
+
+        users.unshift({
+
+            id: "admin",
+            name: "Super Admin",
+            password: "Admin@123",
+            role: "admin",
+            active: true,
+            createdAt:
+                new Date().toISOString()
+
+        });
+
+
+        localStorage.setItem(
+            USERS_KEY,
+            JSON.stringify(users)
+        );
+
+    }
+
+}
+
+
+seedDefaultAdmin();
+
+
+const form =
+    document.getElementById(
+        "adminLoginForm"
+    );
+
+
+const message =
+    document.getElementById(
+        "loginMessage"
+    );
+
+
+form.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const id =
+            document
+                .getElementById(
+                    "adminId"
+                )
+                .value
+                .trim();
+
+
+        const password =
+            document
+                .getElementById(
+                    "adminPassword"
+                )
+                .value;
+
+
+        const users =
+            JSON.parse(
+                localStorage.getItem(
+                    USERS_KEY
+                )
+            ) || [];
+
+
+        const user =
+            users.find(
+                item =>
+                    item.id === id &&
+                    item.password === password &&
+                    item.active !== false
+            );
+
+
+        if (!user) {
+
+            message.textContent =
+                "ID অথবা Password সঠিক নয়।";
+
+            message.classList.add(
+                "show"
+            );
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            SESSION_KEY,
+            JSON.stringify({
+
+                id: user.id,
+                name: user.name,
+                role: user.role,
+                loggedIn: true,
+                loginAt:
+                    new Date().toISOString()
+
+            })
+        );
+
+
+        window.location.href =
+            "admin.html";
+
+    }
+);
+
+
+document
+    .getElementById(
+        "togglePassword"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            const input =
+                document.getElementById(
+                    "adminPassword"
+                );
+
+
+            input.type =
+                input.type === "password"
+                    ? "text"
+                    : "password";
+
+
+            this.innerHTML =
+                input.type === "password"
+                    ? '<i data-lucide="eye"></i>'
+                    : '<i data-lucide="eye-off"></i>';
+
+
+            lucide.createIcons();
+
+        }
+    );
+
+
+const existingSession =
+    JSON.parse(
+        localStorage.getItem(
+            SESSION_KEY
+        )
+    );
+
+
+if (
+    existingSession?.loggedIn
+) {
+
+    window.location.href =
+        "admin.html";
+
+}
+
+
+lucide.createIcons();
+
+</script>
+
+</body>
+</html>

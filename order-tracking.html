@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta name="theme-color" content="#174d35" />
+
+  <title>অর্ডার ট্র্যাক | সরষেফুল</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+
+    .tracking-hero {
+      padding: 44px 0;
+      background: #fff9ed;
+      border-bottom: 1px solid #eee7da;
+      text-align: center;
+    }
+
+    .tracking-hero h1 {
+      color: var(--green-dark);
+      font-family: "Noto Serif Bengali", serif;
+      font-size: clamp(34px, 5vw, 48px);
+    }
+
+    .tracking-hero p {
+      max-width: 600px;
+      margin: 8px auto 0;
+      color: var(--muted);
+    }
+
+    .tracking-section {
+      padding: 46px 0 80px;
+    }
+
+    .tracking-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .tracking-search-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .tracking-search-card label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .tracking-search-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .tracking-search-row input {
+      min-width: 0;
+      height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0 12px;
+      outline: none;
+    }
+
+    .tracking-search-row input:focus {
+      border-color: var(--green);
+    }
+
+    .tracking-search-row button {
+      min-width: 120px;
+      height: 46px;
+      padding: 0 18px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .tracking-message {
+      min-height: 20px;
+      margin-top: 7px;
+      color: var(--red);
+      font-size: 11px;
+    }
+
+    .tracking-result {
+      display: none;
+      margin-top: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .tracking-result.show {
+      display: block;
+    }
+
+    .tracking-result-head {
+      padding: 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      background: #fafbf9;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tracking-result-head h2 {
+      color: var(--green-dark);
+      font-size: 20px;
+    }
+
+    .tracking-result-head p {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    .tracking-status-badge {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--light-green);
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tracking-body {
+      padding: 22px;
+    }
+
+    .tracking-progress {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      position: relative;
+      margin: 10px 0 28px;
+    }
+
+    .tracking-progress::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 17px;
+      height: 2px;
+      background: #e2e7e3;
+      z-index: 0;
+    }
+
+    .tracking-step {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .step-icon {
+      width: 36px;
+      height: 36px;
+      margin: 0 auto 7px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 2px solid #dce3de;
+      background: #fff;
+      color: #9aa29c;
+    }
+
+    .tracking-step.active .step-icon {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .step-icon svg {
+      width: 16px;
+    }
+
+    .tracking-step b,
+    .tracking-step small {
+      display: block;
+    }
+
+    .tracking-step b {
+      color: var(--green-dark);
+      font-size: 10px;
+    }
+
+    .tracking-step small {
+      color: var(--muted);
+      font-size: 8px;
+      margin-top: 2px;
+    }
+
+    .tracking-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .tracking-info-card {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .tracking-info-card h3 {
+      color: var(--green-dark);
+      font-size: 14px;
+      margin-bottom: 9px;
+    }
+
+    .tracking-info-row {
+      min-height: 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      color: #5f6962;
+      font-size: 11px;
+    }
+
+    .tracking-info-row strong {
+      color: var(--green-dark);
+      text-align: right;
+    }
+
+    .tracking-items {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .tracking-items-head {
+      padding: 11px 14px;
+      background: #fafbf9;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tracking-items-head h3 {
+      color: var(--green-dark);
+      font-size: 14px;
+    }
+
+    .tracking-item {
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tracking-item:last-child {
+      border-bottom: none;
+    }
+
+    .tracking-item h4 {
+      color: var(--green-dark);
+      font-size: 12px;
+    }
+
+    .tracking-item small {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .tracking-item strong {
+      color: var(--green-dark);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 700px) {
+
+      .tracking-section {
+        padding: 34px 0 65px;
+      }
+
+      .tracking-search-row {
+        grid-template-columns: 1fr;
+      }
+
+      .tracking-search-row button {
+        width: 100%;
+      }
+
+      .tracking-result-head {
+        flex-direction: column;
+      }
+
+      .tracking-progress {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 0 0 24px;
+      }
+
+      .tracking-progress::before {
+        display: none;
+      }
+
+      .tracking-step {
+        text-align: left;
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .step-icon {
+        margin: 0;
+      }
+
+      .tracking-step b,
+      .tracking-step small {
+        text-align: left;
+      }
+
+      .tracking-info-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>🚚 সারা বাংলাদেশে ডেলিভারি</span>
+      <span class="topbar-middle">৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি</span>
+      <a href="tel:+8801712345678">
+        হেল্পলাইন: +880 1712-345678
+      </a>
+    </div>
+  </div>
+
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">স</div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার, পরিবারের জন্য</small>
+        </div>
+
+      </a>
+
+
+      <form
+        class="search desktop-search"
+        id="desktopSearchForm"
+      >
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="ঘি, মধু, চাল, মসলা খুঁজুন..."
+        />
+
+        <button type="submit">খুঁজুন</button>
+      </form>
+
+
+      <div class="header-actions">
+
+        <a
+          href="account.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+
+        <button class="header-action desktop-action">
+          <i data-lucide="heart"></i>
+          <span>পছন্দ</span>
+          <b id="wishlistCount">0</b>
+        </button>
+
+
+        <button
+          class="cart-header-button"
+          id="cartButton"
+        >
+          <i data-lucide="shopping-bag"></i>
+          <span class="desktop-action">কার্ট</span>
+          <b id="cartCount">0</b>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="container mobile-search-row">
+
+      <form
+        class="search"
+        id="mobileSearchForm"
+      >
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        />
+
+        <button type="submit">খুঁজুন</button>
+      </form>
+
+    </div>
+
+
+    <nav class="desktop-nav">
+
+      <div class="container nav-inner">
+
+        <a
+          href="index.html#categories"
+          class="category-nav-button"
+        >
+          <i data-lucide="layout-grid"></i>
+          সব ক্যাটাগরি
+        </a>
+
+
+        <div class="nav-links">
+          <a href="index.html">হোম</a>
+          <a href="shop.html">সব পণ্য</a>
+          <a href="index.html#products">জনপ্রিয়</a>
+          <a href="offers.html">অফার</a>
+          <a href="about.html">আমাদের গল্প</a>
+          <a href="contact.html">যোগাযোগ</a>
+        </div>
+
+
+        <a
+          href="order-tracking.html"
+          class="track-order active"
+        >
+          <i data-lucide="truck"></i>
+          অর্ডার ট্র্যাক
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <div
+    class="overlay"
+    id="menuOverlay"
+  ></div>
+
+
+  <aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <a href="index.html" class="brand">
+
+        <div class="brand-mark">স</div>
+
+        <div class="brand-copy">
+          <strong>সরষেফুল</strong>
+          <small>প্রকৃতির খাবার</small>
+        </div>
+
+      </a>
+
+
+      <button
+        class="round-button"
+        id="closeMenuButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div class="drawer-links">
+      <a href="index.html"><i data-lucide="house"></i> হোম</a>
+      <a href="shop.html"><i data-lucide="shopping-basket"></i> সব পণ্য</a>
+      <a href="index.html#categories"><i data-lucide="layout-grid"></i> ক্যাটাগরি</a>
+      <a href="offers.html"><i data-lucide="badge-percent"></i> অফার</a>
+      <a href="order-tracking.html"><i data-lucide="truck"></i> অর্ডার ট্র্যাক</a>
+      <a href="about.html"><i data-lucide="leaf"></i> আমাদের গল্প</a>
+      <a href="contact.html"><i data-lucide="phone"></i> যোগাযোগ</a>
+    </div>
+
+  </aside>
+
+
+  <main>
+
+    <section class="tracking-hero">
+
+      <div class="container">
+
+        <h1>
+          আপনার অর্ডার ট্র্যাক করুন
+        </h1>
+
+        <p>
+          Checkout-এর পর পাওয়া Order ID লিখে
+          অর্ডারের বর্তমান অবস্থা দেখুন।
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="tracking-section">
+
+      <div class="container tracking-wrapper">
+
+
+        <div class="tracking-search-card">
+
+          <label for="trackingInput">
+            Order ID
+          </label>
+
+
+          <div class="tracking-search-row">
+
+            <input
+              id="trackingInput"
+              type="text"
+              placeholder="যেমন: SF12345678"
+            />
+
+            <button id="trackButton">
+              Track Order
+            </button>
+
+          </div>
+
+
+          <div
+            class="tracking-message"
+            id="trackingMessage"
+          ></div>
+
+        </div>
+
+
+        <div
+          class="tracking-result"
+          id="trackingResult"
+        >
+
+          <div class="tracking-result-head">
+
+            <div>
+
+              <h2 id="trackingOrderId">
+                Order
+              </h2>
+
+              <p id="trackingOrderDate">
+                -
+              </p>
+
+            </div>
+
+
+            <span
+              class="tracking-status-badge"
+              id="trackingStatus"
+            >
+              Order Placed
+            </span>
+
+          </div>
+
+
+          <div class="tracking-body">
+
+
+            <div class="tracking-progress">
+
+              <div
+                class="tracking-step active"
+                data-status="Order Placed"
+              >
+
+                <div class="step-icon">
+                  <i data-lucide="clipboard-check"></i>
+                </div>
+
+                <div>
+                  <b>Order Placed</b>
+                  <small>অর্ডার গ্রহণ করা হয়েছে</small>
+                </div>
+
+              </div>
+
+
+              <div
+                class="tracking-step"
+                data-status="Confirmed"
+              >
+
+                <div class="step-icon">
+                  <i data-lucide="badge-check"></i>
+                </div>
+
+                <div>
+                  <b>Confirmed</b>
+                  <small>অর্ডার নিশ্চিত</small>
+                </div>
+
+              </div>
+
+
+              <div
+                class="tracking-step"
+                data-status="Processing"
+              >
+
+                <div class="step-icon">
+                  <i data-lucide="package-open"></i>
+                </div>
+
+                <div>
+                  <b>Processing</b>
+                  <small>প্যাক করা হচ্ছে</small>
+                </div>
+
+              </div>
+
+
+              <div
+                class="tracking-step"
+                data-status="Shipped"
+              >
+
+                <div class="step-icon">
+                  <i data-lucide="truck"></i>
+                </div>
+
+                <div>
+                  <b>Shipped</b>
+                  <small>কুরিয়ারে দেওয়া হয়েছে</small>
+                </div>
+
+              </div>
+
+
+              <div
+                class="tracking-step"
+                data-status="Delivered"
+              >
+
+                <div class="step-icon">
+                  <i data-lucide="house-check"></i>
+                </div>
+
+                <div>
+                  <b>Delivered</b>
+                  <small>ডেলিভারি সম্পন্ন</small>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="tracking-info-grid">
+
+
+              <div class="tracking-info-card">
+
+                <h3>
+                  ডেলিভারি তথ্য
+                </h3>
+
+                <div class="tracking-info-row">
+                  <span>নাম</span>
+                  <strong id="trackingName">-</strong>
+                </div>
+
+                <div class="tracking-info-row">
+                  <span>মোবাইল</span>
+                  <strong id="trackingPhone">-</strong>
+                </div>
+
+                <div class="tracking-info-row">
+                  <span>ঠিকানা</span>
+                  <strong id="trackingAddress">-</strong>
+                </div>
+
+              </div>
+
+
+              <div class="tracking-info-card">
+
+                <h3>
+                  অর্ডার সারাংশ
+                </h3>
+
+                <div class="tracking-info-row">
+                  <span>পেমেন্ট</span>
+                  <strong id="trackingPayment">-</strong>
+                </div>
+
+                <div class="tracking-info-row">
+                  <span>ডেলিভারি</span>
+                  <strong id="trackingDelivery">-</strong>
+                </div>
+
+                <div class="tracking-info-row">
+                  <span>মোট</span>
+                  <strong id="trackingTotal">৳০</strong>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="tracking-items">
+
+              <div class="tracking-items-head">
+                <h3>পণ্য</h3>
+              </div>
+
+              <div id="trackingItemsList"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a href="index.html" class="brand">
+          <div class="brand-mark">স</div>
+
+          <div class="brand-copy">
+            <strong>সরষেফুল</strong>
+            <small>প্রকৃতির খাবার</small>
+          </div>
+        </a>
+
+        <p>
+          খাঁটি ও প্রাকৃতিক খাদ্য সহজে আপনার পরিবারের
+          কাছে পৌঁছে দেওয়ার চেষ্টা।
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+        <h3>কেনাকাটা</h3>
+        <a href="shop.html">সব পণ্য</a>
+        <a href="index.html#categories">ক্যাটাগরি</a>
+        <a href="offers.html">অফার</a>
+        <a href="order-tracking.html">অর্ডার ট্র্যাক</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>সহায়তা</h3>
+        <a href="faq.html">FAQ</a>
+        <a href="shipping-policy.html">ডেলিভারি পলিসি</a>
+        <a href="refund-policy.html">রিটার্ন ও রিফান্ড</a>
+        <a href="contact.html">যোগাযোগ</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>যোগাযোগ</h3>
+        <p>+880 1712-345678</p>
+        <p>hello@soroshful.com</p>
+        <p>সকাল ৯টা – রাত ১০টা</p>
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+      <div class="container">
+        © 2026 সরষেফুল। সর্বস্বত্ব সংরক্ষিত।
+      </div>
+    </div>
+
+  </footer>
+
+
+  <div
+    class="overlay"
+    id="cartOverlay"
+  ></div>
+
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <div>
+        <h2>আপনার কার্ট</h2>
+        <small id="cartItemCount">০টি পণ্য</small>
+      </div>
+
+      <button
+        class="round-button"
+        id="closeCartButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-bottom">
+
+      <div>
+        <span>মোট</span>
+        <strong id="cartTotal">৳০</strong>
+      </div>
+
+      <a
+        href="checkout.html"
+        class="primary-button full-button"
+      >
+        Checkout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <nav class="mobile-bottom-nav">
+
+    <a href="index.html">
+      <i data-lucide="house"></i>
+      <span>হোম</span>
+    </a>
+
+    <a href="index.html#categories">
+      <i data-lucide="layout-grid"></i>
+      <span>ক্যাটাগরি</span>
+    </a>
+
+    <a href="shop.html">
+      <i data-lucide="search"></i>
+      <span>খুঁজুন</span>
+    </a>
+
+    <button>
+      <i data-lucide="heart"></i>
+      <span>পছন্দ</span>
+    </button>
+
+    <button id="bottomCartButton">
+      <i data-lucide="shopping-bag"></i>
+      <span>কার্ট</span>
+      <b id="bottomCartCount">0</b>
+    </button>
+
+  </nav>
+
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script src="script.js"></script>
+
+
+  <script>
+
+    const trackingInput =
+      document.getElementById(
+        "trackingInput"
+      );
+
+
+    const trackButton =
+      document.getElementById(
+        "trackButton"
+      );
+
+
+    const trackingMessage =
+      document.getElementById(
+        "trackingMessage"
+      );
+
+
+    const trackingResult =
+      document.getElementById(
+        "trackingResult"
+      );
+
+
+    const statusOrder = [
+      "Order Placed",
+      "Confirmed",
+      "Processing",
+      "Shipped",
+      "Delivered"
+    ];
+
+
+    function findOrder(orderId) {
+
+      const orders =
+        JSON.parse(
+          localStorage.getItem(
+            "soroshfulOrders"
+          )
+        ) || [];
+
+
+      return orders.find(
+        (order) =>
+          order.orderId
+            .toLowerCase() ===
+          orderId
+            .toLowerCase()
+      );
+
+    }
+
+
+    function renderTrackedOrder(
+      order
+    ) {
+
+      trackingMessage.textContent =
+        "";
+
+
+      trackingResult.classList.add(
+        "show"
+      );
+
+
+      document
+        .getElementById(
+          "trackingOrderId"
+        )
+        .textContent =
+          order.orderId;
+
+
+      document
+        .getElementById(
+          "trackingOrderDate"
+        )
+        .textContent =
+          order.date;
+
+
+      document
+        .getElementById(
+          "trackingStatus"
+        )
+        .textContent =
+          order.status ||
+          "Order Placed";
+
+
+      document
+        .getElementById(
+          "trackingName"
+        )
+        .textContent =
+          order.customer.name;
+
+
+      document
+        .getElementById(
+          "trackingPhone"
+        )
+        .textContent =
+          order.customer.phone;
+
+
+      document
+        .getElementById(
+          "trackingAddress"
+        )
+        .textContent =
+          order.customer.address;
+
+
+      const paymentNames = {
+        cod:
+          "Cash on Delivery",
+        bkash:
+          "bKash",
+        nagad:
+          "Nagad"
+      };
+
+
+      const deliveryNames = {
+        standard:
+          "Standard",
+        express:
+          "Express"
+      };
+
+
+      document
+        .getElementById(
+          "trackingPayment"
+        )
+        .textContent =
+          paymentNames[
+            order.paymentMethod
+          ] ||
+          order.paymentMethod;
+
+
+      document
+        .getElementById(
+          "trackingDelivery"
+        )
+        .textContent =
+          deliveryNames[
+            order.deliveryMethod
+          ] ||
+          order.deliveryMethod;
+
+
+      document
+        .getElementById(
+          "trackingTotal"
+        )
+        .textContent =
+          "৳" +
+          Number(
+            order.total
+          ).toLocaleString(
+            "en-US"
+          );
+
+
+      document
+        .getElementById(
+          "trackingItemsList"
+        )
+        .innerHTML =
+          order.items
+            .map((item) => {
+
+              return `
+
+                <div class="tracking-item">
+
+                  <div>
+
+                    <h4>
+                      ${item.name}
+                    </h4>
+
+                    <small>
+                      ${item.quantity}
+                      ×
+                      ৳${item.price.toLocaleString("en-US")}
+                    </small>
+
+                  </div>
+
+
+                  <strong>
+
+                    ৳${(
+                      item.price *
+                      item.quantity
+                    ).toLocaleString(
+                      "en-US"
+                    )}
+
+                  </strong>
+
+                </div>
+
+              `;
+
+            })
+            .join("");
+
+
+      const currentStatus =
+        order.status ||
+        "Order Placed";
+
+
+      const currentIndex =
+        statusOrder.indexOf(
+          currentStatus
+        );
+
+
+      document
+        .querySelectorAll(
+          ".tracking-step"
+        )
+        .forEach(
+          (
+            step,
+            index
+          ) => {
+
+            if (
+              index <=
+              Math.max(
+                currentIndex,
+                0
+              )
+            ) {
+
+              step.classList.add(
+                "active"
+              );
+
+            } else {
+
+              step.classList.remove(
+                "active"
+              );
+
+            }
+
+          }
+        );
+
+
+      lucide.createIcons();
+
+    }
+
+
+    function trackOrder() {
+
+      const orderId =
+        trackingInput.value
+          .trim();
+
+
+      if (!orderId) {
+
+        trackingMessage.textContent =
+          "Order ID লিখুন।";
+
+
+        trackingResult.classList.remove(
+          "show"
+        );
+
+
+        return;
+
+      }
+
+
+      const order =
+        findOrder(orderId);
+
+
+      if (!order) {
+
+        trackingMessage.textContent =
+          "এই Order ID দিয়ে কোনো অর্ডার পাওয়া যায়নি।";
+
+
+        trackingResult.classList.remove(
+          "show"
+        );
+
+
+        return;
+
+      }
+
+
+      renderTrackedOrder(
+        order
+      );
+
+    }
+
+
+    trackButton.addEventListener(
+      "click",
+      trackOrder
+    );
+
+
+    trackingInput.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          trackOrder();
+
+        }
+
+      }
+    );
+
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    if (
+      params.has("order")
+    ) {
+
+      trackingInput.value =
+        params.get("order");
+
+
+      trackOrder();
+
+    }
+
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>

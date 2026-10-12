@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#174d35">
+
+  <title>Login | সরষেফুল</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    .auth-page {
+      min-height: calc(100vh - 160px);
+      padding: 55px 0 80px;
+      background:
+        linear-gradient(
+          180deg,
+          #fff9ed 0%,
+          #ffffff 48%
+        );
+    }
+
+    .auth-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .auth-side {
+      min-height: 570px;
+      padding: 45px 35px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--green);
+      color: #fff;
+    }
+
+    .auth-side .brand-mark {
+      background: var(--mustard);
+      color: var(--green-dark);
+    }
+
+    .auth-side h1 {
+      margin-top: 25px;
+      font-family: "Noto Serif Bengali", serif;
+      font-size: 36px;
+      line-height: 1.25;
+    }
+
+    .auth-side p {
+      margin-top: 10px;
+      color: rgba(255,255,255,.78);
+    }
+
+    .auth-benefits {
+      margin-top: 28px;
+      display: grid;
+      gap: 13px;
+    }
+
+    .auth-benefit {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      color: rgba(255,255,255,.9);
+      font-size: 13px;
+    }
+
+    .auth-benefit svg {
+      width: 18px;
+      flex: 0 0 auto;
+      color: var(--mustard);
+    }
+
+    .auth-form-side {
+      padding: 42px;
+    }
+
+    .auth-heading {
+      margin-bottom: 25px;
+    }
+
+    .auth-heading span {
+      color: #9e7400;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .auth-heading h2 {
+      margin-top: 4px;
+      color: var(--green-dark);
+      font-size: 30px;
+    }
+
+    .auth-heading p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .auth-form {
+      display: grid;
+      gap: 15px;
+    }
+
+    .auth-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .auth-input-wrap {
+      position: relative;
+    }
+
+    .auth-input-wrap > svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      width: 17px;
+      transform: translateY(-50%);
+      color: #89918b;
+      pointer-events: none;
+    }
+
+    .auth-input {
+      width: 100%;
+      height: 46px;
+      padding: 0 45px 0 40px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      outline: none;
+      background: #fff;
+    }
+
+    .auth-input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(23,77,53,.06);
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      transform: translateY(-50%);
+      color: #758078;
+      border-radius: 7px;
+    }
+
+    .password-toggle:hover {
+      background: #f3f6f4;
+    }
+
+    .password-toggle svg {
+      width: 16px;
+    }
+
+    .auth-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .remember-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #657068;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .remember-label input {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--green);
+    }
+
+    .forgot-link {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .auth-submit {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 9px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .auth-submit:hover {
+      background: var(--green-dark);
+    }
+
+    .auth-message {
+      display: none;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+    }
+
+    .auth-message.show {
+      display: block;
+    }
+
+    .auth-message.error {
+      color: #a43c2d;
+      background: #fff0ec;
+      border: 1px solid #f1cec6;
+    }
+
+    .auth-message.success {
+      color: #22643e;
+      background: #edf7f0;
+      border: 1px solid #cde6d5;
+    }
+
+    .auth-bottom {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .auth-bottom a {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .auth-security {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      color: #939b95;
+      font-size: 9px;
+    }
+
+    .auth-security svg {
+      width: 12px;
+    }
+
+    @media (max-width: 800px) {
+
+      .auth-wrapper {
+        grid-template-columns: 1fr;
+        max-width: 620px;
+      }
+
+      .auth-side {
+        min-height: auto;
+        padding: 32px 25px;
+      }
+
+      .auth-side h1 {
+        font-size: 30px;
+      }
+
+    }
+
+    @media (max-width: 520px) {
+
+      .auth-page {
+        padding: 28px 0 65px;
+      }
+
+      .auth-form-side {
+        padding: 25px 17px;
+      }
+
+      .auth-side {
+        padding: 26px 18px;
+      }
+
+      .auth-options {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+
+    <div class="container topbar-inner">
+
+      <span>
+        🚚 সারা বাংলাদেশে ডেলিভারি
+      </span>
+
+      <span class="topbar-middle">
+        ৳১৫০০+ অর্ডারে ফ্রি ডেলিভারি
+      </span>
+
+      <a href="tel:+8801712345678">
+        হেল্পলাইন: +880 1712-345678
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <header class="header">
+
+    <div class="container header-inner">
+
+      <button
+        id="menuButton"
+        class="round-button mobile-menu-button"
+      >
+        <i data-lucide="menu"></i>
+      </button>
+
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            সরষেফুল
+          </strong>
+
+          <small>
+            প্রকৃতির খাবার, পরিবারের জন্য
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <form
+        class="search desktop-search"
+        id="desktopSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="desktopSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+
+      <div class="header-actions">
+
+        <a
+          href="account.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="user"></i>
+          <span>অ্যাকাউন্ট</span>
+        </a>
+
+
+        <a
+          href="wishlist.html"
+          class="header-action desktop-action"
+        >
+          <i data-lucide="heart"></i>
+          <span>পছন্দ</span>
+          <b id="wishlistCount">0</b>
+        </a>
+
+
+        <button
+          class="cart-header-button"
+          id="cartButton"
+        >
+          <i data-lucide="shopping-bag"></i>
+          <span class="desktop-action">কার্ট</span>
+          <b id="cartCount">0</b>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="container mobile-search-row">
+
+      <form
+        class="search"
+        id="mobileSearchForm"
+      >
+
+        <i data-lucide="search"></i>
+
+        <input
+          id="mobileSearchInput"
+          type="search"
+          placeholder="পণ্য খুঁজুন..."
+        >
+
+        <button type="submit">
+          খুঁজুন
+        </button>
+
+      </form>
+
+    </div>
+
+  </header>
+
+
+  <div
+    class="overlay"
+    id="menuOverlay"
+  ></div>
+
+
+  <aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <div class="brand-mark">
+          স
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            সরষেফুল
+          </strong>
+
+          <small>
+            প্রকৃতির খাবার
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <button
+        class="round-button"
+        id="closeMenuButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div class="drawer-links">
+
+      <a href="index.html">
+        <i data-lucide="house"></i>
+        হোম
+      </a>
+
+      <a href="shop.html">
+        <i data-lucide="shopping-basket"></i>
+        সব পণ্য
+      </a>
+
+      <a href="wishlist.html">
+        <i data-lucide="heart"></i>
+        Wishlist
+      </a>
+
+      <a href="login.html">
+        <i data-lucide="log-in"></i>
+        Login
+      </a>
+
+      <a href="register.html">
+        <i data-lucide="user-plus"></i>
+        Register
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <main class="auth-page">
+
+    <div class="container">
+
+      <div class="auth-wrapper">
+
+
+        <!-- LEFT -->
+
+        <section class="auth-side">
+
+          <a
+            href="index.html"
+            class="brand"
+            style="color:#fff;"
+          >
+
+            <div class="brand-mark">
+              স
+            </div>
+
+            <div class="brand-copy">
+
+              <strong style="color:#fff;">
+                সরষেফুল
+              </strong>
+
+              <small style="color:rgba(255,255,255,.7);">
+                প্রকৃতির খাবার
+              </small>
+
+            </div>
+
+          </a>
+
+
+          <h1>
+            আবার স্বাগতম
+          </h1>
+
+          <p>
+            আপনার account-এ login করে order history,
+            wishlist এবং saved information সহজে দেখুন।
+          </p>
+
+
+          <div class="auth-benefits">
+
+            <div class="auth-benefit">
+              <i data-lucide="package-check"></i>
+              <span>
+                আপনার সব order history এক জায়গায়
+              </span>
+            </div>
+
+
+            <div class="auth-benefit">
+              <i data-lucide="heart"></i>
+              <span>
+                পছন্দের পণ্য সংরক্ষণ করুন
+              </span>
+            </div>
+
+
+            <div class="auth-benefit">
+              <i data-lucide="truck"></i>
+              <span>
+                দ্রুত order tracking
+              </span>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- RIGHT -->
+
+        <section class="auth-form-side">
+
+          <div class="auth-heading">
+
+            <span>
+              CUSTOMER ACCOUNT
+            </span>
+
+            <h2>
+              Login করুন
+            </h2>
+
+            <p>
+              আপনার Email অথবা Phone দিয়ে login করুন।
+            </p>
+
+          </div>
+
+
+          <div
+            class="auth-message"
+            id="loginMessage"
+          ></div>
+
+
+          <form
+            class="auth-form"
+            id="loginForm"
+          >
+
+
+            <div class="auth-group">
+
+              <label for="loginIdentity">
+                Email অথবা মোবাইল নম্বর
+              </label>
+
+              <div class="auth-input-wrap">
+
+                <i data-lucide="user"></i>
+
+                <input
+                  class="auth-input"
+                  id="loginIdentity"
+                  type="text"
+                  placeholder="Email / 01XXXXXXXXX"
+                  autocomplete="username"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div class="auth-group">
+
+              <label for="loginPassword">
+                Password
+              </label>
+
+              <div class="auth-input-wrap">
+
+                <i data-lucide="lock-keyhole"></i>
+
+                <input
+                  class="auth-input"
+                  id="loginPassword"
+                  type="password"
+                  placeholder="আপনার password"
+                  autocomplete="current-password"
+                >
+
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  id="toggleLoginPassword"
+                >
+                  <i data-lucide="eye"></i>
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="auth-options">
+
+              <label class="remember-label">
+
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                >
+
+                আমাকে মনে রাখুন
+
+              </label>
+
+
+              <a
+                href="#"
+                class="forgot-link"
+                id="forgotPasswordLink"
+              >
+                Password ভুলে গেছেন?
+              </a>
+
+            </div>
+
+
+            <button
+              class="auth-submit"
+              type="submit"
+            >
+              Login
+            </button>
+
+          </form>
+
+
+          <div class="auth-bottom">
+
+            নতুন customer?
+
+            <a href="register.html">
+              Account তৈরি করুন
+            </a>
+
+          </div>
+
+
+          <div class="auth-security">
+
+            <i data-lucide="shield-check"></i>
+
+            আপনার তথ্য browser-এর local storage-এ সংরক্ষিত হচ্ছে
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a
+          href="index.html"
+          class="brand"
+        >
+
+          <div class="brand-mark">
+            স
+          </div>
+
+          <div class="brand-copy">
+            <strong>সরষেফুল</strong>
+            <small>প্রকৃতির খাবার</small>
+          </div>
+
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+        <h3>কেনাকাটা</h3>
+        <a href="shop.html">সব পণ্য</a>
+        <a href="wishlist.html">Wishlist</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>অ্যাকাউন্ট</h3>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+      </div>
+
+
+      <div class="footer-column">
+        <h3>যোগাযোগ</h3>
+        <p>+880 1712-345678</p>
+        <p>hello@soroshful.com</p>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <div
+    class="overlay"
+    id="cartOverlay"
+  ></div>
+
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+  >
+
+    <div class="drawer-header">
+
+      <div>
+        <h2>আপনার কার্ট</h2>
+        <small id="cartItemCount">০টি পণ্য</small>
+      </div>
+
+      <button
+        class="round-button"
+        id="closeCartButton"
+      >
+        <i data-lucide="x"></i>
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-bottom">
+
+      <div>
+        <span>মোট</span>
+        <strong id="cartTotal">৳০</strong>
+      </div>
+
+      <a
+        href="checkout.html"
+        class="primary-button full-button"
+      >
+        Checkout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <nav class="mobile-bottom-nav">
+
+    <a href="index.html">
+      <i data-lucide="house"></i>
+      <span>হোম</span>
+    </a>
+
+    <a href="shop.html">
+      <i data-lucide="layout-grid"></i>
+      <span>পণ্য</span>
+    </a>
+
+    <a href="shop.html">
+      <i data-lucide="search"></i>
+      <span>খুঁজুন</span>
+    </a>
+
+    <a href="wishlist.html">
+      <i data-lucide="heart"></i>
+      <span>পছন্দ</span>
+    </a>
+
+    <button id="bottomCartButton">
+      <i data-lucide="shopping-bag"></i>
+      <span>কার্ট</span>
+      <b id="bottomCartCount">0</b>
+    </button>
+
+  </nav>
+
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script src="script.js"></script>
+
+
+  <script>
+
+    const loginForm =
+      document.getElementById(
+        "loginForm"
+      );
+
+
+    const loginIdentity =
+      document.getElementById(
+        "loginIdentity"
+      );
+
+
+    const loginPassword =
+      document.getElementById(
+        "loginPassword"
+      );
+
+
+    const loginMessage =
+      document.getElementById(
+        "loginMessage"
+      );
+
+
+    function showLoginMessage(
+      message,
+      type
+    ) {
+
+      loginMessage.textContent =
+        message;
+
+
+      loginMessage.className =
+        "auth-message show " +
+        type;
+
+    }
+
+
+    function getRegisteredUsers() {
+
+      return JSON.parse(
+        localStorage.getItem(
+          "soroshfulUsers"
+        )
+      ) || [];
+
+    }
+
+
+    document
+      .getElementById(
+        "toggleLoginPassword"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          const isPassword =
+            loginPassword.type ===
+            "password";
+
+
+          loginPassword.type =
+            isPassword
+              ? "text"
+              : "password";
+
+
+          this.innerHTML =
+            isPassword
+              ? '<i data-lucide="eye-off"></i>'
+              : '<i data-lucide="eye"></i>';
+
+
+          lucide.createIcons();
+
+        }
+      );
+
+
+    loginForm.addEventListener(
+      "submit",
+      function(event) {
+
+        event.preventDefault();
+
+
+        const identity =
+          loginIdentity.value
+            .trim()
+            .toLowerCase();
+
+
+        const password =
+          loginPassword.value;
+
+
+        if (!identity) {
+
+          showLoginMessage(
+            "Email অথবা মোবাইল নম্বর লিখুন।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (!password) {
+
+          showLoginMessage(
+            "Password লিখুন।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const users =
+          getRegisteredUsers();
+
+
+        const user =
+          users.find(
+            item => {
+
+              return (
+                item.email
+                  ?.toLowerCase() ===
+                  identity ||
+                item.phone ===
+                  identity
+              );
+
+            }
+          );
+
+
+        if (!user) {
+
+          showLoginMessage(
+            "এই তথ্য দিয়ে কোনো account পাওয়া যায়নি।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (
+          user.password !==
+          password
+        ) {
+
+          showLoginMessage(
+            "Password সঠিক নয়।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const session = {
+
+          loggedIn:
+            true,
+
+          name:
+            user.name,
+
+          phone:
+            user.phone,
+
+          email:
+            user.email,
+
+          loginAt:
+            new Date()
+              .toISOString()
+
+        };
+
+
+        localStorage.setItem(
+          "soroshfulSession",
+          JSON.stringify(
+            session
+          )
+        );
+
+
+        localStorage.setItem(
+          "soroshfulProfile",
+          JSON.stringify({
+            name:
+              user.name || "",
+
+            phone:
+              user.phone || "",
+
+            email:
+              user.email || "",
+
+            address:
+              user.address || ""
+          })
+        );
+
+
+        if (
+          document
+            .getElementById(
+              "rememberMe"
+            )
+            .checked
+        ) {
+
+          localStorage.setItem(
+            "soroshfulRememberedIdentity",
+            identity
+          );
+
+        } else {
+
+          localStorage.removeItem(
+            "soroshfulRememberedIdentity"
+          );
+
+        }
+
+
+        showLoginMessage(
+          "Login সফল হয়েছে।",
+          "success"
+        );
+
+
+        setTimeout(
+          function() {
+
+            window.location.href =
+              "account.html";
+
+          },
+          500
+        );
+
+      }
+    );
+
+
+    const rememberedIdentity =
+      localStorage.getItem(
+        "soroshfulRememberedIdentity"
+      );
+
+
+    if (rememberedIdentity) {
+
+      loginIdentity.value =
+        rememberedIdentity;
+
+
+      document
+        .getElementById(
+          "rememberMe"
+        )
+        .checked =
+          true;
+
+    }
+
+
+    document
+      .getElementById(
+        "forgotPasswordLink"
+      )
+      .addEventListener(
+        "click",
+        function(event) {
+
+          event.preventDefault();
+
+
+          showLoginMessage(
+            "এই demo version-এ password reset এখনো backend-এর সাথে যুক্ত করা হয়নি।",
+            "error"
+          );
+
+        }
+      );
+
+
+    const activeSession =
+      JSON.parse(
+        localStorage.getItem(
+          "soroshfulSession"
+        )
+      );
+
+
+    if (
+      activeSession?.loggedIn
+    ) {
+
+      showLoginMessage(
+        "আপনি ইতোমধ্যে login করা আছেন।",
+        "success"
+      );
+
+    }
+
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>
